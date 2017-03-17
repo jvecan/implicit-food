@@ -1,0 +1,48 @@
+<div class="game-container">
+    <div class='game-content'>
+        <!-- muuta 'left' -->
+        <div class='game-touch-area game-touch-area-left' ng-click="playGameController.playerTouch('healthy', playGameController.randomFood.name)">
+            <span class='game-touch-area-left-attribute'>Healthy</span>
+
+
+
+            <!-- playGameController.leftAreaStimulus.name -->
+        </div>
+        <div class='game-middle-screen'>
+            <div class='game-stimulus'>
+                <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.randomFood.name}}.png" />
+                <!--img class='game-stimulus-image' ng-src="img/game_images/asparagus.png" />-->
+            </div>
+            <div class='game-points'>
+                Score: x
+                <br /> Difference in milliseconds: {{playGameController.differenceMilliseconds}}
+                <!-- playGameController.currentPoints -->
+            </div>
+        </div>
+        <div class='game-touch-area game-touch-area-right' ng-click="playGameController.playerTouch('unhealthy', playGameController.randomFood.name)">
+            <span class='game-touch-area-right-attribute'>Unhealthy</span>
+            <!-- playGameController.rightAreaStimulus.name -->
+        </div>
+    </div>
+</div>
+<!--
+    <div ng-controller="playCtrl as playController">
+
+
+        <div class="row first-row game-row">
+            <div class="col-xs-3" ng-click="playerTouch(left)">
+                Unhealthy
+            </div>
+            <div class="col-xs-6">
+                <img ng-src="img/game_images/{{randomFood()}}.png" width="32" height="32" />
+            </div>
+            <div class="col-xs-3" ng-click="playerTouch(right)">
+                Healthy
+            </div>
+        </div>
+
+
+
+
+    </div>
+    -->

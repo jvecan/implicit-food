@@ -1,0 +1,86 @@
+<div class="container-fluid header-wide">
+    <div class='div-center-content header '>
+        <h1>New Game</h1>
+    </div>
+</div>
+<div class="container-fluid content-full">
+    <!-- <div class='content-margins'>-->
+
+
+    <!--<div ng-controller="playCtrl as playController"> -->
+
+    <div>
+        Lorem ipsum dolor sit amet, in has offendit invenire. At nullam audiam menandri mea, stet sapientem ius in, mea id delenit platonem. Est suas timeam ex. His vocent vulputate ea, mel in iudico omnium consetetur, pro ad putant iisque persius. Vim et omnesque
+        forensibus.
+    </div>
+
+    <br />
+
+    <!--
+        <table class="table-game-instructions-food">
+            <tbody>
+                <tr>
+                    <th>Healthy:</th>
+                </tr>
+                <tr>
+                    <td>
+                        <img class='image-instructions-food' ng-src="img/game_images/asparagus.png" src="img/game_images/asparagus.png">
+                    </td>
+
+                    <td>
+                        <img class='image-instructions-food' ng-src="img/game_images/cabbage.png" src="img/game_images/cabbage.png">
+                    </td>
+                    <td>
+                        <img class='image-instructions-food' ng-src="img/game_images/cherries.png" src="img/game_images/cherries.png">
+                    </td>
+                    <td>
+                        <img class='image-instructions-food' ng-src="img/game_images/chives.png" src="img/game_images/chives.png">
+                    </td>
+                    <td>
+                        <img class='image-instructions-food' ng-src="img/game_images/coconut.png" src="img/game_images/coconut.png">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+-->
+
+
+    <table class='table-game-instructions-food'>
+        <tr>
+            <th>Healthy:</th>
+        </tr>
+        <tr>
+            <td ng-repeat="n in playController.randomHealthyFoods track by $index">
+                <img ng-src="img/game_images/{{n}}.png" class='image-instructions-food' />
+            </td>
+        </tr>
+    </table>
+
+    <br />
+    <table class='table-game-instructions-food'>
+        <tr>
+            <th>Unhealthy:</th>
+        </tr>
+        <tr>
+            <td ng-repeat="n in playController.randomUnhealthyFoods track by $index">
+                <img ng-src="img/game_images/{{n}}.png" class='image-instructions-food' />
+            </td>
+        </tr>
+    </table>
+
+
+    <br />
+
+    <div class='div-center-content'>
+        <!--<button type="button" ng-click="playController.startGame()">Start Game</button>-->
+        <a href="#/play-game" class="main-menu-btn">Start Game</a>
+
+    </div>
+    <br />
+
+
+
+    <!--</div> ng-controller -->
+    <!-- </div>-->
+</div>

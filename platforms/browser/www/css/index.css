@@ -1,0 +1,284 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family: 'Verdana', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+.header {
+    margin-top: 30px;
+    background-color: #88e348;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    border: 1px solid #18ab29;
+}
+
+.main-menu {
+    margin-top: 15px;
+    background-color: #a0ed69;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 25px;
+    border: 1px solid #18ab29;
+}
+
+.main-menu-btn {
+    margin-top: 25px;
+    background-color: #89e34a !important;
+    width: 80%;
+    font-size: 24px !important;
+    font-weight: bold;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    color: #000000;
+    text-decoration: none !important;
+    text-align: center;
+    padding: 16px 31px;
+    outline: none;
+}
+
+.main-menu-btn:active {
+    background-color: #5cbf2a !important;
+    position: relative;
+    top: 1px;
+    text-decoration: none !important;
+}
+
+.main-menu-btn:visited {
+    color: #000000;
+}
+
+.first-row {
+    margin-top: 12px;
+}
+
+.last-row {
+    margin-bottom: 12px;
+}
+
+.div-center-content {
+    text-align: center;
+}
+
+.table-game-instructions-food {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-game-instructions-food td {
+    border: 1px black solid;
+    padding: 2px;
+}
+
+.table-game-instructions-food th {
+    text-align: left;
+}
+
+.game-container {
+    padding-top: 25px;
+    height: 100%;
+    width: 100%;
+}
+
+.game-content {
+    background-color: #b9f58e;
+    width: 100%;
+    height: 100%;
+}
+
+.game-touch-area {
+    width: 25%;
+    background-color: #6fd027;
+    height: 100%;
+    /*display: inline-block;*/
+}
+
+.game-touch-area-left {
+    float: left;
+}
+
+.game-touch-area-right {
+    float: right;
+}
+
+.game-middle-screen {
+    float: left;
+    height: 100%;
+    position: relative;
+    /*display: inline-block;*/
+    width: 50%;
+    background-color: #a0ed69;
+}
+
+.game-stimulus {
+    position: absolute;
+    left: 25%;
+    top: 40%;
+}
+
+.game-points {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 10%;
+}
+
+.content-full {
+    /*width: 100%;*/
+    background-color: #a0ed69;
+    border-bottom: 1px solid #18ab29;
+    border-top: 1px solid #18ab29;
+}
+
+.content-game {
+    /*width: 100%;*/
+    height: 90%;
+    background-color: #a0ed69;
+    border-bottom: 1px solid #18ab29;
+    border-top: 1px solid #18ab29;
+}
+
+.content-margins {
+    margin-left: 5%;
+    background-color: #a0ed69;
+}
+
+
+/*
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+*/
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+    body {
+        background: url(../img/background480.jpg);
+    }
+    .header-narrow {
+        width: 300px;
+        /*width: 80%;*/
+    }
+    .header-wide {
+        width: 320px;
+    }
+    .main-menu {
+        width: 300px;
+        /*width: 80%;*/
+    }
+    .image-instructions-food {
+        width: 50px;
+    }
+    .game-stimulus-image {
+        width: 100px;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    body {
+        background: url(../img/background768.jpg);
+    }
+    .header-narrow {
+        width: 60%;
+    }
+    .header-wide {
+        width: 90%;
+    }
+    .main-menu {
+        width: 60%;
+    }
+    .image-instructions-food {
+        width: 80px;
+    }
+    .game-stimulus-image {
+        width: 150px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    body {
+        background: url(../img/background992.jpg);
+    }
+    .header-narrow {
+        width: 40%;
+    }
+    .header-wide {
+        width: 80%;
+    }
+    .main-menu {
+        width: 40%;
+    }
+    .image-instructions-food {
+        width: 120px;
+    }
+    .game-stimulus-image {
+        width: 200px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1999px) {
+    body {
+        background: url(../img/background.jpg) no-repeat center center fixed;
+    }
+    .header-narrow {
+        width: 40%;
+    }
+    .header-wide {
+        width: 80%;
+    }
+    .main-menu {
+        width: 40%;
+    }
+    .image-instructions-food {
+        width: 180px;
+    }
+    .game-stimulus-image {
+        width: 250px;
+    }
+}
