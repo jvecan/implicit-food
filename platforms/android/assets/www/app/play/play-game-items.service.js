@@ -216,7 +216,7 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory) {
 
             currentRound = 0;
             var type = 1;
-            var query = 'SELECT food_id, name FROM food_attribute_category, food ' +
+            var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
                 'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + type +
                 ' ORDER BY RANDOM() LIMIT 5) AND food.id = food_attribute_category.food_id';
             var params = [];
@@ -232,7 +232,7 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory) {
 
             currentRound = 0;
             var type = 2;
-            var query = 'SELECT food_id, name FROM food_attribute_category, food ' +
+            var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
                 'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + type +
                 ' ORDER BY RANDOM() LIMIT 5) AND food.id = food_attribute_category.food_id';
             var params = [];

@@ -46,7 +46,7 @@ body {
 }
 
 .header {
-    margin-top: 30px;
+    margin-top: 15px;
     background-color: #88e348;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -68,12 +68,12 @@ body {
     -moz-border-radius: 18px;
     -webkit-border-radius: 18px;
     border-radius: 18px;
-    border: 1px solid #18ab29;
+    border: 3px solid #18ab29;
     display: inline-block;
     color: #000000;
     text-decoration: none !important;
     text-align: center;
-    padding: 16px 31px;
+    padding: 20px 31px;
     outline: none;
     font-weight: bold;
 }
@@ -95,8 +95,8 @@ body {
 }
 
 .main-menu-btn {
-    margin-top: 25px;
-    width: 80%;
+    margin-top: 40px;
+    width: 70%;
     font-size: 24px !important;
 }
 
@@ -112,18 +112,35 @@ body {
     text-align: center;
 }
 
-.table-game-instructions-food {
+.game-instructions-text {
+    font-size: 16px;
+    border: 1px black solid;
+    width: 100%;
+    padding: 5px;
+    background: rgba(160, 237, 105, 1);
+}
+
+.game-instructions-start-btn {
+    margin-top: 25px;
+    width: 70%;
+    font-size: 24px !important;
+}
+
+.game-instructions-food-table {
+    background: rgba(160, 237, 105, 1);
     width: 100%;
     table-layout: fixed;
 }
 
-.table-game-instructions-food td {
+.game-instructions-food-table td {
     border: 1px black solid;
     padding: 2px;
 }
 
-.table-game-instructions-food th {
-    text-align: left;
+.game-instructions-food-table th {
+    border: 1px black solid;
+    text-align: center;
+    font-size: 16px;
 }
 
 .game-container {
@@ -139,6 +156,7 @@ body {
 }
 
 .game-touch-area {
+    border-top: 2px green solid;
     width: 25%;
     background-color: #6fd027;
     height: 100%;
@@ -146,14 +164,17 @@ body {
 }
 
 .game-touch-area-left {
+    border-right: 2px green solid;
     float: left;
 }
 
 .game-touch-area-right {
+    border-left: 2px green solid;
     float: right;
 }
 
 .game-middle-screen {
+    border-top: 2px green solid;
     float: left;
     height: 100%;
     position: relative;
@@ -170,14 +191,6 @@ body {
     font-size: 19px;
 }
 
-.game-touch-area-left-attribute:active {
-    background-color: green;
-}
-
-.game-touch-area-right-attribute:active {
-    background-color: green;
-}
-
 .game-touch-area-right-attribute {
     position: absolute;
     top: 10%;
@@ -192,6 +205,10 @@ body {
     top: 40%;
 }
 
+.game-stimulus-image {
+    border: 1px green solid;
+}
+
 .game-points {
     position: absolute;
     left: 25%;
@@ -201,9 +218,10 @@ body {
 
 .content-full {
     /*width: 100%;*/
-    background-color: #a0ed69;
-    border-bottom: 1px solid #18ab29;
-    border-top: 1px solid #18ab29;
+    /*background-color: #a0ed69;*/
+    background: rgba(160, 237, 105, 0.85);
+    border-bottom: 3px solid #18ab29;
+    border-top: 3px solid #18ab29;
 }
 
 .content-game {

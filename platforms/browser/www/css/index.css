@@ -63,33 +63,41 @@ body {
     border: 1px solid #18ab29;
 }
 
-.main-menu-btn {
-    margin-top: 25px;
+.btn-base {
     background-color: #89e34a !important;
-    width: 80%;
-    font-size: 24px !important;
-    font-weight: bold;
     -moz-border-radius: 18px;
     -webkit-border-radius: 18px;
     border-radius: 18px;
-    border: 1px solid #18ab29;
+    border: 3px solid #18ab29;
     display: inline-block;
     color: #000000;
     text-decoration: none !important;
     text-align: center;
-    padding: 16px 31px;
+    padding: 20px 31px;
     outline: none;
+    font-weight: bold;
 }
 
-.main-menu-btn:active {
+.btn-base:active {
     background-color: #5cbf2a !important;
     position: relative;
     top: 1px;
     text-decoration: none !important;
 }
 
-.main-menu-btn:visited {
+.btn-base:visited {
     color: #000000;
+}
+
+.results-btn {
+    width: 45%;
+    font-size: 16px !important;
+}
+
+.main-menu-btn {
+    margin-top: 40px;
+    width: 70%;
+    font-size: 24px !important;
 }
 
 .first-row {
@@ -131,6 +139,7 @@ body {
 }
 
 .game-touch-area {
+    border-top: 2px green solid;
     width: 25%;
     background-color: #6fd027;
     height: 100%;
@@ -138,14 +147,17 @@ body {
 }
 
 .game-touch-area-left {
+    border-right: 2px green solid;
     float: left;
 }
 
 .game-touch-area-right {
+    border-left: 2px green solid;
     float: right;
 }
 
 .game-middle-screen {
+    border-top: 2px green solid;
     float: left;
     height: 100%;
     position: relative;
@@ -154,10 +166,30 @@ body {
     background-color: #a0ed69;
 }
 
+.game-touch-area-left-attribute {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    z-index: 100;
+    font-size: 19px;
+}
+
+.game-touch-area-right-attribute {
+    position: absolute;
+    top: 10%;
+    right: 1%;
+    z-index: 100;
+    font-size: 19px;
+}
+
 .game-stimulus {
     position: absolute;
     left: 25%;
     top: 40%;
+}
+
+.game-stimulus-image {
+    border: 1px green solid;
 }
 
 .game-points {
@@ -169,9 +201,10 @@ body {
 
 .content-full {
     /*width: 100%;*/
-    background-color: #a0ed69;
-    border-bottom: 1px solid #18ab29;
-    border-top: 1px solid #18ab29;
+    /*background-color: #a0ed69;*/
+    background: rgba(160, 237, 105, 0.9);
+    border-bottom: 3px solid #18ab29;
+    border-top: 3px solid #18ab29;
 }
 
 .content-game {

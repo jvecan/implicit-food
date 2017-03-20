@@ -1,73 +1,90 @@
-/*angular
-    .module('play')
-    .factory('playDatabase', playDatabase); */
+angular.module('play').factory('dbFactory', function($q, $cordovaSQLite) {
+    //private variables
 
 
-play.factory('playDatabase', ['$cordovaSQLite', '$q', 'databaseUtility', function($cordovaSQLite, $q, databaseUtility) {
-    return {
-        setInitialGameItems: function() {
-            var deferred = $q.defer();
+    var db_;
 
-            deferred.resolve("kukkuu");
-            console.log("Helouas");
-            /*
-            var query = 'SELECT food_id, name FROM food_attribute_category, food ' +
-                'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + type +
-                ' ORDER BY RANDOM() LIMIT 5) AND food.id = food_attribute_category.food_id';
-            deferred.resolve(databaseUtility.executeQuery(query));*/
-            return deferred.promise;
+    // private methods - all return promises
+    var openDB_ = function(dbName, location) {
+        var q = $q.defer();
+        try {
+            db_ = $cordovaSQLite.openDB({
+                name: dbName,
+                location: location
+            });
+            q.resolve(db_);
+        } catch (e) {
+            q.reject("Exception thrown while opening DB " + JSON.stringify(e));
         }
+        return q.promise;
     };
 
-}]);
+    var performQuery_ = function(query, params, out) {
+        var q = $q.defer();
+        params = params || []; // If params value is set then set it, otherwise set to empty array. 
+        out = out || []; // If out value is set then set it, otherwise set to empty array. 
 
+        //open the DB
 
-play.factory('databaseUtility', ['$cordovaSQLite', '$q', function($cordovaSQLite, $q) {
-    return {
+        /*
+        openDB_("foodapp.db", "default");
 
-        executeQuery: function(query) {
-            var deferred = $q.defer();
-            var db = $cordovaSQLite.openDB({ name: "foodapp.db", location: "default" });
-            var output_results = [];
+        $cordovaSQLite.execute(db_, query, []).then(function(res) {
+            for (var i = 0; i < res.rows.length; i++) {
+                out.push(res.rows.item(i));
+                console.log("Added row to set", JSON.stringify(res.rows.item(i)));
+            }
+        }, function(err) {
+            console.error(err);
+            q.reject();
+        });
+*/
 
-            db.transaction(function(tx) {
-                tx.executeSql(query, [], function(tx, res) {
-                    var length = results.rows.length;
-                    for (i = 0; i < length; i++) {
-                        var result = results.rows.item(i);
-                        output_results.push(result);
-                        console.log(results.rows.item(i));
+        openDB_("foodapp.db", "default")
+            .then(function(db) {
+                //then execute the query
+                $cordovaSQLite.execute(db, query, params).then(function(res) {
+                    //then add the records to the out param
+                    // console.log("Query executed", JSON.stringify(query));
+                    for (var i = 0; i < res.rows.length; i++) {
+                        out.push(res.rows.item(i));
+                        //console.log("Added row to set", JSON.stringify(res.rows.item(i)));
                     }
+                    if (res.rows.length == 0 && self.bDebug === true) {
+                        //console.log("No results found ");
+                    }
+                }, function(err) {
+                    // console.log("Query failed", JSON.stringify(query));
+                    q.reject();
+                });
 
+                db_.open(function() {
+                    q.resolve("DB Opened")
+                }, function() {
+                    q.reject("Failed to open DB");
                 });
-            }, function(error) {
-                // OK to close here:
-                console.log('transaction error: ' + error.message);
-                db.close();
-            }, function() {
-                // OK to close here:
-                deferred.resolve(output_results);
-                console.log('transaction ok');
-                db.close(function() {
-                    console.log('database is closed ok');
-                });
+            }, function(err) {
+                //console.log(JSON.stringify(err), this.query);
+                q.reject(err);
             });
 
-            return deferred.promise;
-        },
-        resultsHandler: function(deferred, successCB, errorCB) {
-            var deferred = $q.defer();
-            db.transaction(function(tx) {
-                tx.executeSql(query, [], successCB(deferred), errorCB);
-            }, errorCB);
-            return deferred.promise;
-        },
-        errorHandler: function(error) {
-
-            return deferred.reject(console.log(error));
-        },
+        return q.promise;
 
 
     };
 
-}]);
+    // public methods
+    var execute = function(query, params, out) {
+        var q = $q.defer();
+        performQuery_(query, params, out).then(function() {
+            q.resolve([query, params]);
+        }, function(err) {
+            q.reject([query, params, err]);
+        });
+        return q.promise;
+    };
+
+    return {
+        execute: execute
+    };
+})

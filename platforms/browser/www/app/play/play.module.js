@@ -1,1 +1,1 @@
-var play = angular.module('play', ['ngRoute']);
+angular.module('play', ['ngRoute']);

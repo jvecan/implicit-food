@@ -1,7 +1,6 @@
 var implicitFood = angular.module("implicitFood", ['myProfile', 'play', 'ngCordova', 'ngRoute']);
 
 
-//implicitFood.config(function($locationProvider, $routeProvider) {
 implicitFood.config(function($locationProvider, $routeProvider) {
     //  $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('');
@@ -12,7 +11,9 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             templateUrl: 'app/play/play-start.html',
             resolve: {
                 healthyFoods: gameItems => gameItems.initializeHealthyItems(),
-                unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems()
+                unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
+                //goodWords: gameItems => gameItems.initializeGoodWords(),
+                //  negativeWords: gameItems => gameItems.initializeNegativeWords()
             }
         })
         .when('/', {
@@ -23,7 +24,6 @@ implicitFood.config(function($locationProvider, $routeProvider) {
                     return checkDatabase.getDatabaseStatus();
                 }
             }
-
         })
         .when("/play-game", {
             controller: 'playGameCtrl',
@@ -74,7 +74,6 @@ implicitFood.factory('checkDatabase', ['$cordovaSQLite', '$q', function($cordova
     };
 
 }]);
-
 
 
 implicitFood.run(function() {

@@ -20,23 +20,11 @@ var app = {
     // Application Constructor
     initialize: function() {
 
-
-
         /*
                 var attachFastClick = Origami.fastclick;
                 attachFastClick(document.body);
         */
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-
-
-        // delete this
-
-        //var buttonTwo = document.getElementById("btntest");
-        //buttonTwo.addEventListener('click', function () { alert("Button Clicked"); }, false);
-
-        //buttonTwo.addEventListener('click', this.onDeviceReady.bind(this), false);
-
-        // delete this end
 
 
     },
@@ -46,41 +34,8 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-
         console.log("OnDeviceReady ready")
-
-
-
-        /*
-                var db = null;
-                db = window.sqlitePlugin.openDatabase({ name: 'db/foodapp.db', location: 'default' });
-
-                window.sqlitePlugin.echoTest(function() {
-                    console.log('ECHO test OK');
-                });
-        */
-        // delete this
-
-        /*
-                this.timerEnd = this.timerStart;
-
-                var parentElement = document.getElementById('millisecondTest');
-
-
-                this.timerStart = Date.now();
-
-                var differenceMilliseconds = this.timerStart - this.timerEnd;
-
-
-
-                parentElement.innerHTML = differenceMilliseconds;
-
-        */
-        // delete this end
-
-
     },
-
 
 
 };

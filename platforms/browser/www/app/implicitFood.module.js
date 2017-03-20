@@ -6,17 +6,19 @@ implicitFood.config(function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
         .when("/play", {
+            controller: "playStartCtrl",
+            controllerAs: "playStartController",
             templateUrl: 'app/play/play-start.html',
-            controller: 'playController',
             resolve: {
-                initialGameItems: function(playDatabase) {
-                    return playDatabase.setInitialGameItems();
-                }
+                healthyFoods: gameItems => gameItems.initializeHealthyItems(),
+                unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
+                goodWords: gameItems => gameItems.initializeGoodWords(),
+                negativeWords: gameItems => gameItems.initializeNegativeWords()
             }
         })
         .when('/', {
-            templateUrl: 'app/main-menu/main-menu.html',
             controller: 'mainMenuController',
+            templateUrl: 'app/main-menu/main-menu.html',
             resolve: {
                 message: function(checkDatabase) {
                     return checkDatabase.getDatabaseStatus();
@@ -24,7 +26,14 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             }
         })
         .when("/play-game", {
+            controller: 'playGameCtrl',
+            controllerAs: 'playGameController',
             templateUrl: 'app/play/play-game.html'
+        })
+        .when("/play-results", {
+            controller: 'playResultsCtrl',
+            controllerAs: 'playResultsController',
+            templateUrl: 'app/play/play-results.html'
         })
         .when("/my-profile", {
             templateUrl: 'app/my-profile/my-profile.html'
@@ -37,10 +46,10 @@ implicitFood.config(function($locationProvider, $routeProvider) {
         });
 });
 
-
-implicitFood.controller("mainMenuController", function($scope, message) {
-    $scope.message = message;
-    console.log(message);
+implicitFood.controller("mainMenuController", function($scope, gameItems) {
+    //gameItems.initializeHealthyItems();
+    //$scope.message = message;
+    //console.log(message);
 });
 
 implicitFood.factory('checkDatabase', ['$cordovaSQLite', '$q', function($cordovaSQLite, $q) {
@@ -52,6 +61,7 @@ implicitFood.factory('checkDatabase', ['$cordovaSQLite', '$q', function($cordova
             function databaseCopySuccess() {
                 console.log("Database copied successfully. ");
                 deferred.resolve("Database copied successfully. ");
+
             }
 
             function databaseCopyError(e) {
@@ -66,13 +76,6 @@ implicitFood.factory('checkDatabase', ['$cordovaSQLite', '$q', function($cordova
 }]);
 
 
-
-
-
-
-
-
 implicitFood.run(function() {
     FastClick.attach(document.body);
-
 });
