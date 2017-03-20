@@ -6,14 +6,14 @@ implicitFood.config(function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
         .when("/play", {
-            templateUrl: "app/play/play-start.html",
             controller: 'playStartCtrl',
-            controllerAs: 'playStartController'
+            controllerAs: 'playStartController',
+            templateUrl: "app/play/start.html"
         })
         .when("/play-start-food", {
             controller: 'playStartFoodCtrl',
             controllerAs: 'playStartFoodController',
-            templateUrl: 'app/play/play-start-food.html',
+            templateUrl: 'app/play/start-food.html',
             resolve: {
                 healthyFoods: gameItems => gameItems.initializeHealthyItems(),
                 unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
@@ -22,7 +22,7 @@ implicitFood.config(function($locationProvider, $routeProvider) {
         .when("/play-start-attribute", {
             controller: 'playStartAttributeCtrl',
             controllerAs: 'playStartAttributeController',
-            templateUrl: 'app/play/play-start-attribute.html',
+            templateUrl: 'app/play/start-attribute.html',
             resolve: {
                 healthyFoods: gameItems => gameItems.initializeHealthyItems(),
                 unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
@@ -40,12 +40,12 @@ implicitFood.config(function($locationProvider, $routeProvider) {
         .when("/play-game", {
             controller: 'playGameCtrl',
             controllerAs: 'playGameController',
-            templateUrl: 'app/play/play-game.html'
+            templateUrl: 'app/play/game.html'
         })
         .when("/play-results", {
             controller: 'playResultsCtrl',
             controllerAs: 'playResultsController',
-            templateUrl: 'app/play/play-results.html'
+            templateUrl: 'app/play/results.html'
         })
         .when("/my-profile", {
             templateUrl: 'app/my-profile/my-profile.html'

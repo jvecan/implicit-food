@@ -1,30 +1,45 @@
 <div class="game-container">
     <div class='game-content'>
         <!-- muuta 'left' -->
-        <div class='game-touch-area game-touch-area-left' ng-click="playGameController.playerTouch('healthy', playGameController.randomFood.name)">
+
+
+        <div ng-show="showOverlay" ng-click="playGameController.startGameTouch()" class='game-instructions-overlay'>
+            <div class="game-instructions-overlay-content">
+                <h3 class='game-instructions-overlay-header'>Instructions</h3>
+                <ol type="1">
+                    <li>Position your fingers on the dark green areas on each side of the screen. </li>
+                    <li>Start the game by tapping anywhere on the screen. </li>
+                    <li>The first food image will appear one second after.</li>
+                </ol>
+            </div>
+        </div>
+
+
+        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || playGameController.playerTouch('healthy', playGameController.randomFood.name, playGameController.randomFood.attribute_category_id, 1)">
             <span class='game-touch-area-left-attribute'>Healthy</span>
-
-
 
             <!-- playGameController.leftAreaStimulus.name -->
         </div>
         <div class='game-middle-screen'>
-            <div class='game-stimulus'>
+
+            <div ng-show="showStimulus" class='game-stimulus'>
                 <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.randomFood.name}}.png" />
                 <!--img class='game-stimulus-image' ng-src="img/game_images/asparagus.png" />-->
             </div>
+            <div class='game-error' ng-show="showError">X</div>
             <div class='game-points'>
                 Score: x
                 <br /> Difference in milliseconds: {{playGameController.differenceMilliseconds}}
                 <!-- playGameController.currentPoints -->
             </div>
         </div>
-        <div class='game-touch-area game-touch-area-right' ng-click="playGameController.playerTouch('unhealthy', playGameController.randomFood.name)">
+        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch('unhealthy', playGameController.randomFood.name, playGameController.randomFood.attribute_category_id, 1)">
             <span class='game-touch-area-right-attribute'>Unhealthy</span>
             <!-- playGameController.rightAreaStimulus.name -->
         </div>
     </div>
 </div>
+
 <!--
     <div ng-controller="playCtrl as playController">
 

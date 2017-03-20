@@ -10,6 +10,9 @@
      vm.randomHealthyFoods = gameItems.getHealthyItems();
      vm.randomUnhealthyFoods = gameItems.getUnhealthyItems();
 
+     //vm.leftAttribute = gameItems.getLeftAttribute();
+     //vm.rightAttribute = gameItems.getRightAttribute();
+
      console.log(gameItems.getHealthyItems());
      console.log(vm.randomUnhealthyFoods);
 
