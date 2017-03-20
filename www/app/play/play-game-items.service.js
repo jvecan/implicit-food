@@ -16,8 +16,6 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory) {
 
     var previousItemId;
 
-
-
     var startTime;
     var endTime;
 

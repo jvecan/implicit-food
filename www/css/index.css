@@ -112,6 +112,24 @@ body {
     text-align: center;
 }
 
+.game-type-text {
+    font-size: 16px;
+    border: 1px black solid;
+    width: 50%;
+    padding: 5px;
+    background: rgba(160, 237, 105, 1);
+    float: left;
+    height: 250px;
+}
+
+.game-type-header {
+    text-align: center;
+}
+
+.game-type-paragraph {
+    margin-left: 20px;
+}
+
 .game-instructions-text {
     font-size: 16px;
     border: 1px black solid;
@@ -120,10 +138,42 @@ body {
     background: rgba(160, 237, 105, 1);
 }
 
+.game-instructions-text-table {
+    background: rgba(160, 237, 105, 1);
+    width: 100%;
+    table-layout: fixed;
+}
+
+.game-instructions-text-table-button {
+    text-align: center;
+    border: 0px;
+}
+
+.game-instructions-text-table td {
+    background: rgba(160, 237, 105, 1);
+    border: 1px black solid;
+    padding: 2px;
+}
+
+.game-instructions-text-table th {
+    background: rgba(160, 237, 105, 1);
+    border: 1px black solid;
+    text-align: left;
+    padding: 2px;
+}
+
 .game-instructions-start-btn {
     margin-top: 25px;
     width: 70%;
     font-size: 24px !important;
+}
+
+.game-type-select-btn {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 90%;
+    font-size: 24px !important;
+    padding: 8px !important;
 }
 
 .game-instructions-food-table {

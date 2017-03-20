@@ -6,14 +6,26 @@ implicitFood.config(function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
         .when("/play", {
-            controller: "playStartCtrl",
-            controllerAs: "playStartController",
-            templateUrl: 'app/play/play-start.html',
+            templateUrl: "app/play/play-start.html",
+            controller: 'playStartCtrl',
+            controllerAs: 'playStartController'
+        })
+        .when("/play-start-food", {
+            controller: 'playStartFoodCtrl',
+            controllerAs: 'playStartFoodController',
+            templateUrl: 'app/play/play-start-food.html',
             resolve: {
                 healthyFoods: gameItems => gameItems.initializeHealthyItems(),
                 unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
-                //goodWords: gameItems => gameItems.initializeGoodWords(),
-                //  negativeWords: gameItems => gameItems.initializeNegativeWords()
+            }
+        })
+        .when("/play-start-attribute", {
+            controller: 'playStartAttributeCtrl',
+            controllerAs: 'playStartAttributeController',
+            templateUrl: 'app/play/play-start-attribute.html',
+            resolve: {
+                healthyFoods: gameItems => gameItems.initializeHealthyItems(),
+                unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
             }
         })
         .when('/', {
@@ -44,7 +56,24 @@ implicitFood.config(function($locationProvider, $routeProvider) {
         .otherwise({
             templateUrl: "app/main-menu/main-menu.html"
         });
+
+
+
 });
+
+
+implicitFood.factory('randomGameType', ['$q', function($q) {
+    return {
+        getRandomGameType: function() {
+            var deferred = $q.defer();
+            var gameTypes = ["food", "attribute"];
+            var randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
+            deferred.resolve(randomGameType);
+            return deferred.promise.gameType;
+        }
+    }
+}]);
+
 
 implicitFood.controller("mainMenuController", function($scope, gameItems) {
     //gameItems.initializeHealthyItems();
@@ -72,7 +101,6 @@ implicitFood.factory('checkDatabase', ['$cordovaSQLite', '$q', function($cordova
             return deferred.promise;
         }
     };
-
 }]);
 
 

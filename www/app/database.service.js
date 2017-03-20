@@ -1,4 +1,4 @@
-angular.module('play').factory('dbFactory', function($q, $cordovaSQLite) {
+angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite) {
     //private variables
 
 
