@@ -15,8 +15,8 @@
         </div>
 
 
-        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || playGameController.playerTouch('healthy', playGameController.randomFood.name, playGameController.randomFood.attribute_category_id, 1)">
-            <span class='game-touch-area-left-attribute'>Healthy</span>
+        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || playGameController.playerTouch(playGameController.leftCategory.name, playGameController.displayedFood.name, playGameController.displayedFood.attribute_category_id, playGameController.leftCategory.id)">
+            <span class='game-touch-area-left-attribute'>{{playGameController.leftCategory.name}}</span>
 
             <!-- playGameController.leftAreaStimulus.name -->
         </div>
@@ -27,7 +27,7 @@
             </div>
 
             <div ng-show="showStimulus" class='game-stimulus'>
-                <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.randomFood.name}}.png" />
+                <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.displayedFood.name}}.png" />
                 <!--img class='game-stimulus-image' ng-src="img/game_images/asparagus.png" />-->
             </div>
             <div class='game-error' ng-show="showError">X</div>
@@ -37,8 +37,8 @@
                 <!-- playGameController.currentPoints -->
             </div>
         </div>
-        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch('unhealthy', playGameController.randomFood.name, playGameController.randomFood.attribute_category_id, 2)">
-            <span class='game-touch-area-right-attribute'>Unhealthy</span>
+        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch(playGameController.rightCategory.name, playGameController.displayedFood.name, playGameController.displayedFood.attribute_category_id, playGameController.rightCategory.id)">
+            <span class='game-touch-area-right-attribute'>{{playGameController.rightCategory.name}}</span>
             <!-- playGameController.rightAreaStimulus.name -->
         </div>
     </div>
@@ -53,7 +53,7 @@
                 Unhealthy
             </div>
             <div class="col-xs-6">
-                <img ng-src="img/game_images/{{randomFood()}}.png" width="32" height="32" />
+                <img ng-src="img/game_images/{{displayedFood()}}.png" width="32" height="32" />
             </div>
             <div class="col-xs-3" ng-click="playerTouch(right)">
                 Healthy

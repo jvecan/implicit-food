@@ -23,7 +23,7 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
     };
 
     var saveFoodRoundData = function(leftAttributeId, rightAttributeId, stimulusFoodId, timeTaken, error) {
-        var roundObj = { 'side': side, 'name': foodName, 'time': difference };
+        var roundObj = { 'side': side, 'correctSide': correctSide, 'name': foodName, 'time': difference };
         roundData.push(roundObj);
 
         // stub
@@ -34,6 +34,12 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
 
         // stub
     };
+
+    var createGameContainerForRounds = function(game_type) {
+        var query = 'INSERT INTO game(game_type) VALUES ("' + game_type + '")';
+        dbFactory.execute(query, [], []);
+    }
+
     var saveRoundDataToDatabase = function() {
         // stub
     };
@@ -46,7 +52,8 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
         resetAllRoundData: resetAllRoundData,
         saveFoodRoundData: saveFoodRoundData,
         saveAttributeRoundData: saveAttributeRoundData,
-        saveRoundDataToDatabase: saveRoundDataToDatabase
+        saveRoundDataToDatabase: saveRoundDataToDatabase,
+        createGameContainerForRounds: createGameContainerForRounds
 
 
 

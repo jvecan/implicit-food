@@ -43,18 +43,23 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
         openDB_("foodapp.db", "default")
             .then(function(db) {
                 //then execute the query
+                console.log(query);
                 $cordovaSQLite.execute(db, query, params).then(function(res) {
+
+                    console.log("insertId: " + res.insertId);
                     //then add the records to the out param
                     // console.log("Query executed", JSON.stringify(query));
                     for (var i = 0; i < res.rows.length; i++) {
                         out.push(res.rows.item(i));
                         //console.log("Added row to set", JSON.stringify(res.rows.item(i)));
                     }
-                    if (res.rows.length == 0 && self.bDebug === true) {
+                    if (res.rows.length == 0) {
                         //console.log("No results found ");
+                        console.log("insertId: " + res.insertId);
                     }
                 }, function(err) {
-                    // console.log("Query failed", JSON.stringify(query));
+                    console.log("Query failed", JSON.stringify(query));
+                    console.error(err);
                     q.reject();
                 });
 
@@ -64,7 +69,7 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
                     q.reject("Failed to open DB");
                 });
             }, function(err) {
-                //console.log(JSON.stringify(err), this.query);
+                console.log(JSON.stringify(err), this.query);
                 q.reject(err);
             });
 
