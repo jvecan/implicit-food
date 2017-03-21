@@ -21,6 +21,10 @@
             <!-- playGameController.leftAreaStimulus.name -->
         </div>
         <div class='game-middle-screen'>
+            <div class='game-nav-buttons'>
+                <a href="#/play" class="game-nav-btn btn-base">New Game</a>
+                <a href="#/main-menu" class="game-nav-btn btn-base">Main Menu</a>
+            </div>
 
             <div ng-show="showStimulus" class='game-stimulus'>
                 <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.randomFood.name}}.png" />
@@ -33,7 +37,7 @@
                 <!-- playGameController.currentPoints -->
             </div>
         </div>
-        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch('unhealthy', playGameController.randomFood.name, playGameController.randomFood.attribute_category_id, 1)">
+        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch('unhealthy', playGameController.randomFood.name, playGameController.randomFood.attribute_category_id, 2)">
             <span class='game-touch-area-right-attribute'>Unhealthy</span>
             <!-- playGameController.rightAreaStimulus.name -->
         </div>

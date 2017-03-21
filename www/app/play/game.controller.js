@@ -21,7 +21,7 @@
 
      $scope.showStimulus = false;
 
-     var advanceRound = false;
+     var roundSaved = false;
 
 
      vm.startGameTouch = function() {
@@ -52,21 +52,36 @@
          //console.log("start time: " + gameItems.getStartTime());
          //console.log("called playerTouch");
 
-         gameItems.addRoundInfo(side, foodName, Date.now() - gameItems.getStartTime());
+         if (roundSaved == false) {
+             if (foodAttributeCategoryId == 1) {
+                 correctSide = "healthy";
+             } else if (foodAttributeCategoryId == 2) {
+                 correctSide = "unhealthy";
+             }
+             gameItems.addRoundInfo(side, correctSide, foodName, Date.now() - gameItems.getStartTime());
+             roundSaved = true;
+         }
 
+         if (roundSaved == true && foodAttributeCategoryId == touchAreaAttributeId) {
 
+             gameItems.advanceRoundCounter();
 
-         gameItems.advanceRoundCounter();
+         }
+
+         if ($scope.showError == true && roundSaved == true) {
+             $scope.sideTouchAreasDisabled = false;
+         }
 
          // debug
          vm.differenceMilliseconds = Date.now() - gameItems.getStartTime();
          // debug
 
-         if ($scope.showError == false) {
+         if (roundSaved == true && foodAttributeCategoryId == touchAreaAttributeId) {
              $timeout(function() {
                  vm.randomFood = gameItems.getRandomItem();
                  gameItems.setStartTime(Date.now());
-
+                 $scope.showError = false;
+                 roundSaved = false;
 
                  $scope.sideTouchAreasDisabled = false;
              }, 400);
@@ -76,8 +91,6 @@
              }
 
          }
-
-
 
      }
 

@@ -169,8 +169,8 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
 
             return unhealthyFoods;
         },
-        addRoundInfo(side, foodName, difference) {
-            var roundObj = { 'side': side, 'name': foodName, 'time': difference };
+        addRoundInfo(side, correctSide, foodName, difference) {
+            var roundObj = { 'side': side, 'correctSide': correctSide, 'name': foodName, 'time': difference };
             roundData.push(roundObj);
         }
 
