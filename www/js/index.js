@@ -34,10 +34,27 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        console.log("OnDeviceReady ready")
+        console.log("OnDeviceReady ready");
+
+        window.plugins.sqlDB.copy('foodapp.db', 0, databaseCopySuccess, databaseCopyError);
+
+
     },
 
 
 };
+
+function databaseCopySuccess() {
+    console.log("Database copied successfully. ");
+    //window.sqlitePlugin.close(successcb, errorcb);
+    //deferred.resolve("Database copied successfully. ");
+
+}
+
+function databaseCopyError(e) {
+    console.log("Error Code = " + JSON.stringify(e));
+    //window.sqlitePlugin.close(successcb, errorcb);
+    //deferred.resolve("Resolve message: error in copying database: " + JSON.stringify(e));
+}
 
 app.initialize();

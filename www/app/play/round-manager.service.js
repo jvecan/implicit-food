@@ -40,6 +40,8 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
         dbFactory.execute(query, [], []);
     }
 
+    var saveFoodRoundToDatabase
+
     var saveRoundDataToDatabase = function() {
         // stub
     };

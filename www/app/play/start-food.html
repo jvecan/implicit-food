@@ -1,41 +1,38 @@
 <div class="container-fluid header-wide">
     <div class='div-center-content header '>
-        <h1>New Game</h1>
+        <h1>Food Categorization</h1>
     </div>
 </div>
 <div class="container-fluid content-full">
-
-    <div>
-        <br />
-        <div class="game-instructions-text">
-            <p>Categorize these ten foods into healthy and unhealthy foods. </p>
-            <p>Be as quick as possible. Fast and accurate answers net more points.</p>
-        </div>
-        <br />
-        <table class='game-instructions-food-table'>
-            <tr>
-                <th colspan="5">Healthy:</th>
-            </tr>
-            <tr>
-                <td ng-repeat="healthyFood in playStartFoodController.randomHealthyFoods track by $index">
-                    <img ng-src="img/game_images/{{healthyFood.name}}.png" class='image-instructions-food' />
-                </td>
-            </tr>
-        </table>
-        <br />
-        <table class='game-instructions-food-table'>
-            <tr>
-                <th colspan="5">Unhealthy:</th>
-            </tr>
-            <tr>
-                <td ng-repeat="unhealthyFood in playStartFoodController.randomUnhealthyFoods track by $index">
-                    <img ng-src="img/game_images/{{unhealthyFood.name}}.png" class='image-instructions-food' />
-                </td>
-            </tr>
-        </table>
-        <div class='div-center-content'>
-            <a href="#/play-game" class="game-instructions-start-btn btn-base">Start Game</a>
-        </div>
-        <br />
+    <br />
+    <table class='game-instructions-food-table'>
+        <tr>
+            <th colspan="5">Healthy:</th>
+        </tr>
+        <tr>
+            <td ng-repeat="healthyFood in playStartFoodController.randomHealthyFoods track by $index">
+                <img ng-src="img/game_images/{{healthyFood.name}}.png" class='image-instructions-food' />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table class='game-instructions-food-table'>
+        <tr>
+            <th colspan="5">Unhealthy:</th>
+        </tr>
+        <tr>
+            <td ng-repeat="unhealthyFood in playStartFoodController.randomUnhealthyFoods track by $index">
+                <img ng-src="img/game_images/{{unhealthyFood.name}}.png" class='image-instructions-food' />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class="game-instructions-text">
+        <p>Categorize these ten foods into healthy and unhealthy foods. </p>
+        <p>Be as quick as possible. Fast and accurate answers net more points.</p>
     </div>
+    <div class='div-center-content'>
+        <a href="#/play-game" class="game-instructions-start-btn btn-base">Start Game</a>
+    </div>
+    <br />
 </div>

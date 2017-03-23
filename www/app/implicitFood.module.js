@@ -15,8 +15,8 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             controllerAs: 'playStartFoodController',
             templateUrl: 'app/play/start-food.html',
             resolve: {
-                healthyFoods: gameItems => gameItems.initializeHealthyItems(),
-                unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
+                healthyFoods: foodGame => foodGame.initializeHealthyItems(),
+                unhealthyFoods: foodGame => foodGame.initializeUnhealthyItems(),
             }
         })
         .when("/play-start-attribute", {
@@ -24,28 +24,38 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             controllerAs: 'playStartAttributeController',
             templateUrl: 'app/play/start-attribute.html',
             resolve: {
-                healthyFoods: gameItems => gameItems.initializeHealthyItems(),
-                unhealthyFoods: gameItems => gameItems.initializeUnhealthyItems(),
+                positiveWords: attributeGame => attributeGame.initializePositiveWords(),
+                negativeWords: attributeGame => attributeGame.initializeNegativeWords(),
             }
         })
         .when('/', {
             controller: 'mainMenuController',
             templateUrl: 'app/main-menu/main-menu.html',
-            resolve: {
+            /*resolve: {
                 message: function(checkDatabase) {
                     return checkDatabase.getDatabaseStatus();
                 }
-            }
+            }*/
         })
         .when("/play-game", {
             controller: 'playGameCtrl',
             controllerAs: 'playGameController',
             templateUrl: 'app/play/game.html'
         })
+        .when("/play-game-attribute", {
+            controller: 'playGameAttributeCtrl',
+            controllerAs: 'playGameAttributeController',
+            templateUrl: 'app/play/game-attribute.html'
+        })
         .when("/play-results", {
             controller: 'playResultsCtrl',
             controllerAs: 'playResultsController',
             templateUrl: 'app/play/results.html'
+        })
+        .when("/play-results-attribute", {
+            controller: 'playResultsAttributeCtrl',
+            controllerAs: 'playResultsAttributeController',
+            templateUrl: 'app/play/results-attribute.html'
         })
         .when("/my-profile", {
             templateUrl: 'app/my-profile/my-profile.html'
@@ -62,21 +72,8 @@ implicitFood.config(function($locationProvider, $routeProvider) {
 });
 
 
-implicitFood.factory('randomGameType', ['$q', function($q) {
-    return {
-        getRandomGameType: function() {
-            var deferred = $q.defer();
-            var gameTypes = ["food", "attribute"];
-            var randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
-            deferred.resolve(randomGameType);
-            return deferred.promise.gameType;
-        }
-    }
-}]);
-
-
-implicitFood.controller("mainMenuController", function($scope, gameItems) {
-    //gameItems.initializeHealthyItems();
+implicitFood.controller("mainMenuController", function($scope) {
+    //foodGame.initializeHealthyItems();
     //$scope.message = message;
     //console.log(message);
 });

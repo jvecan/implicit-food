@@ -2,15 +2,18 @@
      .module('play')
      .controller('playStartAttributeCtrl', playStartAttributeCtrl);
 
- playStartAttributeCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'gameItems'];
+ playStartAttributeCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'attributeGame'];
 
- function playStartAttributeCtrl($scope, $timeout, dbFactory, gameItems) {
+ function playStartAttributeCtrl($scope, $timeout, dbFactory, attributeGame) {
      var vm = this;
 
-     vm.randomHealthyFoods = gameItems.getHealthyItems();
-     vm.randomUnhealthyFoods = gameItems.getUnhealthyItems();
+     vm.positiveWords = attributeGame.getPositiveWords();
+     vm.negativeWords = attributeGame.getNegativeWords();
 
-     console.log(gameItems.getHealthyItems());
-     console.log(vm.randomUnhealthyFoods);
+     vm.healthyFood = attributeGame.getHealthyFood();
+     vm.unhealthyFood = attributeGame.getUnhealthyFood();
+
+     console.log(attributeGame.getHealthyFood());
+     //console.log(vm.randomUnhealthyFoods);
 
  }

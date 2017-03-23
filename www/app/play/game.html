@@ -1,8 +1,5 @@
 <div class="game-container">
     <div class='game-content'>
-        <!-- muuta 'left' -->
-
-
         <div ng-show="showOverlay" ng-click="playGameController.startGameTouch()" class='game-instructions-overlay'>
             <div class="game-instructions-overlay-content">
                 <h3 class='game-instructions-overlay-header'>Instructions</h3>
@@ -13,12 +10,8 @@
                 </ol>
             </div>
         </div>
-
-
-        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || playGameController.playerTouch(playGameController.leftCategory.name, playGameController.displayedFood.name, playGameController.displayedFood.attribute_category_id, playGameController.leftCategory.id)">
-            <span class='game-touch-area-left-attribute'>{{playGameController.leftCategory.name}}</span>
-
-            <!-- playGameController.leftAreaStimulus.name -->
+        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || playGameController.playerTouch(playGameController.leftTouchItem.name, playGameController.displayedItem.name, playGameController.displayedItem.attribute_category_id, playGameController.leftTouchItem.id)">
+            <span class='game-touch-area-left-attribute'>{{playGameController.leftTouchItem.name}}</span>
         </div>
         <div class='game-middle-screen'>
             <div class='game-nav-buttons'>
@@ -27,23 +20,19 @@
             </div>
 
             <div ng-show="showStimulus" class='game-stimulus'>
-                <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.displayedFood.name}}.png" />
-                <!--img class='game-stimulus-image' ng-src="img/game_images/asparagus.png" />-->
+                <img class='game-stimulus-image' ng-src="img/game_images/{{playGameController.displayedItem.name}}.png" />
             </div>
             <div class='game-error' ng-show="showError">X</div>
             <div class='game-points'>
                 Score: x
                 <br /> Difference in milliseconds: {{playGameController.differenceMilliseconds}}
-                <!-- playGameController.currentPoints -->
             </div>
         </div>
-        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch(playGameController.rightCategory.name, playGameController.displayedFood.name, playGameController.displayedFood.attribute_category_id, playGameController.rightCategory.id)">
-            <span class='game-touch-area-right-attribute'>{{playGameController.rightCategory.name}}</span>
-            <!-- playGameController.rightAreaStimulus.name -->
+        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameController.playerTouch(playGameController.rightTouchItem.name, playGameController.displayedItem.name, playGameController.displayedItem.attribute_category_id, playGameController.rightTouchItem.id)">
+            <span class='game-touch-area-right-attribute'>{{playGameController.rightTouchItem.name}}</span>
         </div>
     </div>
 </div>
-
 <!--
     <div ng-controller="playCtrl as playController">
 
@@ -53,7 +42,7 @@
                 Unhealthy
             </div>
             <div class="col-xs-6">
-                <img ng-src="img/game_images/{{displayedFood()}}.png" width="32" height="32" />
+                <img ng-src="img/game_images/{{displayedItem()}}.png" width="32" height="32" />
             </div>
             <div class="col-xs-3" ng-click="playerTouch(right)">
                 Healthy

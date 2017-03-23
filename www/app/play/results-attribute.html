@@ -1,0 +1,43 @@
+<div class="container-fluid header-wide">
+    <div class='div-center-content header'>
+        <h1>Results</h1>
+    </div>
+</div>
+
+
+<div class="container-fluid content-full">
+    <table class='game-instructions-text-table'>
+        <tr>
+            <th>Name</th>
+            <th>Tap Side</th>
+            <th>Correct</th>
+            <th>Time</th>
+        </tr>
+        <tr ng-repeat="result in playResultsAttributeController.results track by $index">
+            <td>
+                <!--{{ unhealthyFood.name }}-->
+                {{result.name}}
+            </td>
+            <td>
+                <!--{{ unhealthyFood.name }}-->
+                {{result.side}}
+            </td>
+            <td>
+                <!--{{ unhealthyFood.name }}-->
+                {{result.correctSide}}
+            </td>
+            <td>
+                <!--{{ unhealthyFood.name }}-->
+                {{result.time}} ms
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class='div-center-content'>
+        <a href="#/play" class="results-btn btn-base">New Game</a>
+        <a href="#/main-menu" class="results-btn btn-base">Main Menu</a>
+
+    </div>
+    <br />
+
+</div>

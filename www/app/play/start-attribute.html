@@ -1,14 +1,84 @@
 <div class="container-fluid header-wide">
     <div class='div-center-content header '>
-        <h1>New Game</h1>
+        <h1>Attribute Association</h1>
     </div>
 </div>
 <div class="container-fluid content-full">
-    <div>
+    <div class="game-instructions-attribute-table-container">
         <br />
-        <div class="game-instructions-text">
-            <p>Associate the following ten words with the two foods displayed below. </p>
-            <p>Be as quick as possible. Fast and accurate answers net more points.</p>
-        </div>
+        <table class="game-instructions-attribute-table game-instructions-attribute-table-word">
+            <tr>
+                <th>Positive words:</th>
+            </tr>
+            <tr>
+                <td>
+                    <span ng-repeat="positiveWord in playStartAttributeController.positiveWords track by $index">
+                        {{positiveWord.name}}{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <table class="game-instructions-attribute-table game-instructions-attribute-table-word">
+            <tr>
+                <th>Negative words:</th>
+            </tr>
+            <tr>
+                <td>
+                    <span ng-repeat="negativeWord in playStartAttributeController.negativeWords track by $index">
+                        {{negativeWord.name}}{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <!--
+        <table class="game-instructions-attribute-table">
+            <tr>
+                <th>Positive words:</th>
+            </tr>
+            <tr ng-repeat="positiveWord in playStartAttributeController.positiveWords track by $index">
+                <td>{{positiveWord.name}}</td>
+            </tr>
+        </table>
+        <table class="game-instructions-attribute-table">
+            <tr>
+                <th>Negative words:</th>
+            </tr>
+            <tr ng-repeat="negativeWord in playStartAttributeController.negativeWords track by $index">
+                <td>{{negativeWord.name}}</td>
+            </tr>
+        </table>
+        -->
     </div>
+    <div style='clear:both;'><br /></div>
+    <div class="game-instructions-attribute-table-container">
+        <table class="game-instructions-attribute-table">
+            <tr>
+                <th>Healthy food: </th>
+            </tr>
+            <tr>
+                <td class='center-text'>
+                    <img ng-src="img/game_images/{{playStartAttributeController.healthyFood[0].name}}.png" class='image-instructions-food' />
+                </td>
+            </tr>
+        </table>
+        <table class="game-instructions-attribute-table">
+            <tr>
+                <th>Unhealthy food: </th>
+            </tr>
+            <tr>
+                <td class='center-text'>
+                    <img ng-src="img/game_images/{{playStartAttributeController.unhealthyFood[0].name}}.png" class='image-instructions-food' />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style='clear:both;'><br /></div>
+    <div class="game-instructions-text">
+        <p>Associate positive words with the healthy food and negative words with the unhealthy food. </p>
+        <p>Be as quick as possible. Fast and accurate answers net more points.</p>
+    </div>
+    <div class='div-center-content'>
+        <a href="#/play-game-attribute" class="game-instructions-start-btn btn-base">Start Game</a>
+    </div>
+    <br />
 </div>

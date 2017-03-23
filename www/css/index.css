@@ -94,6 +94,10 @@ body {
     font-size: 16px !important;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .main-menu-btn {
     margin-top: 40px;
     width: 70%;
@@ -190,7 +194,7 @@ body {
 }
 
 .game-instructions-start-btn {
-    margin-top: 25px;
+    margin-top: 20px;
     width: 70%;
     font-size: 24px !important;
 }
@@ -203,18 +207,38 @@ body {
     padding: 8px !important;
 }
 
+.game-instructions-attribute-table-container {
+    width: 100%;
+}
+
+.game-instructions-attribute-table {
+    background: rgba(160, 237, 105, 1);
+    width: 50%;
+    table-layout: fixed;
+    float: left;
+}
+
+.game-instructions-attribute-table-word td {
+    height: 65px;
+    vertical-align: top;
+}
+
 .game-instructions-food-table {
     background: rgba(160, 237, 105, 1);
     width: 100%;
     table-layout: fixed;
+    height: 80px;
 }
 
-.game-instructions-food-table td {
+.game-instructions-food-table td,
+.game-instructions-attribute-table td {
+    width: 64px;
     border: 1px black solid;
     padding: 2px;
 }
 
-.game-instructions-food-table th {
+.game-instructions-food-table th,
+.game-instructions-attribute-table th {
     border: 1px black solid;
     text-align: center;
     font-size: 16px;
@@ -276,6 +300,10 @@ body {
     font-size: 19px;
 }
 
+.game-touch-area-attribute-image {
+    width: 75px;
+}
+
 .game-nav-buttons {
     width: 100%;
     padding: 5px;
@@ -292,6 +320,15 @@ body {
     position: absolute;
     left: 15%;
     top: 30%;
+}
+
+.game-stimulus-text {
+    font-size: 32px;
+    position: absolute;
+    left: -5%;
+    top: 45%;
+    text-align: center;
+    width: 200px;
 }
 
 .game-error {

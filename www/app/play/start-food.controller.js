@@ -2,18 +2,18 @@
      .module('play')
      .controller('playStartFoodCtrl', playStartFoodCtrl);
 
- playStartFoodCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'gameItems'];
+ playStartFoodCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'foodGame'];
 
- function playStartFoodCtrl($scope, $timeout, dbFactory, gameItems) {
+ function playStartFoodCtrl($scope, $timeout, dbFactory, foodGame) {
      var vm = this;
 
-     vm.randomHealthyFoods = gameItems.getHealthyItems();
-     vm.randomUnhealthyFoods = gameItems.getUnhealthyItems();
+     vm.randomHealthyFoods = foodGame.getPositiveItems();
+     vm.randomUnhealthyFoods = foodGame.getNegativeItems();
 
-     //vm.leftAttribute = gameItems.getLeftAttribute();
-     //vm.rightAttribute = gameItems.getRightAttribute();
+     //vm.leftAttribute = foodGame.getLeftAttribute();
+     //vm.rightAttribute = foodGame.getRightAttribute();
 
-     console.log(gameItems.getHealthyItems());
-     console.log(vm.randomUnhealthyFoods);
+     //console.log(foodGame.getPositiveItems());
+     //console.log(vm.randomUnhealthyFoods);
 
  }

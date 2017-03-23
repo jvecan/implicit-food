@@ -1,9 +1,7 @@
-angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, roundManager) {
+angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, roundManager) {
     var healthyFoods = [];
     var unhealthyFoods = [];
     var combinedItems = [];
-
-
 
     var positiveCategoryId = 1;
     var negativeCategoryId = 2;
@@ -13,7 +11,6 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
 
     var leftCategoryData = [];
     var rightCategoryData = [];
-
 
     var currentRound = 0;
 
@@ -30,18 +27,18 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
         return roundData;
     };
 
-    var getHealthyFoods = function() {
+    var getPositiveItems = function() {
         return healthyFoods;
     };
-    var getUnhealthyFoods = function() {
+    var getNegativeItems = function() {
         return unhealthyFoods;
     };
 
-    var resetHealthyFoods = function() {
+    var resetPositiveItems = function() {
         healthyFoods.length = 0;
     };
 
-    var resetUnhealthyFoods = function() {
+    var resetNegativeItems = function() {
         unhealthyFoods.length = 0;
     };
 
@@ -59,29 +56,27 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
 
     var getRound = function() {
         return currentRound;
-    }
+    };
 
     var setupCategoryPositions = function() {
         var randomCat = randomIntFromInterval(1, 2);
 
         if (randomCat == 1) {
-            console.log("ykkösrandom");
             leftCategoryData = positiveCategoryData;
             rightCategoryData = negativeCategoryData;
         } else {
-            console.log("kakkosrandom");
             leftCategoryData = negativeCategoryData;
             rightCategoryData = positiveCategoryData;
         }
-    }
+    };
 
-    var getLeftCategoryData = function() {
+    var getLeftTouchAreaData = function() {
         return leftCategoryData[0];
     };
 
-    var getRightCategoryData = function() {
+    var getRightTouchAreaData = function() {
         return rightCategoryData[0];
-    }
+    };
 
 
     function setStartTime(time) {
@@ -115,7 +110,7 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
     };
 
 
-    var getNextFoodItem = function() {
+    var getNextDisplayItem = function() {
         if (currentRound == 0) {
 
             startTime = Date.now();
@@ -128,6 +123,7 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
 
 
     var initializePositiveCategory = function() {
+
         var query = 'SELECT id, name FROM attribute_category WHERE id =  ' + positiveCategoryId
         dbFactory.execute(query, [], positiveCategoryData);
 
@@ -161,11 +157,11 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
 
 
     return {
-        getHealthyItems: getHealthyFoods,
-        getUnhealthyItems: getUnhealthyFoods,
-        getNextFoodItem: getNextFoodItem,
-        getLeftCategoryData: getLeftCategoryData,
-        getRightCategoryData: getRightCategoryData,
+        getPositiveItems: getPositiveItems,
+        getNegativeItems: getNegativeItems,
+        getNextDisplayItem: getNextDisplayItem,
+        getLeftTouchAreaData: getLeftTouchAreaData,
+        getRightTouchAreaData: getRightTouchAreaData,
         differenceInMilliseconds: differenceMilliseconds,
         getRoundSummary: getRoundData,
         getCurrentRound: getRound,
@@ -177,9 +173,14 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
         advanceRoundCounter: advanceRoundCounter,
         initializeHealthyItems: function() {
             combinedItems.length = 0;
-            resetHealthyFoods();
+            resetPositiveItems();
             resetRoundData();
             currentRound = 0;
+
+            positiveCategoryData.length = 0;
+            negativeCategoryData.length = 0;
+            leftCategoryData.length = 0;
+            rightCategoryData.length = 0;
 
             initializePositiveCategory();
 
@@ -193,10 +194,11 @@ angular.module('play').factory("gameItems", function($q, $timeout, dbFactory, ro
         },
         initializeUnhealthyItems: function() {
             combinedItems.length = 0;
-            resetUnhealthyFoods();
+            resetNegativeItems();
             resetRoundData();
 
             currentRound = 0;
+
 
             initializeNegativeCategory();
             setupCategoryPositions();
