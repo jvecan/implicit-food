@@ -31,11 +31,11 @@ implicitFood.config(function($locationProvider, $routeProvider) {
         .when('/', {
             controller: 'mainMenuController',
             templateUrl: 'app/main-menu/main-menu.html',
-            /*resolve: {
+            resolve: {
                 message: function(checkDatabase) {
                     return checkDatabase.getDatabaseStatus();
                 }
-            }*/
+            }
         })
         .when("/play-game", {
             controller: 'playGameCtrl',

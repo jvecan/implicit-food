@@ -36,7 +36,7 @@ var app = {
     onDeviceReady: function() {
         console.log("OnDeviceReady ready");
 
-        window.plugins.sqlDB.copy('foodapp.db', 0, databaseCopySuccess, databaseCopyError);
+        //window.plugins.sqlDB.copy('foodapp.db', 0, databaseCopySuccess, databaseCopyError);
 
 
     },

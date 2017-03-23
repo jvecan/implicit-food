@@ -7,19 +7,16 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
     // private methods - all return promises
     var openDB_ = function(dbName, location) {
         var q = $q.defer();
-        if (db_ === null) {
-            try {
+        try {
+            if (db_ == null) {
                 db_ = $cordovaSQLite.openDB({
                     name: dbName,
                     location: location
                 });
-                q.resolve(db_);
-            } catch (e) {
-                q.reject("Exception thrown while opening DB " + JSON.stringify(e));
             }
-        } else {
-            console.log("Database opened. ");
             q.resolve(db_);
+        } catch (e) {
+            q.reject("Exception thrown while opening DB " + JSON.stringify(e));
         }
         return q.promise;
     };
@@ -46,12 +43,12 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
 */
 
         openDB_("foodapp.db", "default")
-            .then(function(db_) {
+            .then(function(db) {
                 //then execute the query
                 //console.log(query);
-                $cordovaSQLite.execute(db_, query, params).then(function(res) {
+                $cordovaSQLite.execute(db, query, params).then(function(res) {
 
-                    //console.log("insertId: " + res.insertId);
+                    // console.log("insertId: " + res.insertId);
                     //then add the records to the out param
                     // console.log("Query executed", JSON.stringify(query));
                     for (var i = 0; i < res.rows.length; i++) {
@@ -67,8 +64,8 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
                     console.error(err);
                     q.reject();
                 });
-
-                /*db_.open(function() {
+                /*
+                db_.open(function() {
                     q.resolve("DB Opened")
                 }, function() {
                     q.reject("Failed to open DB");
