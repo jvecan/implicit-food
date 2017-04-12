@@ -224,7 +224,8 @@ body {
 }
 
 .game-instructions-food-table {
-    background: rgba(160, 237, 105, 1);
+    /*background: rgba(160, 237, 105, 1);*/
+    background-color: #6fd027;
     width: 100%;
     table-layout: fixed;
     height: 80px;

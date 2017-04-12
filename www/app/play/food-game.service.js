@@ -83,11 +83,6 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
         startTime = time;
     }
 
-
-    function differenceMilliseconds() {
-        return getStartTime() - getEndTime();
-    }
-
     function advanceRoundCounter() {
         currentRound++;
     }
@@ -162,7 +157,6 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
         getNextDisplayItem: getNextDisplayItem,
         getLeftTouchAreaData: getLeftTouchAreaData,
         getRightTouchAreaData: getRightTouchAreaData,
-        differenceInMilliseconds: differenceMilliseconds,
         getRoundSummary: getRoundData,
         getCurrentRound: getRound,
         setStartTime: setStartTime,
@@ -209,9 +203,26 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
 
             return unhealthyFoods; // Return promise for resolve in routing. 
         },
-        addRoundInfo: function(side, correctSide, foodName, difference) {
-            var roundObj = { 'side': side, 'correctSide': correctSide, 'name': foodName, 'time': difference };
+        addRoundInfo: function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points) {
+
+            var roundObj = {
+                'left_attribute_category_id': leftAttributeId,
+                'right_attribute_category_id': rightAttributeId,
+                'food_id': foodId,
+                'user_response_category_id': userResponseCategoryId,
+                'reaction_time': reactionTime,
+                'points': 0,
+                'game_id': 0
+            };
+
             roundData.push(roundObj);
+
+            for (i = 0; i < roundData.length; i++) {
+                console.log('INSERT INTO game_round_food(left_attribute_category_id, right_attribute_category_id, food_id, user_response_category_id, reaction_time, points, game_id) ' +
+                    'VALUES (' + roundData[i].left_attribute_category_id + ', ' + roundData[i].right_attribute_category_id + ', ' + roundData[i].food_id + ', ' +
+                    roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + roundData[i].game_id + ')');
+            }
+
         }
 
     };

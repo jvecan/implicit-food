@@ -1,10 +1,10 @@
  angular
      .module('play')
-     .controller('playGameCtrl', playGameCtrl);
+     .controller('playGameFoodCtrl', playGameFoodCtrl);
 
- playGameCtrl.$inject = ['$scope', '$timeout', '$location', 'dbFactory', 'foodGame', 'roundManager'];
+ playGameFoodCtrl.$inject = ['$scope', '$timeout', '$location', 'dbFactory', 'foodGame', 'roundManager'];
 
- function playGameCtrl($scope, $timeout, $location, dbFactory, foodGame, roundManager) {
+ function playGameFoodCtrl($scope, $timeout, $location, dbFactory, foodGame, roundManager) {
      var vm = this;
      vm.displayedItem;
 
@@ -14,9 +14,6 @@
      if (foodGame.getCurrentRound() == roundManager.getMaxRounds()) {
          $location.path('/play-start-food');
      }
-
-     //vm.displayedItem = foodGame.getNextDisplayItem();
-     //$scope.foodGameService = foodGame;
 
      $scope.sideTouchAreasDisabled = true;
      $scope.showOverlay = true;
@@ -37,9 +34,11 @@
      }
 
 
-     vm.playerTouch = function(side, itemName, displayItemCategoryId, touchAreaAttributeId) {
+     // leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points
 
-         if (displayItemCategoryId == touchAreaAttributeId) {
+     vm.playerTouch = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, displayItemCategoryId) {
+
+         if (displayItemCategoryId == userResponseCategoryId) {
              $scope.showError = false;
          } else {
              $scope.showError = true;
@@ -57,15 +56,15 @@
                  correctSide = "bad";
              }
              $scope.showStimulus = false;
-             foodGame.addRoundInfo(side, correctSide, itemName, Date.now() - foodGame.getStartTime());
+             foodGame.addRoundInfo(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, Date.now() - foodGame.getStartTime(), 0);
              roundSaved = true;
          }
 
-         if (roundSaved == true && displayItemCategoryId == touchAreaAttributeId) {
+         if (roundSaved == true && displayItemCategoryId == userResponseCategoryId) {
              $scope.showStimulus = false;
              foodGame.advanceRoundCounter();
              if (foodGame.getCurrentRound() == roundManager.getMaxRounds()) {
-                 $location.path('/play-results');
+                 $location.path('/play-results-food');
              }
 
          }
@@ -79,7 +78,7 @@
          vm.differenceMilliseconds = Date.now() - foodGame.getStartTime();
          // debug
 
-         if (roundSaved == true && displayItemCategoryId == touchAreaAttributeId) {
+         if (roundSaved == true && displayItemCategoryId == userResponseCategoryId) {
              $timeout(function() {
                  vm.displayedItem = foodGame.getNextDisplayItem();
                  foodGame.setStartTime(Date.now());

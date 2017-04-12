@@ -38,6 +38,7 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
     var getPositiveWords = function() {
         return positiveWords;
     };
+
     var getNegativeWords = function() {
         return negativeWords;
     };
@@ -98,10 +99,6 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
 
     function setStartTime(time) {
         startTime = time;
-    }
-
-    function differenceMilliseconds() {
-        return getStartTime() - getEndTime();
     }
 
     function advanceRoundCounter() {
@@ -181,7 +178,6 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
         getHealthyFood: getHealthyFood,
         getUnhealthyFood: getUnhealthyFood,
         // yhteisiä
-        differenceInMilliseconds: differenceMilliseconds,
         getRoundSummary: getRoundData,
         getCurrentRound: getRound,
         setStartTime: setStartTime,

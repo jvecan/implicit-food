@@ -37,20 +37,20 @@ implicitFood.config(function($locationProvider, $routeProvider) {
                 }
             }
         })
-        .when("/play-game", {
-            controller: 'playGameCtrl',
-            controllerAs: 'playGameController',
-            templateUrl: 'app/play/game.html'
+        .when("/play-game-food", {
+            controller: 'playGameFoodCtrl',
+            controllerAs: 'playGameFoodController',
+            templateUrl: 'app/play/game-food.html'
         })
         .when("/play-game-attribute", {
             controller: 'playGameAttributeCtrl',
             controllerAs: 'playGameAttributeController',
             templateUrl: 'app/play/game-attribute.html'
         })
-        .when("/play-results", {
-            controller: 'playResultsCtrl',
-            controllerAs: 'playResultsController',
-            templateUrl: 'app/play/results.html'
+        .when("/play-results-food", {
+            controller: 'playResultsFoodCtrl',
+            controllerAs: 'playResultsFoodController',
+            templateUrl: 'app/play/results-food.html'
         })
         .when("/play-results-attribute", {
             controller: 'playResultsAttributeCtrl',

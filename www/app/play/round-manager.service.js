@@ -22,8 +22,15 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
         currentRound = 0;
     };
 
-    var saveFoodRoundData = function(leftAttributeId, rightAttributeId, stimulusFoodId, timeTaken, error) {
-        var roundObj = { 'side': side, 'correctSide': correctSide, 'name': foodName, 'time': difference };
+    var saveFoodRoundData = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points) {
+        var roundObj = {
+            'left_attribute_category_id': leftAttributeId,
+            'right_attribute_category_id': rightAttributeId,
+            'food_id': foodId,
+            'user_response_category_id': userResponseCategoryId,
+            'reaction_time': reactionTime,
+            'points': points
+        };
         roundData.push(roundObj);
 
         // stub
@@ -43,7 +50,11 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
     //var saveFoodRoundToDatabase
 
     var saveRoundDataToDatabase = function() {
-        // stub
+        for (i = 0; i < roundData.length; i++) {
+            console.log('INSERT INTO game_round_food(left_attribute_category_id, right_attribute_category_id, food_id, user_response_category_id, reaction_time, points, game_id) ' +
+                +'VALUES (' + roundData[i].left_attribute_category_id + ', ' + roundData[i].right_attribute_category_id + ', ' + roundData[i].food_id + ', ' +
+                roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + roundData[i].game_id + ')');
+        }
     };
 
 
@@ -56,8 +67,6 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
         saveAttributeRoundData: saveAttributeRoundData,
         saveRoundDataToDatabase: saveRoundDataToDatabase,
         createGameContainerForRounds: createGameContainerForRounds
-
-
 
     };
 

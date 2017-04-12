@@ -1,10 +1,10 @@
  angular
      .module('play')
-     .controller('playResultsCtrl', playResultsCtrl);
+     .controller('playResultsFoodCtrl', playResultsFoodCtrl);
 
- playResultsCtrl.$inject = ['$scope', '$timeout', '$location', 'dbFactory', 'foodGame', 'roundManager'];
+ playResultsFoodCtrl.$inject = ['$scope', '$timeout', '$location', 'dbFactory', 'foodGame', 'roundManager'];
 
- function playResultsCtrl($scope, $timeout, $location, dbFactory, foodGame, roundManager) {
+ function playResultsFoodCtrl($scope, $timeout, $location, dbFactory, foodGame, roundManager) {
      var vm = this;
 
 

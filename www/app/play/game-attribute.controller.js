@@ -29,7 +29,6 @@
 
      vm.startGameTouch = function() {
          $scope.showOverlay = false;
-
          $timeout(function() {
              vm.displayedItem = attributeGame.getNextDisplayItem();
              $scope.showStimulus = true;
@@ -84,7 +83,6 @@
                  $scope.showStimulus = true;
                  $scope.sideTouchAreasDisabled = false;
              }, 200);
-
          }
 
      }
