@@ -11,19 +11,21 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
         return roundData;
     }
 
-    var addFoodRoundData = function(leftAttributeId, rightAttributeId, foodId, userResponseId, reactionTime) {
-        //var score = scorer.
+    var addFoodRoundData = function(leftWordId, rightWordId, displayedFoodId, displayedFoodCategoryId, userResponseCategoryId, reactionTime) {
+        var points = 0;
+        if (displayedFoodCategoryId == userResponseCategoryId) {
+            points = scorer.scoreAttributeRound(reactionTime);
+        }
         var roundObj = {
-            'left_attribute_category_id': leftAttributeId,
-            'right_attribute_category_id': rightAttributeId,
-            'food_id': foodId,
-            'user_response_category_id': userResponseId,
+            'left_word_id': leftWordId,
+            'right_word_id': rightWordId,
+            'displayed_food_id': displayedFoodId,
+            //'displayed_word_category_id': displayedWordCategoryId,
+            'user_response_category_id': userResponseCategoryId,
             'reaction_time': reactionTime,
             'points': points
         };
         roundData.push(roundObj);
-
-        // stub
     };
     var addAttributeRoundData = function(leftFoodId, rightFoodId, displayedWordId, displayedWordCategoryId, userResponseCategoryId, reactionTime) {
         var points = 0;
@@ -34,7 +36,7 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
             'left_food_id': leftFoodId,
             'right_food_id': rightFoodId,
             'displayed_word_id': displayedWordId,
-            'displayed_word_category_id': displayedWordCategoryId,
+            //'displayed_word_category_id': displayedWordCategoryId,
             'user_response_category_id': userResponseCategoryId,
             'reaction_time': reactionTime,
             'points': points

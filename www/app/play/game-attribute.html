@@ -6,15 +6,16 @@
                 <ol type="1">
                     <li>Position your fingers on the dark green areas on each side of the screen. </li>
                     <li>Start the game by tapping anywhere on the screen. </li>
-                    <li>The first food image will appear one second after.</li>
+                    <li>The first word will appear one second after in the middle of the screen.</li>
                 </ol>
             </div>
         </div>
-
         <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || 
         playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
-        playGameAttributeController.rightTouchItem.food_id, playGameAttributeController.displayedItem.attribute_word_id,
-        playGameAttributeController.displayedItem.attribute_category_id, playGameAttributeController.leftTouchItem.attribute_category_id)">
+        playGameAttributeController.rightTouchItem.food_id, 
+        playGameAttributeController.displayedItem.attribute_word_id,
+        playGameAttributeController.displayedItem.attribute_category_id, 
+        playGameAttributeController.leftTouchItem.attribute_category_id)">
             <img class='game-touch-area-attribute-image game-touch-area-left-attribute' ng-src="img/game_images/{{playGameAttributeController.leftTouchItem.name}}.png" />
         </div>
         <div class='game-middle-screen'>
@@ -27,16 +28,14 @@
                 <span>{{playGameAttributeController.displayedItem.name}}</span>
             </div>
             <div class='game-error' ng-show="showError">X</div>
-            <div class='game-points'>
-                Score: x
-                <br /> Difference in milliseconds: {{playGameAttributeController.differenceMilliseconds}}
-            </div>
         </div>
 
         <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || 
         playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
-        playGameAttributeController.rightTouchItem.food_id, playGameAttributeController.displayedItem.attribute_word_id,
-        playGameAttributeController.displayedItem.attribute_category_id, playGameAttributeController.rightTouchItem.attribute_category_id)">
+        playGameAttributeController.rightTouchItem.food_id, 
+        playGameAttributeController.displayedItem.attribute_word_id,
+        playGameAttributeController.displayedItem.attribute_category_id, 
+        playGameAttributeController.rightTouchItem.attribute_category_id)">
             <img class='game-touch-area-attribute-image game-touch-area-right-attribute' ng-src="img/game_images/{{playGameAttributeController.rightTouchItem.name}}.png" />
         </div>
     </div>

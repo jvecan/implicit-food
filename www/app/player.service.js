@@ -1,11 +1,8 @@
 angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, dbFactory) {
-    //private variables
-
 
     var playerId = 1;
     var playerInfo = [];
     var newLevelUnlocked = false;
-
 
     var getPlayerInfo = function() {
         return playerInfo;
@@ -21,14 +18,11 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
         var playerInfoArray = [];
 
         dbFactory.execute(query, [], playerInfoArray).then(function() {
-            // console.log(playerInfoArray);
             playerInfo = playerInfoArray[0];
             q.resolve();
         });
         return q.promise;
     };
-
-
 
     var updateLevel = function() {
         var q = $q.defer();
@@ -52,8 +46,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
             }
             q.resolve();
         });
-
-
 
         /*
         dbFactory.execute(query, [], nextLevel).then(function() {
@@ -82,7 +74,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
         });
 
         return q.promise;
-
         // return levelInformation[0];
     };
 
@@ -96,9 +87,7 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
             });
         });
         return q.promise;
-
     };
-
 
     return {
         getPlayerInfoFromDb: getPlayerInfoFromDb,

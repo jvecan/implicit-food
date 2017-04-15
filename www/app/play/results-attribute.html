@@ -28,7 +28,7 @@
             <h2>You scored {{playResultsAttributeController.totalScore}} points!</h2>
         </div>
         <!--<h3>You now have {{playerInfo.total_points}} points. </h3>-->
-        <div class='results-progressbar-container' ng-if="nextLevelProgress">
+        <div class='results-progressbar-container'>
             <!--Points until next level: {{pointsUntilNextLevel}} Current level start points: {{currentLevelData.required_points}}-->
             <div class='results-progressbar-bar' ng-style="{'width' : progressBarWidth + '%' }">
                 <div class='div-center-content'>{{newLevelMessage}}</div>
@@ -38,21 +38,21 @@
         <br />
     </div>
     <div style='clear:both;'><br /></div>
-    <div ng-if="newLevelUnlocked">
+    <div ng-if="showNewLevelInfo">
         <div class="game-instructions-text">
             <div class='div-center-content'>
-                <h3>{{newLevelData.level_description}}</h3>
+                <h3>{{nextLevelData.level_description}}</h3>
             </div>
             <div class='div-center-content'>
-                <p><img class='image-results-unlock-food' ng-src="img/game_images/{{newLevelData.food_name}}.png" /></p>
+                <p><img class='image-results-unlock-food' ng-src="img/game_images/{{nextLevelData.food_name}}.png" /></p>
             </div>
-            <p>{{newLevelData.food_unlock_text}}</p>
+            <p>{{nextLevelData.food_unlock_text}}</p>
         </div>
     </div>
-    <br />
     <div class='div-center-content'>
-        <a href="#/play" class="results-btn btn-base">New Game</a>
-        <a href="#/main-menu" class="results-btn btn-base">Main Menu</a>
-
+        <a href="#/play-start-attribute" class="results-btn-quick btn-base">Quick Game</a>
+        <br />
+        <a href="#/play" class="results-btn-small btn-base">New Game</a>
+        <a href="#/main-menu" class="results-btn-small btn-base">Main Menu</a>
     </div>
     <br />

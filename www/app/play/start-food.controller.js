@@ -2,18 +2,18 @@
      .module('play')
      .controller('playStartFoodCtrl', playStartFoodCtrl);
 
- playStartFoodCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'foodGame'];
+ playStartFoodCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'foodGame', 'roundManager'];
 
- function playStartFoodCtrl($scope, $timeout, dbFactory, foodGame) {
+ function playStartFoodCtrl($scope, $timeout, dbFactory, foodGame, roundManager) {
      var vm = this;
 
-     vm.randomHealthyFoods = foodGame.getPositiveItems();
-     vm.randomUnhealthyFoods = foodGame.getNegativeItems();
+     vm.healthyFoods = foodGame.getHealthyFoods();
+     vm.unhealthyFoods = foodGame.getUnhealthyFoods();
 
-     //vm.leftAttribute = foodGame.getLeftAttribute();
-     //vm.rightAttribute = foodGame.getRightAttribute();
+     vm.positiveCategory = foodGame.getPositiveCategory();
+     vm.negativeCategory = foodGame.getNegativeCategory();
 
-     //console.log(foodGame.getPositiveItems());
-     //console.log(vm.randomUnhealthyFoods);
+     roundManager.resetRoundData();
+     foodGame.setupRoundInfo(10);
 
  }

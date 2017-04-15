@@ -24,49 +24,36 @@
 
 
      vm.startGameTouch = function() {
-         $scope.showOverlay = false;
-
-         $timeout(function() {
-             vm.displayedItem = foodGame.getNextDisplayItem();
-             $scope.showStimulus = true;
-             $scope.sideTouchAreasDisabled = false;
-         }, 1000);
-     }
-
-
-     // leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points
-
-     vm.playerTouch = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, displayItemCategoryId) {
-
-         if (displayItemCategoryId == userResponseCategoryId) {
+             $scope.showOverlay = false;
+             $timeout(function() {
+                 vm.displayedItem = foodGame.getNextDisplayItem();
+                 $scope.showStimulus = true;
+                 $scope.sideTouchAreasDisabled = false;
+             }, 1000);
+         }
+         // leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points
+         //vm.playerTouch = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, displayItemCategoryId) {
+     vm.playerTouch = function(leftWordId, rightWordId, displayedFoodId, displayedFoodCategoryId, userResponseCategoryId) {
+         if (displayedFoodCategoryId == userResponseCategoryId) {
              $scope.showError = false;
          } else {
              $scope.showError = true;
          }
          $scope.sideTouchAreasDisabled = true;
 
-         //console.log("end time: " + Date.now());
-         //console.log("start time: " + foodGame.getStartTime());
-         //console.log("called playerTouch");
-
          if (roundSaved == false) {
-             if (displayItemCategoryId == 1) {
-                 correctSide = "good";
-             } else if (displayItemCategoryId == 2) {
-                 correctSide = "bad";
-             }
              $scope.showStimulus = false;
-             foodGame.addRoundInfo(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, Date.now() - foodGame.getStartTime(), 0);
+             roundManager.addFoodRoundData(leftWordId, rightWordId, displayedFoodId,
+                 displayedFoodCategoryId, userResponseCategoryId, Date.now() - foodGame.getStartTime());
              roundSaved = true;
          }
 
-         if (roundSaved == true && displayItemCategoryId == userResponseCategoryId) {
+         if (roundSaved == true && displayedFoodCategoryId == userResponseCategoryId) {
              $scope.showStimulus = false;
              foodGame.advanceRoundCounter();
              if (foodGame.getCurrentRound() == foodGame.getMaxRounds()) {
                  $location.path('/play-results-food');
              }
-
          }
 
          if ($scope.showError == true && roundSaved == true) {
@@ -78,7 +65,7 @@
          vm.differenceMilliseconds = Date.now() - foodGame.getStartTime();
          // debug
 
-         if (roundSaved == true && displayItemCategoryId == userResponseCategoryId) {
+         if (roundSaved == true && displayedFoodCategoryId == userResponseCategoryId) {
              $timeout(function() {
                  vm.displayedItem = foodGame.getNextDisplayItem();
                  foodGame.setStartTime(Date.now());
@@ -87,9 +74,6 @@
                  $scope.showStimulus = true;
                  $scope.sideTouchAreasDisabled = false;
              }, 200);
-
          }
-
      }
-
  }

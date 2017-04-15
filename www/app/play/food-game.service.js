@@ -1,21 +1,19 @@
 angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, roundManager) {
-    var healthyFoods = [];
-    var unhealthyFoods = [];
+    var positiveCategoryData = [];
+    var negativeCategoryData = [];
     var combinedItems = [];
 
     var positiveCategoryId = 1;
     var negativeCategoryId = 2;
 
-    var positiveCategoryData = [];
-    var negativeCategoryData = [];
+    var healthyFoods = [];
+    var unhealthyFoods = [];
 
     var leftCategoryData = [];
     var rightCategoryData = [];
 
     var currentRound = 0;
     var maxRounds = 10;
-
-    var roundData = [];
 
     var startTime;
     var endTime;
@@ -28,40 +26,56 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
         return maxRounds;
     };
 
-    var getPositiveItems = function() {
+    var getPositiveCategory = function() {
+        return positiveCategoryData;
+    };
+
+    var getNegativeCategory = function() {
+        return negativeCategoryData;
+    };
+
+    var getHealthyFoods = function() {
         return healthyFoods;
     };
-    var getNegativeItems = function() {
+
+    var getUnhealthyFoods = function() {
         return unhealthyFoods;
     };
 
-    var resetPositiveItems = function() {
+    var resetHealthyFoods = function() {
         healthyFoods.length = 0;
     };
 
-    var resetNegativeItems = function() {
+    var resetUnhealthyFoods = function() {
         unhealthyFoods.length = 0;
     };
 
-    var resetRoundData = function() {
-        roundData.length = 0;
+    var resetPositiveCategory = function() {
+        positiveCategoryData.length = 0;
+    };
+
+    var resetNegativeCategory = function() {
+        negativeCategoryData.length = 0;
     };
 
     var getStartTime = function() {
         return startTime;
     };
 
+    function setStartTime(time) {
+        startTime = time;
+    }
+
     var getEndTime = function() {
         return endTime;
     };
 
-    var getRound = function() {
+    var getCurrentRound = function() {
         return currentRound;
     };
 
     var setupCategoryPositions = function() {
         var randomCat = randomIntFromInterval(1, 2);
-
         if (randomCat == 1) {
             leftCategoryData = positiveCategoryData;
             rightCategoryData = negativeCategoryData;
@@ -79,16 +93,9 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
         return rightCategoryData[0];
     };
 
-
-    function setStartTime(time) {
-        startTime = time;
-    }
-
     function advanceRoundCounter() {
         currentRound++;
     }
-
-
 
     function setupCombinedArray(arrayOne, arrayTwo) {
         arrayOne = shuffle(arrayOne);
@@ -99,35 +106,35 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
         }
 
         Array.prototype.push.apply(arrayOne, arrayTwo);
-
-        console.log("inside" + arrayOne);
-
         return arrayOne;
     };
 
-
     var getNextDisplayItem = function() {
         if (currentRound == 0) {
-
             startTime = Date.now();
             combinedItems = setupCombinedArray(healthyFoods, unhealthyFoods);
             combinedItems = shuffle(combinedItems);
-
         }
         return combinedItems[currentRound];
     };
 
-
     var initializePositiveCategory = function() {
-
-        var query = 'SELECT id, name FROM attribute_category WHERE id =  ' + positiveCategoryId
+        var query = 'SELECT attribute_word_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
+            'WHERE attribute_category_word.id IN (SELECT id FROM attribute_category_word WHERE attribute_category_id = ' + positiveCategoryId +
+            ' ORDER BY RANDOM() LIMIT 1) AND attribute_word.id = attribute_category_word.attribute_word_id';
         dbFactory.execute(query, [], positiveCategoryData);
-
     };
 
     var initializeNegativeCategory = function() {
-        var query = 'SELECT id, name FROM attribute_category WHERE id =  ' + negativeCategoryId
+        var query = 'SELECT attribute_word_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
+            'WHERE attribute_category_word.id IN (SELECT id FROM attribute_category_word WHERE attribute_category_id = ' + negativeCategoryId +
+            ' ORDER BY RANDOM() LIMIT 1) AND attribute_word.id = attribute_category_word.attribute_word_id';
         dbFactory.execute(query, [], negativeCategoryData);
+    };
+
+    var setupRoundInfo = function(maximumRounds) {
+        currentRound = 0;
+        maxRounds = maximumRounds;
     };
 
     function shuffle(array) {
@@ -135,51 +142,39 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
             temporaryValue, randomIndex;
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
-
             // Pick a remaining element...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-
             // And swap it with the current element.
             temporaryValue = array[currentIndex];
             array[currentIndex] = array[randomIndex];
             array[randomIndex] = temporaryValue;
         }
-
         return array;
     };
 
 
-
-
     return {
-        getPositiveItems: getPositiveItems,
-        getNegativeItems: getNegativeItems,
+        getHealthyFoods: getHealthyFoods,
+        getUnhealthyFoods: getUnhealthyFoods,
         getNextDisplayItem: getNextDisplayItem,
         getLeftTouchAreaData: getLeftTouchAreaData,
         getRightTouchAreaData: getRightTouchAreaData,
-
+        getPositiveCategory: getPositiveCategory,
+        getNegativeCategory: getNegativeCategory,
+        setupRoundInfo: setupRoundInfo,
         getMaxRounds: getMaxRounds,
-        getCurrentRound: getRound,
+        getCurrentRound: getCurrentRound,
         setStartTime: setStartTime,
         getStartTime: getStartTime,
         getEndTime: getEndTime,
-        resetRoundData: resetRoundData,
-
         advanceRoundCounter: advanceRoundCounter,
+
         initializeHealthyItems: function() {
             combinedItems.length = 0;
-            resetPositiveItems();
-            resetRoundData();
-            currentRound = 0;
-
-            positiveCategoryData.length = 0;
-            negativeCategoryData.length = 0;
-            leftCategoryData.length = 0;
-            rightCategoryData.length = 0;
-
+            resetHealthyFoods();
+            resetPositiveCategory();
             initializePositiveCategory();
-
 
             var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
                 'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + positiveCategoryId +
@@ -190,14 +185,12 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
         },
         initializeUnhealthyItems: function() {
             combinedItems.length = 0;
-            resetNegativeItems();
-            resetRoundData();
 
-            currentRound = 0;
-
-
+            resetUnhealthyFoods();
+            resetNegativeCategory();
             initializeNegativeCategory();
             setupCategoryPositions();
+
             var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
                 'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + negativeCategoryId +
                 ' ORDER BY RANDOM() LIMIT 5) AND food.id = food_attribute_category.food_id';

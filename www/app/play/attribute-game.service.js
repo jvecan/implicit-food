@@ -1,7 +1,7 @@
 angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory, roundManager) {
-    var healthyFood = [];
-    var unhealthyFood = [];
-    var combinedItems = [];
+    var healthyFood = []; // left/right side item
+    var unhealthyFood = []; // left/right side item
+    var combinedItems = []; // game item array that is randomized
 
     var positiveCategoryId = 1;
     var negativeCategoryId = 2;
@@ -15,18 +15,12 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
     var currentRound = 0;
     var maxRounds = 10;
 
-
-
-    var roundData = [];
-
     var startTime;
     var endTime;
 
     function randomIntFromInterval(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
-
-
 
     var getMaxRounds = function() {
         return maxRounds;
@@ -68,6 +62,10 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
         return startTime;
     };
 
+    function setStartTime(time) {
+        startTime = time;
+    }
+
     var getEndTime = function() {
         return endTime;
     };
@@ -78,13 +76,10 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
 
     var setupFoodPositions = function() {
         var randomCat = randomIntFromInterval(1, 2);
-
         if (randomCat == 1) {
-            //console.log("ykkösrandom");
             leftFoodData = healthyFood;
             rightFoodData = unhealthyFood;
         } else {
-            //console.log("kakkosrandom");
             leftFoodData = unhealthyFood;
             rightFoodData = healthyFood;
         }
@@ -97,10 +92,6 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
     var getRightTouchAreaData = function() {
         return rightFoodData[0];
     };
-
-    function setStartTime(time) {
-        startTime = time;
-    }
 
     function advanceRoundCounter() {
         currentRound++;
@@ -115,24 +106,17 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
         }
 
         Array.prototype.push.apply(arrayOne, arrayTwo);
-
-        //console.log("inside" + arrayOne);
-
         return arrayOne;
     };
 
-    // refactored
     var getNextDisplayItem = function() {
         if (currentRound == 0) {
-
             startTime = Date.now();
             combinedItems = setupCombinedArray(positiveWords, negativeWords);
             combinedItems = shuffle(combinedItems);
-
         }
         return combinedItems[currentRound];
     };
-
 
     var initializeHealthyFood = function() {
         var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
@@ -158,20 +142,16 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
             temporaryValue, randomIndex;
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
-
             // Pick a remaining element...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-
             // And swap it with the current element.
             temporaryValue = array[currentIndex];
             array[currentIndex] = array[randomIndex];
             array[randomIndex] = temporaryValue;
         }
-
         return array;
     };
-
 
 
     return {
@@ -183,18 +163,15 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
         getHealthyFood: getHealthyFood,
         getUnhealthyFood: getUnhealthyFood,
         setupRoundInfo: setupRoundInfo,
-        // yhteisiä
         getMaxRounds: getMaxRounds,
         getCurrentRound: getCurrentRound,
         setStartTime: setStartTime,
         getStartTime: getStartTime,
         getEndTime: getEndTime,
         advanceRoundCounter: advanceRoundCounter,
-        // yhteisiä loppuu
 
         initializePositiveWords: function() {
             combinedItems.length = 0;
-
             resetPositiveWords();
             resetHealthyFood();
             initializeHealthyFood();
@@ -203,28 +180,20 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
                 'WHERE attribute_category_word.id IN (SELECT id FROM attribute_category_word WHERE attribute_category_id = ' + positiveCategoryId +
                 ' ORDER BY RANDOM() LIMIT 5) AND attribute_word.id = attribute_category_word.attribute_word_id';
             dbFactory.execute(query, [], positiveWords);
-
             return positiveWords; // Return promise for resolve in routing. 
 
         },
         initializeNegativeWords: function() {
-
-            currentRound = 0;
             combinedItems.length = 0;
 
             resetNegativeWords();
             resetUnhealthyFood();
             initializeUnhealthyFood();
-
             setupFoodPositions();
-
-            //console.log(healthyFood);
-            // console.log(unhealthyFood);
 
             var query = 'SELECT attribute_word_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
                 'WHERE attribute_category_word.id IN (SELECT id FROM attribute_category_word WHERE attribute_category_id = ' + negativeCategoryId +
                 ' ORDER BY RANDOM() LIMIT 5) AND attribute_word.id = attribute_category_word.attribute_word_id';
-
             dbFactory.execute(query, [], negativeWords);
 
             return negativeWords; // Return promise for resolve in routing. 

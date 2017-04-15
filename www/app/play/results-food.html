@@ -6,35 +6,53 @@
 
 
 <div class="container-fluid content-full">
+    <!--
     <table class='game-instructions-text-table'>
         <tr>
-            <th>Name</th>
-            <th>Tap Side</th>
-            <th>Correct</th>
+            <th>Points</th>
             <th>Time</th>
         </tr>
         <tr ng-repeat="result in playResultsFoodController.results track by $index">
             <td>
-                {{result.name}}
+                {{result.points}}
             </td>
             <td>
-                {{result.side}}
-            </td>
-            <td>
-                {{result.correctSide}}
-            </td>
-            <td>
-                {{result.time}} ms
+                {{result.reaction_time}}
             </td>
         </tr>
     </table>
+    -->
     <br />
+    <div class="game-instructions-text">
+        <div class='div-center-content'>
+            <h2>You scored {{playResultsFoodController.totalScore}} points!</h2>
+        </div>
+        <!--<h3>You now have {{playerInfo.total_points}} points. </h3>-->
+        <div class='results-progressbar-container'>
+            <!--Points until next level: {{pointsUntilNextLevel}} Current level start points: {{currentLevelData.required_points}}-->
+            <div class='results-progressbar-bar' ng-style="{'width' : progressBarWidth + '%' }">
+                <div class='div-center-content'>{{newLevelMessage}}</div>
+            </div>
+            <!--<progress></progress>-->
+        </div>
+        <br />
+    </div>
+    <div style='clear:both;'><br /></div>
+    <div ng-if="showNewLevelInfo">
+        <div class="game-instructions-text">
+            <div class='div-center-content'>
+                <h3>{{nextLevelData.level_description}}</h3>
+            </div>
+            <div class='div-center-content'>
+                <p><img class='image-results-unlock-food' ng-src="img/game_images/{{nextLevelData.food_name}}.png" /></p>
+            </div>
+            <p>{{nextLevelData.food_unlock_text}}</p>
+        </div>
+    </div>
     <div class='div-center-content'>
-        <!--<button type="button" ng-click="playController.startGame()">Start Game</button>-->
-        <a href="#/play" class="results-btn btn-base">New Game</a>
-        <a href="#/main-menu" class="results-btn btn-base">Main Menu</a>
-
+        <a href="#/play-start-food" class="results-btn-quick btn-base">Quick Game</a>
+        <br />
+        <a href="#/play" class="results-btn-small btn-base">New Game</a>
+        <a href="#/main-menu" class="results-btn-small btn-base">Main Menu</a>
     </div>
     <br />
-
-</div>

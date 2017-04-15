@@ -6,14 +6,16 @@
                 <ol type="1">
                     <li>Position your fingers on the dark green areas on each side of the screen. </li>
                     <li>Start the game by tapping anywhere on the screen. </li>
-                    <li>The first food image will appear one second after.</li>
+                    <li>The first food image will appear one second after in the middle of the screen.</li>
                 </ol>
             </div>
         </div>
         <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || 
-        playGameFoodController.playerTouch(playGameFoodController.leftTouchItem.id, playGameFoodController.rightTouchItem.id, 
-        playGameFoodController.displayedItem.food_id, playGameFoodController.leftTouchItem.id, 
-        playGameFoodController.displayedItem.attribute_category_id)">
+        playGameFoodController.playerTouch(playGameFoodController.leftTouchItem.attribute_word_id, 
+        playGameFoodController.rightTouchItem.attribute_word_id, 
+        playGameFoodController.displayedItem.food_id, 
+        playGameFoodController.displayedItem.attribute_category_id, 
+        playGameFoodController.leftTouchItem.attribute_category_id)">
             <span class='game-touch-area-left-attribute'>{{playGameFoodController.leftTouchItem.name}}</span>
         </div>
         <div class='game-middle-screen'>
@@ -26,16 +28,14 @@
                 <img class='game-stimulus-image' ng-src="img/game_images/{{playGameFoodController.displayedItem.name}}.png" />
             </div>
             <div class='game-error' ng-show="showError">X</div>
-            <div class='game-points'>
-                Score: x
-                <br /> Difference in milliseconds: {{playGameFoodController.differenceMilliseconds}}
-            </div>
         </div>
 
         <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || 
-        playGameFoodController.playerTouch(playGameFoodController.leftTouchItem.id, playGameFoodController.rightTouchItem.id, 
-        playGameFoodController.displayedItem.food_id, playGameFoodController.rightTouchItem.id, 
-        playGameFoodController.displayedItem.attribute_category_id)">
+        playGameFoodController.playerTouch(playGameFoodController.leftTouchItem.attribute_word_id, 
+        playGameFoodController.rightTouchItem.attribute_word_id, 
+        playGameFoodController.displayedItem.food_id, 
+        playGameFoodController.displayedItem.attribute_category_id, 
+        playGameFoodController.rightTouchItem.attribute_category_id)">
             <span class='game-touch-area-right-attribute'>{{playGameFoodController.rightTouchItem.name}}</span>
         </div>
     </div>

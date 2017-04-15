@@ -75,7 +75,5 @@
                  $scope.sideTouchAreasDisabled = false;
              }, 200);
          }
-
      }
-
  }
