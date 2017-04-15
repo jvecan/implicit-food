@@ -11,7 +11,10 @@
             </div>
         </div>
 
-        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.id, playGameAttributeController.displayedItem.name, playGameAttributeController.displayedItem.attribute_category_id, playGameAttributeController.leftTouchItem.id)">
+        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || 
+        playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
+        playGameAttributeController.rightTouchItem.food_id, playGameAttributeController.displayedItem.attribute_word_id,
+        playGameAttributeController.displayedItem.attribute_category_id, playGameAttributeController.leftTouchItem.attribute_category_id)">
             <img class='game-touch-area-attribute-image game-touch-area-left-attribute' ng-src="img/game_images/{{playGameAttributeController.leftTouchItem.name}}.png" />
         </div>
         <div class='game-middle-screen'>
@@ -29,7 +32,11 @@
                 <br /> Difference in milliseconds: {{playGameAttributeController.differenceMilliseconds}}
             </div>
         </div>
-        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || playGameAttributeController.playerTouch(playGameAttributeController.rightTouchItem.id, playGameAttributeController.displayedItem.name, playGameAttributeController.displayedItem.attribute_category_id, playGameAttributeController.rightTouchItem.id)">
+
+        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || 
+        playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
+        playGameAttributeController.rightTouchItem.food_id, playGameAttributeController.displayedItem.attribute_word_id,
+        playGameAttributeController.displayedItem.attribute_category_id, playGameAttributeController.rightTouchItem.attribute_category_id)">
             <img class='game-touch-area-attribute-image game-touch-area-right-attribute' ng-src="img/game_images/{{playGameAttributeController.rightTouchItem.name}}.png" />
         </div>
     </div>

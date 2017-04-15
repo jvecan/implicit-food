@@ -8,9 +8,6 @@
      var vm = this;
 
 
-     vm.results = foodGame.getRoundSummary();
-
-
      roundManager.createGameContainerForRounds('food');
 
      vm.averageHealthyTime;

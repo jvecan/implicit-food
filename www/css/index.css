@@ -353,6 +353,16 @@ body {
     bottom: 10%;
 }
 
+.results-progressbar-bar {
+    color: orange;
+    background-color: green;
+    height: 30px;
+}
+
+.results-progressbar-container {
+    background-color: #18ab29;
+}
+
 .content-full {
     /*width: 100%;*/
     /*background-color: #a0ed69;*/
@@ -405,6 +415,9 @@ body {
     .game-stimulus-image {
         width: 130px;
     }
+    .image-results-unlock-food {
+        width: 130px;
+    }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -424,6 +437,9 @@ body {
         width: 80px;
     }
     .game-stimulus-image {
+        width: 170px;
+    }
+    .image-results-unlock-food {
         width: 170px;
     }
 }
@@ -447,6 +463,9 @@ body {
     .game-stimulus-image {
         width: 200px;
     }
+    .image-results-unlock-food {
+        width: 200px;
+    }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1999px) {
@@ -466,6 +485,9 @@ body {
         width: 180px;
     }
     .game-stimulus-image {
+        width: 250px;
+    }
+    .image-results-unlock-food {
         width: 250px;
     }
 }

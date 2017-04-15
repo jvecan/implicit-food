@@ -11,7 +11,7 @@
      vm.leftTouchItem = foodGame.getLeftTouchAreaData();
      vm.rightTouchItem = foodGame.getRightTouchAreaData();
 
-     if (foodGame.getCurrentRound() == roundManager.getMaxRounds()) {
+     if (foodGame.getCurrentRound() == foodGame.getMaxRounds()) {
          $location.path('/play-start-food');
      }
 
@@ -63,7 +63,7 @@
          if (roundSaved == true && displayItemCategoryId == userResponseCategoryId) {
              $scope.showStimulus = false;
              foodGame.advanceRoundCounter();
-             if (foodGame.getCurrentRound() == roundManager.getMaxRounds()) {
+             if (foodGame.getCurrentRound() == foodGame.getMaxRounds()) {
                  $location.path('/play-results-food');
              }
 

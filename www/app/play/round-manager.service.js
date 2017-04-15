@@ -1,33 +1,23 @@
-angular.module('play').factory("roundManager", function($q, $timeout, dbFactory) {
+angular.module('play').factory("roundManager", function($q, $timeout, dbFactory, scorer) {
 
-    var currentRound = 0;
-    var maxRounds = 10;
-    var roundDataArray = [];
+    var gameId = 0;
+    var roundData = [];
 
-
-    var getCurrentRound = function() {
-        return currentRound;
-    };
-
-    var advanceRoundCounter = function() {
-        currentRound++;
-    };
-
-    var getMaxRounds = function() {
-        return maxRounds;
-    };
-
-    var resetAllRoundData = function() {
+    var resetRoundData = function() {
         roundData.length = 0;
-        currentRound = 0;
     };
 
-    var saveFoodRoundData = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points) {
+    var getRoundData = function() {
+        return roundData;
+    }
+
+    var addFoodRoundData = function(leftAttributeId, rightAttributeId, foodId, userResponseId, reactionTime) {
+        //var score = scorer.
         var roundObj = {
             'left_attribute_category_id': leftAttributeId,
             'right_attribute_category_id': rightAttributeId,
             'food_id': foodId,
-            'user_response_category_id': userResponseCategoryId,
+            'user_response_category_id': userResponseId,
             'reaction_time': reactionTime,
             'points': points
         };
@@ -35,19 +25,27 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
 
         // stub
     };
-    var saveAttributeRoundData = function(side, at) {
-        var roundObj = { 'side': side, 'name': foodName, 'time': difference };
+    var addAttributeRoundData = function(leftFoodId, rightFoodId, displayedWordId, displayedWordCategoryId, userResponseCategoryId, reactionTime) {
+        var points = 0;
+        if (displayedWordCategoryId == userResponseCategoryId) {
+            points = scorer.scoreAttributeRound(reactionTime);
+        }
+        var roundObj = {
+            'left_food_id': leftFoodId,
+            'right_food_id': rightFoodId,
+            'displayed_word_id': displayedWordId,
+            'displayed_word_category_id': displayedWordCategoryId,
+            'user_response_category_id': userResponseCategoryId,
+            'reaction_time': reactionTime,
+            'points': points
+        };
         roundData.push(roundObj);
-
-        // stub
     };
 
     var createGameContainerForRounds = function(game_type) {
         var query = 'INSERT INTO game(game_type) VALUES ("' + game_type + '")';
         dbFactory.execute(query, [], []);
     }
-
-    //var saveFoodRoundToDatabase
 
     var saveRoundDataToDatabase = function() {
         for (i = 0; i < roundData.length; i++) {
@@ -59,12 +57,10 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
 
 
     return {
-        currentRound: currentRound,
-        advanceRoundCounter: advanceRoundCounter,
-        getMaxRounds: getMaxRounds,
-        resetAllRoundData: resetAllRoundData,
-        saveFoodRoundData: saveFoodRoundData,
-        saveAttributeRoundData: saveAttributeRoundData,
+        resetRoundData: resetRoundData,
+        getRoundData: getRoundData,
+        addFoodRoundData: addFoodRoundData,
+        addAttributeRoundData: addAttributeRoundData,
         saveRoundDataToDatabase: saveRoundDataToDatabase,
         createGameContainerForRounds: createGameContainerForRounds
 

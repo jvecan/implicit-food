@@ -1,4 +1,4 @@
-angular.module('play').factory("roundManager", function($q, $timeout, dbFactory) {
+angular.module('play').factory("scorer", function($q, $timeout) {
 
     /*
 
@@ -15,19 +15,34 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory)
     var perfectUnhealthyFoodMultiplier = 1.1;
 
     var scoreFoodRound = function(reaction_time) {
+        if (reaction_time < 300) {
+            reaction_time = 300;
+        }
         var score = Math.pow(1 / (reaction_time / 1000), 1.5) * 10;
         return score;
     };
 
+    var scoreAttributeRound = function(reaction_time) {
+        if (reaction_time < 300) {
+            reaction_time = 300;
+        }
+        var score = Math.pow(1 / (reaction_time / 1000), 1.5) * 10;
+        return score;
+    };
 
-
-
-
+    var calculateTotalScore = function(roundData) {
+        var totalScore = 0;
+        for (var i = 0; i < roundData.length; i++) {
+            totalScore = totalScore + roundData[i].points;
+        }
+        return totalScore;
+    };
 
 
     return {
         scoreFoodRound: scoreFoodRound,
-        scoreAttributeRound: scoreAttributeRound
+        scoreAttributeRound: scoreAttributeRound,
+        calculateTotalScore: calculateTotalScore
 
 
     };

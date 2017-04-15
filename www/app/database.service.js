@@ -50,15 +50,18 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
 
                     // console.log("insertId: " + res.insertId);
                     //then add the records to the out param
-                    // console.log("Query executed", JSON.stringify(query));
+                    console.log("Query executed", JSON.stringify(query));
                     for (var i = 0; i < res.rows.length; i++) {
                         out.push(res.rows.item(i));
                         //console.log("Added row to set", JSON.stringify(res.rows.item(i)));
                     }
                     if (res.rows.length == 0) {
+                        out.push(res.insertId);
                         //console.log("No results found ");
                         console.log("insertId: " + res.insertId);
                     }
+                    q.resolve();
+
                 }, function(err) {
                     console.log("Query failed", JSON.stringify(query));
                     console.error(err);

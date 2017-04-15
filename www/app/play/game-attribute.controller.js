@@ -11,13 +11,9 @@
      vm.leftTouchItem = attributeGame.getLeftTouchAreaData();
      vm.rightTouchItem = attributeGame.getRightTouchAreaData();
 
-     if (attributeGame.getCurrentRound() == roundManager.getMaxRounds()) {
+     if (attributeGame.getCurrentRound() == attributeGame.getMaxRounds()) {
          $location.path('/play-start-attribute');
      }
-
-
-     //vm.displayedItem = attributeGame.getNextDisplayItem();
-     //$scope.attributeGameService = attributeGame;
 
      $scope.sideTouchAreasDisabled = true;
      $scope.showOverlay = true;
@@ -37,32 +33,27 @@
      }
 
 
-     vm.playerTouch = function(side, itemName, displayItemCategoryId, touchAreaAttributeId) {
-         console.log(side + " " + itemName + " " + displayItemCategoryId + " " + touchAreaAttributeId)
-         if (displayItemCategoryId == touchAreaAttributeId) {
+     vm.playerTouch = function(leftFoodId, rightFoodId, displayedWordId, displayedWordCategoryId, userResponseCategoryId) { // leftFoodId, rightFoodId, attributeWordId, userResponseId
+         if (displayedWordCategoryId == userResponseCategoryId) {
              $scope.showError = false;
          } else {
              $scope.showError = true;
          }
          $scope.sideTouchAreasDisabled = true;
 
-         //console.log("end time: " + Date.now());
-         //console.log("start time: " + attributeGame.getStartTime());
-         //console.log("called playerTouch");
-
          if (roundSaved == false) {
              $scope.showStimulus = false;
-             attributeGame.addRoundInfo(side, displayItemCategoryId, itemName, Date.now() - attributeGame.getStartTime());
+             roundManager.addAttributeRoundData(leftFoodId, rightFoodId, displayedWordId,
+                 displayedWordCategoryId, userResponseCategoryId, Date.now() - attributeGame.getStartTime());
              roundSaved = true;
          }
 
-         if (roundSaved == true && displayItemCategoryId == touchAreaAttributeId) {
+         if (roundSaved == true && displayedWordCategoryId == userResponseCategoryId) {
              $scope.showStimulus = false;
              attributeGame.advanceRoundCounter();
-             if (attributeGame.getCurrentRound() == roundManager.getMaxRounds()) {
+             if (attributeGame.getCurrentRound() == attributeGame.getMaxRounds()) {
                  $location.path('/play-results-attribute');
              }
-
          }
 
          if ($scope.showError == true && roundSaved == true) {
@@ -74,7 +65,7 @@
          vm.differenceMilliseconds = Date.now() - attributeGame.getStartTime();
          // debug
 
-         if (roundSaved == true && displayItemCategoryId == touchAreaAttributeId) {
+         if (roundSaved == true && displayedWordCategoryId == userResponseCategoryId) {
              $timeout(function() {
                  vm.displayedItem = attributeGame.getNextDisplayItem();
                  attributeGame.setStartTime(Date.now());
