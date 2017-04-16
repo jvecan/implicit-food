@@ -1,6 +1,6 @@
 angular.module('play').factory("roundManager", function($q, $timeout, dbFactory, scorer) {
 
-    var gameId = 0;
+    var gameId = [];
     var roundData = [];
 
     var resetRoundData = function() {
@@ -45,16 +45,47 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
     };
 
     var createGameContainerForRounds = function(game_type) {
-        var query = 'INSERT INTO game(game_type) VALUES ("' + game_type + '")';
-        dbFactory.execute(query, [], []);
+        var q = $q.defer();
+        var query = 'INSERT INTO game(timestamp, game_type) VALUES (' + Date.now() + ', "' + game_type + '")';
+        dbFactory.execute(query, [], gameId).then(function() {
+            q.resolve();
+        });
+        return q.promise;
     }
 
-    var saveRoundDataToDatabase = function() {
-        for (i = 0; i < roundData.length; i++) {
-            console.log('INSERT INTO game_round_food(left_attribute_category_id, right_attribute_category_id, food_id, user_response_category_id, reaction_time, points, game_id) ' +
-                +'VALUES (' + roundData[i].left_attribute_category_id + ', ' + roundData[i].right_attribute_category_id + ', ' + roundData[i].food_id + ', ' +
-                roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + roundData[i].game_id + ')');
-        }
+    var saveRoundDataToDatabase = function(game_type) {
+        gameId.length = 0;
+        var promiseArray = [];
+        createGameContainerForRounds(game_type).then(function() {
+            if (game_type == 'word') {
+                var query = 'INSERT INTO game_round_word(left_food_id, right_food_id, displayed_word_id, ' +
+                    'user_response_category_id, reaction_time, points, game_id) VALUES ';
+                for (i = 0; i < roundData.length; i++) {
+                    query += '(' + roundData[i].left_food_id + ', ' + roundData[i].right_food_id + ', ' + roundData[i].displayed_word_id + ', ' +
+                        roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
+                    if (i == roundData.length - 1) {
+                        query += ';';
+                    } else {
+                        query += ', ';
+                    }
+                }
+                dbFactory.execute(query, [], promiseArray);
+            } else if (game_type == 'food') {
+                var query = 'INSERT INTO game_round_food(left_word_id, right_word_id, displayed_food_id, ' +
+                    'user_response_category_id, reaction_time, points, game_id) VALUES ';
+                for (i = 0; i < roundData.length; i++) {
+                    query += '(' + roundData[i].left_word_id + ', ' + roundData[i].right_word_id + ', ' + roundData[i].displayed_food_id + ', ' +
+                        roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
+                    if (i == roundData.length - 1) {
+                        query += ';';
+                    } else {
+                        query += ', ';
+                    }
+                }
+                dbFactory.execute(query, [], promiseArray);
+            }
+        });
+        return promiseArray;
     };
 
 
@@ -65,7 +96,6 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
         addAttributeRoundData: addAttributeRoundData,
         saveRoundDataToDatabase: saveRoundDataToDatabase,
         createGameContainerForRounds: createGameContainerForRounds
-
     };
 
 });

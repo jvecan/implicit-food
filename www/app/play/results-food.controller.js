@@ -9,7 +9,7 @@
 
      $scope.showNewLevelInfo = false;
      $scope.newLevelUnlocked = false;
-     roundManager.createGameContainerForRounds('food');
+
 
      vm.totalScore = scorer.calculateTotalScore(roundManager.getRoundData());
      vm.totalScore = Math.round(vm.totalScore);

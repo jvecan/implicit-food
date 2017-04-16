@@ -6,5 +6,9 @@
 
 
 <div class="container-fluid content-full">
-    My Profile Placeholder Text
+
+    <span ng-repeat="playedGame in myProfileController.playedGames track by $index">
+                        {{playedGame}}
+                        <br />
+    </span> <br /> {{roundData}}
 </div>

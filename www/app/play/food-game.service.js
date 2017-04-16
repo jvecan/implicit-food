@@ -1,7 +1,9 @@
-angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, roundManager) {
+angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, roundManager, player) {
     var positiveCategoryData = [];
     var negativeCategoryData = [];
     var combinedItems = [];
+
+    var playerLevel = 0;
 
     var positiveCategoryId = 1;
     var negativeCategoryId = 2;
@@ -172,31 +174,42 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
 
         initializeHealthyItems: function() {
             combinedItems.length = 0;
-            resetHealthyFoods();
-            resetPositiveCategory();
-            initializePositiveCategory();
 
-            var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
-                'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + positiveCategoryId +
-                ' ORDER BY RANDOM() LIMIT 5) AND food.id = food_attribute_category.food_id';
-            dbFactory.execute(query, [], healthyFoods);
-            return healthyFoods; // Return promise for resolve in routing. 
+            player.getPlayerInfoFromDb().then(function() {
+                var playerData = player.getPlayerInfo();
+                playerLevel = playerData.level;
+
+                resetHealthyFoods();
+                resetPositiveCategory();
+                initializePositiveCategory();
+
+                var query = 'SELECT food.id AS food_id, name, level, food_attribute_category.attribute_category_id AS attribute_category_id FROM food, food_attribute_category ' +
+                    'WHERE level <= ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + positiveCategoryId +
+                    ' AND food_attribute_category.food_id = food.id ORDER BY RANDOM() LIMIT 5';
+                dbFactory.execute(query, [], healthyFoods);
+                return healthyFoods; // Return promise for resolve in routing. 
+            });
 
         },
         initializeUnhealthyItems: function() {
             combinedItems.length = 0;
 
-            resetUnhealthyFoods();
-            resetNegativeCategory();
-            initializeNegativeCategory();
-            setupCategoryPositions();
+            player.getPlayerInfoFromDb().then(function() {
+                var playerData = player.getPlayerInfo();
+                playerLevel = playerData.level;
 
-            var query = 'SELECT food_id, name, attribute_category_id FROM food_attribute_category, food ' +
-                'WHERE food_attribute_category.id IN (SELECT id FROM food_attribute_category WHERE attribute_category_id = ' + negativeCategoryId +
-                ' ORDER BY RANDOM() LIMIT 5) AND food.id = food_attribute_category.food_id';
-            dbFactory.execute(query, [], unhealthyFoods);
+                resetUnhealthyFoods();
+                resetNegativeCategory();
+                initializeNegativeCategory();
+                setupCategoryPositions();
 
-            return unhealthyFoods; // Return promise for resolve in routing. 
+                var query = 'SELECT food.id AS food_id, name, level, food_attribute_category.attribute_category_id AS attribute_category_id FROM food, food_attribute_category ' +
+                    'WHERE level <= ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + negativeCategoryId +
+                    ' AND food_attribute_category.food_id = food.id ORDER BY RANDOM() LIMIT 5';
+                dbFactory.execute(query, [], unhealthyFoods);
+
+                return unhealthyFoods; // Return promise for resolve in routing. 
+            });
         }
 
 

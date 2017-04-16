@@ -9,7 +9,7 @@
 
      $scope.showNewLevelInfo = false;
      $scope.newLevelUnlocked = false;
-     roundManager.createGameContainerForRounds('attribute');
+
 
      vm.totalScore = scorer.calculateTotalScore(roundManager.getRoundData());
      vm.totalScore = Math.round(vm.totalScore);
@@ -65,6 +65,5 @@
              $scope.progressBarWidth = progressBarAnimationWidth;
          }
      }
-
 
  }

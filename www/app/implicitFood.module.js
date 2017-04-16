@@ -50,14 +50,22 @@ implicitFood.config(function($locationProvider, $routeProvider) {
         .when("/play-results-food", {
             controller: 'playResultsFoodCtrl',
             controllerAs: 'playResultsFoodController',
-            templateUrl: 'app/play/results-food.html'
+            templateUrl: 'app/play/results-food.html',
+            resolve: {
+                saveRoundData: roundManager => roundManager.saveRoundDataToDatabase('food'),
+            }
         })
         .when("/play-results-attribute", {
             controller: 'playResultsAttributeCtrl',
             controllerAs: 'playResultsAttributeController',
-            templateUrl: 'app/play/results-attribute.html'
+            templateUrl: 'app/play/results-attribute.html',
+            resolve: {
+                saveRoundData: roundManager => roundManager.saveRoundDataToDatabase('word'),
+            }
         })
         .when("/my-profile", {
+            controller: 'myProfileCtrl',
+            controllerAs: 'myProfileController',
             templateUrl: 'app/my-profile/my-profile.html'
         })
         .when("/about", {
@@ -67,10 +75,7 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             templateUrl: "app/main-menu/main-menu.html"
         });
 
-
-
 });
-
 
 implicitFood.controller("mainMenuController", function($scope) {
     //foodGame.initializeHealthyItems();

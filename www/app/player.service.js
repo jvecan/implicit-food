@@ -1,7 +1,8 @@
-angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, dbFactory) {
+angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $cordovaFile, dbFactory) {
 
     var playerId = 1;
     var playerInfo = [];
+    var playedGames = [];
     var newLevelUnlocked = false;
 
     var getPlayerInfo = function() {
@@ -10,7 +11,22 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
 
     var newLevelUnlocked = function() {
         return newLevelUnlocked;
-    }
+    };
+
+    var getPlayedGames = function() {
+        return playedGames;
+    };
+
+    var exportPlayerGamesToCSV = function() {
+        var data = "test;test1;test2;test3"
+        $cordovaFile.writeFile(cordova.file.externalDataDirectory, "temp.csv", data, true)
+            .then(function(success) {
+                // success
+            }, function(error) {
+                // error
+            });
+    };
+
 
     var getPlayerInfoFromDb = function() {
         var query = 'SELECT total_points, level, display_name FROM player WHERE id = ' + playerId;
@@ -23,6 +39,30 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
         });
         return q.promise;
     };
+
+    var getPlayedGamesFromDb = function() {
+        playedGames.length = 0;
+        var query = 'SELECT id, timestamp, game_type FROM game ORDER BY timestamp DESC';
+        var q = $q.defer();
+        dbFactory.execute(query, [], playedGames).then(function() {
+            q.resolve();
+        });
+        return q.promise;
+    };
+
+    var getGameRoundsFromDb = function(game_type, game_id, gameRoundArray) {
+        var query = 'SELECT id, reaction_time FROM game_round_' + game_type + ' WHERE game_id = ' + game_id;
+        var q = $q.defer();
+
+        dbFactory.execute(query, [], gameRoundArray).then(function() {
+            //console.log(roundData);
+            //return roundData;
+            q.resolve(gameRoundArray);
+        });
+        return q.promise;
+
+    };
+
 
     var updateLevel = function() {
         var q = $q.defer();
@@ -46,18 +86,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
             }
             q.resolve();
         });
-
-        /*
-        dbFactory.execute(query, [], nextLevel).then(function() {
-            if (playerInfo.total_points > nextLevel[0].required_points) {
-                newLevel = nextLevel[0].number;
-                var query = 'UPDATE player SET level = ' + newLevel + ' WHERE id = ' + playerId;
-                dbFactory.execute(query, [], []);
-                q.resolve();
-            }
-            q.resolve();
-        });
-        */
         return q.promise;
     };
 
@@ -74,7 +102,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
         });
 
         return q.promise;
-        // return levelInformation[0];
     };
 
     var updateTotalPoints = function(points) {
@@ -92,6 +119,10 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, db
     return {
         getPlayerInfoFromDb: getPlayerInfoFromDb,
         getPlayerInfo: getPlayerInfo,
+        getPlayedGamesFromDb: getPlayedGamesFromDb,
+        getPlayedGames: getPlayedGames,
+        exportPlayerGamesToCSV: exportPlayerGamesToCSV,
+        getGameRoundsFromDb: getGameRoundsFromDb,
         getLevelInformation: getLevelInformation,
         newLevelUnlocked: newLevelUnlocked,
         updateLevel: updateLevel,
