@@ -33,7 +33,7 @@
          }
          // leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points
          //vm.playerTouch = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, displayItemCategoryId) {
-     vm.playerTouch = function(leftWordId, rightWordId, displayedFoodId, displayedFoodCategoryId, userResponseCategoryId) {
+     vm.playerTouch = function(leftWordId, rightWordId, displayedFoodId, displayedFoodCategoryId, userResponseCategoryId, displayedName) {
          if (displayedFoodCategoryId == userResponseCategoryId) {
              $scope.showError = false;
          } else {
@@ -44,7 +44,7 @@
          if (roundSaved == false) {
              $scope.showStimulus = false;
              roundManager.addFoodRoundData(leftWordId, rightWordId, displayedFoodId,
-                 displayedFoodCategoryId, userResponseCategoryId, Date.now() - foodGame.getStartTime());
+                 displayedFoodCategoryId, userResponseCategoryId, Date.now() - foodGame.getStartTime(), displayedName);
              roundSaved = true;
          }
 

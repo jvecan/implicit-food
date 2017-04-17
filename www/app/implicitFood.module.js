@@ -51,17 +51,17 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             controller: 'playResultsFoodCtrl',
             controllerAs: 'playResultsFoodController',
             templateUrl: 'app/play/results-food.html',
-            resolve: {
+            /*resolve: {
                 saveRoundData: roundManager => roundManager.saveRoundDataToDatabase('food'),
-            }
+            }*/
         })
         .when("/play-results-attribute", {
             controller: 'playResultsAttributeCtrl',
             controllerAs: 'playResultsAttributeController',
             templateUrl: 'app/play/results-attribute.html',
-            resolve: {
+            /*resolve: {
                 saveRoundData: roundManager => roundManager.saveRoundDataToDatabase('word'),
-            }
+            }*/
         })
         .when("/my-profile", {
             controller: 'myProfileCtrl',

@@ -6,37 +6,43 @@
                 <ol type="1">
                     <li>Position your fingers on the dark green areas on each side of the screen. </li>
                     <li>Start the game by tapping anywhere on the screen. </li>
-                    <li>The first word will appear one second after in the middle of the screen.</li>
+                    <li>The first word will appear after one second in the middle of the screen.</li>
+                    <li>If you answer incorrectly, tap the correct side of the screen to continue the game.</li>
                 </ol>
             </div>
         </div>
-        <div class='game-touch-area game-touch-area-left' ng-click="sideTouchAreasDisabled || 
+        <div class='game-touch-area game-touch-area-left'>
+            <a class='game-touch-area-link' ng-click="sideTouchAreasDisabled || 
         playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
         playGameAttributeController.rightTouchItem.food_id, 
         playGameAttributeController.displayedItem.attribute_word_id,
         playGameAttributeController.displayedItem.attribute_category_id, 
-        playGameAttributeController.leftTouchItem.attribute_category_id)">
-            <img class='game-touch-area-attribute-image game-touch-area-left-attribute' ng-src="img/game_images/{{playGameAttributeController.leftTouchItem.name}}.png" />
+        playGameAttributeController.leftTouchItem.attribute_category_id,
+        playGameAttributeController.displayedItem.name)">
+                <img class='game-touch-area-attribute-image game-touch-area-left-attribute' ng-src="img/game_images/{{playGameAttributeController.leftTouchItem.name}}.png" />
+            </a>
         </div>
         <div class='game-middle-screen'>
-            <div class='game-nav-buttons'>
-                <a href="#/play" class="game-nav-btn btn-base">New Game</a>
-                <a href="#/main-menu" class="game-nav-btn btn-base">Main Menu</a>
-            </div>
-
             <div ng-show="showStimulus" class='game-stimulus-text'>
                 <span>{{playGameAttributeController.displayedItem.name}}</span>
             </div>
             <div class='game-error' ng-show="showError">X</div>
+            <div class='game-nav-buttons'>
+                <a href="#/play" class="game-nav-btn btn-base">New Game</a>
+                <a href="#/main-menu" class="game-nav-btn btn-base">Main Menu</a>
+            </div>
         </div>
 
-        <div class='game-touch-area game-touch-area-right' ng-click="sideTouchAreasDisabled || 
+        <div class='game-touch-area game-touch-area-right'>
+            <a class='game-touch-area-link' ng-click="sideTouchAreasDisabled || 
         playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
         playGameAttributeController.rightTouchItem.food_id, 
         playGameAttributeController.displayedItem.attribute_word_id,
         playGameAttributeController.displayedItem.attribute_category_id, 
-        playGameAttributeController.rightTouchItem.attribute_category_id)">
-            <img class='game-touch-area-attribute-image game-touch-area-right-attribute' ng-src="img/game_images/{{playGameAttributeController.rightTouchItem.name}}.png" />
+        playGameAttributeController.rightTouchItem.attribute_category_id,
+        playGameAttributeController.displayedItem.name)">
+                <img class='game-touch-area-attribute-image game-touch-area-right-attribute' ng-src="img/game_images/{{playGameAttributeController.rightTouchItem.name}}.png" />
+            </a>
         </div>
     </div>
 </div>

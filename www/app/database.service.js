@@ -4,6 +4,16 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
 
     var db_;
 
+    var getDb = function() {
+        if (db_ == null) {
+            openDB_("foodapp.db", "default");
+            return db_;
+        } else {
+            return db_;
+        }
+
+    };
+
     // private methods - all return promises
     var openDB_ = function(dbName, location) {
         var q = $q.defer();
@@ -50,7 +60,7 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
 
                     // console.log("insertId: " + res.insertId);
                     //then add the records to the out param
-                    console.log("Query executed", JSON.stringify(query));
+                    //console.log("Query executed", JSON.stringify(query));
                     for (var i = 0; i < res.rows.length; i++) {
                         out.push(res.rows.item(i));
                         //console.log("Added row to set", JSON.stringify(res.rows.item(i)));
@@ -58,7 +68,7 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
                     if (res.rows.length == 0) {
                         out.push(res.insertId);
                         //console.log("No results found ");
-                        console.log("insertId: " + res.insertId);
+                        //console.log("insertId: " + res.insertId);
                     }
                     q.resolve();
 
@@ -94,7 +104,24 @@ angular.module('implicitFood').factory('dbFactory', function($q, $cordovaSQLite)
         return q.promise;
     };
 
+
+    var dbQuery = function(query, params) {
+        return $cordovaSQLite.execute(getDb(), query, params).then(function(res) {
+            if (res.rows.length > 0) {
+                var data = [];
+                for (var i = 0; i < res.rows.length; i++) {
+                    data.push(res.rows.item(i));
+                }
+                return data;
+            }
+            console.log("No results found");
+            return false;
+        });
+    }
+
     return {
+        dbQuery: dbQuery,
+        getDb: getDb,
         execute: execute
     };
 })

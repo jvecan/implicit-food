@@ -1,1 +1,1 @@
-angular.module('myProfile', ['ngRoute']);
+angular.module('myProfile', ['ngRoute', 'chart.js']);

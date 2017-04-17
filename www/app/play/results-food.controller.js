@@ -6,13 +6,14 @@
 
  function playResultsFoodCtrl($scope, $timeout, $location, $interval, dbFactory, foodGame, roundManager, scorer, player) {
      var vm = this;
+     if (roundManager.getRoundSaved() == true || roundManager.getRoundData().length == 0) {
+         $location.path('/play');
+     }
+
+     roundManager.saveRoundDataToDatabase('food');
 
      $scope.showNewLevelInfo = false;
      $scope.newLevelUnlocked = false;
-
-
-     vm.totalScore = scorer.calculateTotalScore(roundManager.getRoundData());
-     vm.totalScore = Math.round(vm.totalScore);
      $scope.currentLevelData = [];
      $scope.nextLevelData = [];
 
@@ -21,6 +22,12 @@
      var progressBarAnimation;
      $scope.progressBarWidth = 0;
 
+     vm.roundStatistics = roundManager.compileRoundStatistics();
+     vm.totalScore = scorer.calculateTotalScore(roundManager.getRoundData());
+     vm.totalScore = scorer.giveTotalBonuses(vm.totalScore, vm.roundStatistics, roundManager.getRoundData());
+     $scope.bonusInfo = scorer.getBonusInfo();
+
+     vm.totalScore = Math.round(vm.totalScore);
 
      player.updateTotalPoints(vm.totalScore).then(function() {
              return player.getPlayerInfoFromDb();
@@ -33,6 +40,8 @@
              return player.getLevelInformation($scope.playerInfo.level + 1, $scope.nextLevelData);
          })
          .then(function() {
+             roundManager.updateGameContainer(roundManager.getLastInsertedGameId(), vm.totalScore, vm.roundStatistics);
+
              $scope.nextLevelData = $scope.nextLevelData[0];
              $scope.currentLevelData = $scope.currentLevelData[0];
              var pointsUntilNextLevel;

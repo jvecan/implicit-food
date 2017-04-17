@@ -15,10 +15,4 @@
 
      vm.healthyFood = attributeGame.getHealthyFood();
      vm.unhealthyFood = attributeGame.getUnhealthyFood();
-
-
-
-     console.log(attributeGame.getHealthyFood());
-     //console.log(vm.randomUnhealthyFoods);
-
  }

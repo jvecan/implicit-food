@@ -33,7 +33,7 @@
      }
 
 
-     vm.playerTouch = function(leftFoodId, rightFoodId, displayedWordId, displayedWordCategoryId, userResponseCategoryId) { // leftFoodId, rightFoodId, attributeWordId, userResponseId
+     vm.playerTouch = function(leftFoodId, rightFoodId, displayedWordId, displayedWordCategoryId, userResponseCategoryId, displayedName) { // leftFoodId, rightFoodId, attributeWordId, userResponseId
          if (displayedWordCategoryId == userResponseCategoryId) {
              $scope.showError = false;
          } else {
@@ -44,7 +44,7 @@
          if (roundSaved == false) {
              $scope.showStimulus = false;
              roundManager.addAttributeRoundData(leftFoodId, rightFoodId, displayedWordId,
-                 displayedWordCategoryId, userResponseCategoryId, Date.now() - attributeGame.getStartTime());
+                 displayedWordCategoryId, userResponseCategoryId, Date.now() - attributeGame.getStartTime(), displayedName);
              roundSaved = true;
          }
 
