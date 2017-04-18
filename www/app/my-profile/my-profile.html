@@ -29,7 +29,7 @@
                     Current level:
                 </td>
                 <td>
-                    {{myProfileController.playerInfo.level}}
+                    {{myProfileController.playerInfo.level}} / 35
                 </td>
             </tr>
         </table>
@@ -41,16 +41,21 @@
         <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick">
 </canvas>
         <br />
+        <!--
         <div class='div-center-content'>
             <a href="#/play" class="my-profile-btn btn-base">New Game</a>
             <a href="#/main-menu" class="my-profile-btn btn-base">Main Menu</a>
             <a href="#/about" class="my-profile-btn btn-base">About</a>
-
-        </div>
+        </div>-->
         <!--
         <span ng-repeat="playedGame in myProfileController.playedGames track by $index">
                         {{playedGame}}    
         </span>-->
     </div>
     <br />
+</div>
+<div class='div-center-content navigation-bottom'>
+    <a href="#/play" class="my-profile-btn btn-base">New Game</a>
+    <a href="#/main-menu" class="my-profile-btn btn-base">Main Menu</a>
+    <a href="#/about" class="my-profile-btn btn-base">About</a>
 </div>

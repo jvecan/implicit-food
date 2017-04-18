@@ -24,7 +24,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
 
         getPlayedGamesFromDb().then(function(data) {
             playedGames = data;
-
             for (var i = 0; i < playedGames.length; i++) {
                 csvData += playedGames[i].timestamp + ';' + playedGames[i].game_type + ';' + playedGames[i].total_points + ';' + playedGames[i].correct_responses +
                     ';' + playedGames[i].incorrect_responses + ';' + playedGames[i].average_reaction_time + ';' + playedGames[i].average_reaction_time_correct_responses + '\n';
@@ -40,7 +39,7 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
     };
 
     var getHighScore = function() {
-        highScore.length = 0;
+        highScore = [];
         var query = 'SELECT max(total_points) AS high_score FROM game';
         var data = dbFactory.dbQuery(query, []);
         data.then(function(dataResponse) {
@@ -50,7 +49,7 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
     };
 
     var getPlayerProfile = function() {
-        playerProfile.length = 0;
+        playerProfile = [];
         var query = 'SELECT total_points, level, display_name FROM player WHERE id = ' + playerId;
         var data = dbFactory.dbQuery(query, []);
         data.then(function(dataResponse) {
@@ -60,7 +59,7 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
     };
 
     var getPlayedGamesFromDb = function() {
-        playedGames.length = 0;
+        playedGames = [];
         var query = 'SELECT id, timestamp, game_type, total_points, correct_responses, incorrect_responses, ' +
             'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC';
         var data = dbFactory.dbQuery(query, []);

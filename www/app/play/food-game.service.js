@@ -121,14 +121,14 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
     };
 
     var initializePositiveCategory = function() {
-        var query = 'SELECT attribute_word_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
+        var query = 'SELECT attribute_word_id AS item_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
             'WHERE attribute_category_word.id IN (SELECT id FROM attribute_category_word WHERE attribute_category_id = ' + positiveCategoryId +
             ' ORDER BY RANDOM() LIMIT 1) AND attribute_word.id = attribute_category_word.attribute_word_id';
         dbFactory.execute(query, [], positiveCategoryData);
     };
 
     var initializeNegativeCategory = function() {
-        var query = 'SELECT attribute_word_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
+        var query = 'SELECT attribute_word_id AS item_id, name, attribute_category_id FROM attribute_category_word, attribute_word ' +
             'WHERE attribute_category_word.id IN (SELECT id FROM attribute_category_word WHERE attribute_category_id = ' + negativeCategoryId +
             ' ORDER BY RANDOM() LIMIT 1) AND attribute_word.id = attribute_category_word.attribute_word_id';
         dbFactory.execute(query, [], negativeCategoryData);

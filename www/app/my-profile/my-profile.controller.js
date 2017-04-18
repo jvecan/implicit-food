@@ -25,6 +25,11 @@
                          display: false
                      }
                  }]*/
+         },
+         elements: {
+             point: {
+                 radius: 0
+             }
          }
      };
 
@@ -43,9 +48,12 @@
 
          for (var i = 0; i < vm.playedGames.length; i++) {
              $scope.data.push(vm.playedGames[i].total_points);
-
              $scope.labels.push(vm.playedGames[i].id);
          }
+
+         player.getPlayedGameRoundsFromDb().then(function() {
+
+         })
 
 
          /*
@@ -54,6 +62,12 @@
          }
          */
      });
+
+
+
+
+
+
 
      $scope.series = ['Series A'];
 

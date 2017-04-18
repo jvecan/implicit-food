@@ -33,8 +33,8 @@
      }
 
 
-     vm.playerTouch = function(leftFoodId, rightFoodId, displayedWordId, displayedWordCategoryId, userResponseCategoryId, displayedName) { // leftFoodId, rightFoodId, attributeWordId, userResponseId
-         if (displayedWordCategoryId == userResponseCategoryId) {
+     vm.playerTouch = function(userResponseCategoryId) {
+         if (vm.displayedItem.attribute_category_id == userResponseCategoryId) {
              $scope.showError = false;
          } else {
              $scope.showError = true;
@@ -43,12 +43,12 @@
 
          if (roundSaved == false) {
              $scope.showStimulus = false;
-             roundManager.addAttributeRoundData(leftFoodId, rightFoodId, displayedWordId,
-                 displayedWordCategoryId, userResponseCategoryId, Date.now() - attributeGame.getStartTime(), displayedName);
+             roundManager.addRoundData(vm.leftTouchItem, vm.rightTouchItem, vm.displayedItem,
+                 userResponseCategoryId, Date.now() - attributeGame.getStartTime());
              roundSaved = true;
          }
 
-         if (roundSaved == true && displayedWordCategoryId == userResponseCategoryId) {
+         if (roundSaved == true && vm.displayedItem.attribute_category_id == userResponseCategoryId) {
              $scope.showStimulus = false;
              attributeGame.advanceRoundCounter();
              if (attributeGame.getCurrentRound() == attributeGame.getMaxRounds()) {
@@ -65,7 +65,7 @@
          vm.differenceMilliseconds = Date.now() - attributeGame.getStartTime();
          // debug
 
-         if (roundSaved == true && displayedWordCategoryId == userResponseCategoryId) {
+         if (roundSaved == true && vm.displayedItem.attribute_category_id == userResponseCategoryId) {
              $timeout(function() {
                  vm.displayedItem = attributeGame.getNextDisplayItem();
                  attributeGame.setStartTime(Date.now());

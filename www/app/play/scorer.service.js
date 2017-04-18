@@ -13,22 +13,15 @@ angular.module('play').factory("scorer", function($q, $timeout, dbFactory) {
 
     var bonusInfo = {};
 
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
     var getBonusInfo = function() {
         return bonusInfo;
     }
 
-    var scoreFoodRound = function(reaction_time) {
-        if (reaction_time < 300) {
-            reaction_time = 300;
-        }
-        if (reaction_time > 2000) {
-            reaction_time = 2000;
-        }
-        var score = Math.pow(1 / (reaction_time / 1000), 1.5) * 10;
-        return score;
-    };
-
-    var scoreAttributeRound = function(reaction_time) {
+    var scoreRound = function(reaction_time) {
         if (reaction_time < 300) {
             reaction_time = 300;
         }
@@ -47,10 +40,6 @@ angular.module('play').factory("scorer", function($q, $timeout, dbFactory) {
         return totalScore;
     };
 
-    function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }
-
     var giveTotalBonuses = function(totalScore, roundStatistics, roundData) {
         bonusInfo = {};
 
@@ -59,7 +48,7 @@ angular.module('play').factory("scorer", function($q, $timeout, dbFactory) {
         if (roundStatistics["correctResponses"] == roundData.length) {
             bonusInfo.perfectRound = " (25 point bonus)";
             totalScore += 25;
-            if (roundStatistics["averageReactionTime"] <= 700) {
+            if (roundStatistics["averageReactionTime"] <= 650) {
                 totalScore += 50;
                 bonusInfo.perfectFastRound = " (50 point bonus)";
             }
@@ -68,19 +57,17 @@ angular.module('play').factory("scorer", function($q, $timeout, dbFactory) {
             var randomFood = [];
             var query = 'SELECT food.name as food_name, attribute_word.name as word_name FROM attribute_word, food ORDER BY RANDOM() limit 1';
             dbFactory.execute(query, [], randomFood).then(function() {
-                bonusInfo.surpriseBonus = "The magical appearance of " + randomFood[0].word_name + " " + capitalize(randomFood[0].food_name) + " grants you 100 extra points!";
+                bonusInfo.surpriseBonus = "The magical appearance of " + randomFood[0].word_name + " " + capitalize(randomFood[0].food_name) + " grants you 25 extra points!";
             });
-            totalScore += 100;
+            totalScore += 25;
         }
 
         return totalScore;
 
     };
 
-
     return {
-        scoreFoodRound: scoreFoodRound,
-        scoreAttributeRound: scoreAttributeRound,
+        scoreRound: scoreRound,
         calculateTotalScore: calculateTotalScore,
         giveTotalBonuses: giveTotalBonuses,
         getBonusInfo: getBonusInfo

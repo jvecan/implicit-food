@@ -340,11 +340,11 @@ body {
     z-index: 100;
     font-size: 19px;
     border: 1px black solid;
-    background-color: #009933;
+    background-color: white;
     padding: 4px;
     width: 150px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .game-touch-area-right-attribute {
@@ -354,11 +354,12 @@ body {
     z-index: 100;
     font-size: 19px;
     border: 1px black solid;
-    background-color: #009933;
+    background-color: white;
+    /*#009933 */
     padding: 4px;
     width: 150px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .game-touch-area-attribute-image {
@@ -449,7 +450,7 @@ body {
 }
 
 .my-profile-btn {
-    width: 32%;
+    width: 33%;
     font-size: 14px !important;
     padding: 12px !important;
 }
@@ -458,6 +459,14 @@ body {
     position: absolute;
     top: 0%;
     right: 0%;
+}
+
+.navigation-bottom {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .content-full {

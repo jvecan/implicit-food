@@ -23,34 +23,19 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
         return lastInsertedGameId;
     };
 
-    var addFoodRoundData = function(leftWordId, rightWordId, displayedFoodId, displayedCategoryId, userResponseCategoryId, reactionTime, displayedName) {
+
+    var addRoundData = function(leftItem, rightItem, displayedItem, userResponseCategoryId, reactionTime) {
         var points = 0;
-        if (displayedCategoryId == userResponseCategoryId) {
-            points = scorer.scoreFoodRound(reactionTime);
+        if (displayedItem.attribute_category_id == userResponseCategoryId) {
+            points = scorer.scoreRound(reactionTime);
         }
         var roundObj = {
-            'left_word_id': leftWordId,
-            'right_word_id': rightWordId,
-            'displayed_food_id': displayedFoodId,
-            'displayed_name': displayedName,
-            'displayed_category_id': displayedCategoryId,
-            'user_response_category_id': userResponseCategoryId,
-            'reaction_time': reactionTime,
-            'points': points
-        };
-        roundData.push(roundObj);
-    };
-    var addAttributeRoundData = function(leftFoodId, rightFoodId, displayedWordId, displayedCategoryId, userResponseCategoryId, reactionTime, displayedName) {
-        var points = 0;
-        if (displayedCategoryId == userResponseCategoryId) {
-            points = scorer.scoreAttributeRound(reactionTime);
-        }
-        var roundObj = {
-            'left_food_id': leftFoodId,
-            'right_food_id': rightFoodId,
-            'displayed_word_id': displayedWordId,
-            'displayed_name': displayedName,
-            'displayed_category_id': displayedCategoryId,
+            'left_item_name': leftItem.name,
+            'left_item_category_id': leftItem.attribute_category_id,
+            'right_item_name': rightItem.name,
+            'right_item_category_id': rightItem.attribute_category_id,
+            'displayed_item_name': displayedItem.name,
+            'displayed_item_category_id': displayedItem.attribute_category_id,
             'user_response_category_id': userResponseCategoryId,
             'reaction_time': reactionTime,
             'points': points
@@ -89,38 +74,57 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
         var promiseArray = [];
         createGameContainerForRounds(game_type).then(function() {
             lastInsertedGameId = gameId[0];
-
-            if (game_type == 'word') {
-                var query = 'INSERT INTO game_round_word(left_food_id, right_food_id, displayed_word_id, ' +
-                    'user_response_category_id, reaction_time, points, game_id) VALUES ';
-                for (i = 0; i < roundData.length; i++) {
-                    query += '(' + roundData[i].left_food_id + ', ' + roundData[i].right_food_id + ', ' + roundData[i].displayed_word_id + ', ' +
-                        roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
-                    if (i == roundData.length - 1) {
-                        query += ';';
-                    } else {
-                        query += ', ';
-                    }
+            var query = 'INSERT INTO game_round(left_item_name, left_item_category_id, right_item_name, ' +
+                'right_item_category_id, displayed_item_name, displayed_item_category_id, ' +
+                'user_response_category_id, reaction_time, points, game_id) VALUES '
+            for (i = 0; i < roundData.length; i++) {
+                query += '("' + roundData[i].left_item_name + '", ' + roundData[i].left_item_category_id + ', "' + roundData[i].right_item_name + '", ' +
+                    roundData[i].right_item_category_id + ', "' + roundData[i].displayed_item_name + '", ' + roundData[i].displayed_item_category_id + ', ' +
+                    roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
+                if (i == roundData.length - 1) {
+                    query += ';';
+                } else {
+                    query += ', ';
                 }
-                dbFactory.execute(query, [], promiseArray);
-            } else if (game_type == 'food') {
-                var query = 'INSERT INTO game_round_food(left_word_id, right_word_id, displayed_food_id, ' +
-                    'user_response_category_id, reaction_time, points, game_id) VALUES ';
-                for (i = 0; i < roundData.length; i++) {
-                    query += '(' + roundData[i].left_word_id + ', ' + roundData[i].right_word_id + ', ' + roundData[i].displayed_food_id + ', ' +
-                        roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
-                    if (i == roundData.length - 1) {
-                        query += ';';
-                    } else {
-                        query += ', ';
-                    }
-                }
-                dbFactory.execute(query, [], promiseArray).then(function() {
-
-                });
             }
+            dbFactory.execute(query, [], promiseArray).then(function() {
+                roundSaved = true;
+            });
+
+            /*
+                if (game_type == 'word') {
+                    var query = 'INSERT INTO game_round_word(left_food_id, right_food_id, displayed_word_id, ' +
+                        'user_response_category_id, reaction_time, points, game_id) VALUES ';
+                    for (i = 0; i < roundData.length; i++) {
+                        query += '(' + roundData[i].left_food_id + ', ' + roundData[i].right_food_id + ', ' + roundData[i].displayed_word_id + ', ' +
+                            roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
+                        if (i == roundData.length - 1) {
+                            query += ';';
+                        } else {
+                            query += ', ';
+                        }
+                    }
+                    dbFactory.execute(query, [], promiseArray);
+                } else if (game_type == 'food') {
+                    var query = 'INSERT INTO game_round_food(left_word_id, right_word_id, displayed_food_id, ' +
+                        'user_response_category_id, reaction_time, points, game_id) VALUES ';
+                    for (i = 0; i < roundData.length; i++) {
+                        query += '(' + roundData[i].left_word_id + ', ' + roundData[i].right_word_id + ', ' + roundData[i].displayed_food_id + ', ' +
+                            roundData[i].user_response_category_id + ', ' + roundData[i].reaction_time + ', ' + roundData[i].points + ', ' + gameId[0] + ')';
+                        if (i == roundData.length - 1) {
+                            query += ';';
+                        } else {
+                            query += ', ';
+                        }
+                    }
+                    dbFactory.execute(query, [], promiseArray).then(function() {
+
+                    });
+                   
+            }
+             */
         });
-        roundSaved = true;
+
         return promiseArray;
     };
 
@@ -135,7 +139,7 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
 
         for (i = 0; i < roundData.length; i++) {
             reactionTimeSum += roundData[i].reaction_time;
-            if (roundData[i].user_response_category_id == roundData[i].displayed_category_id) {
+            if (roundData[i].user_response_category_id == roundData[i].displayed_item_category_id) {
                 correctResponseItems.push(roundData[i].displayed_name);
                 correctResponses++;
                 reactionTimeCorrectResponsesSum += roundData[i].reaction_time;
@@ -161,8 +165,7 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
         getRoundData: getRoundData,
         getLastInsertedGameId: getLastInsertedGameId,
         compileRoundStatistics: compileRoundStatistics,
-        addFoodRoundData: addFoodRoundData,
-        addAttributeRoundData: addAttributeRoundData,
+        addRoundData: addRoundData,
         saveRoundDataToDatabase: saveRoundDataToDatabase,
         createGameContainerForRounds: createGameContainerForRounds,
         updateGameContainer: updateGameContainer,

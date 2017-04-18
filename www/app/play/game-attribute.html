@@ -13,12 +13,7 @@
         </div>
         <div class='game-touch-area game-touch-area-left'>
             <a class='game-touch-area-link' ng-click="sideTouchAreasDisabled || 
-        playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
-        playGameAttributeController.rightTouchItem.food_id, 
-        playGameAttributeController.displayedItem.attribute_word_id,
-        playGameAttributeController.displayedItem.attribute_category_id, 
-        playGameAttributeController.leftTouchItem.attribute_category_id,
-        playGameAttributeController.displayedItem.name)">
+        playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.attribute_category_id)">
                 <img class='game-touch-area-attribute-image game-touch-area-left-attribute' ng-src="img/game_images/{{playGameAttributeController.leftTouchItem.name}}.png" />
             </a>
         </div>
@@ -35,12 +30,7 @@
 
         <div class='game-touch-area game-touch-area-right'>
             <a class='game-touch-area-link' ng-click="sideTouchAreasDisabled || 
-        playGameAttributeController.playerTouch(playGameAttributeController.leftTouchItem.food_id, 
-        playGameAttributeController.rightTouchItem.food_id, 
-        playGameAttributeController.displayedItem.attribute_word_id,
-        playGameAttributeController.displayedItem.attribute_category_id, 
-        playGameAttributeController.rightTouchItem.attribute_category_id,
-        playGameAttributeController.displayedItem.name)">
+        playGameAttributeController.playerTouch(playGameAttributeController.rightTouchItem.attribute_category_id)">
                 <img class='game-touch-area-attribute-image game-touch-area-right-attribute' ng-src="img/game_images/{{playGameAttributeController.rightTouchItem.name}}.png" />
             </a>
         </div>

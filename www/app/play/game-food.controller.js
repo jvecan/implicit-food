@@ -24,17 +24,17 @@
 
 
      vm.startGameTouch = function() {
-             $scope.showOverlay = false;
-             $timeout(function() {
-                 vm.displayedItem = foodGame.getNextDisplayItem();
-                 $scope.showStimulus = true;
-                 $scope.sideTouchAreasDisabled = false;
-             }, 1000);
-         }
-         // leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, reactionTime, points
-         //vm.playerTouch = function(leftAttributeId, rightAttributeId, foodId, userResponseCategoryId, displayItemCategoryId) {
-     vm.playerTouch = function(leftWordId, rightWordId, displayedFoodId, displayedFoodCategoryId, userResponseCategoryId, displayedName) {
-         if (displayedFoodCategoryId == userResponseCategoryId) {
+         $scope.showOverlay = false;
+         $timeout(function() {
+             vm.displayedItem = foodGame.getNextDisplayItem();
+             $scope.showStimulus = true;
+             $scope.sideTouchAreasDisabled = false;
+         }, 1000);
+     }
+
+
+     vm.playerTouch = function(userResponseCategoryId) {
+         if (vm.displayedItem.attribute_category_id == userResponseCategoryId) {
              $scope.showError = false;
          } else {
              $scope.showError = true;
@@ -43,12 +43,12 @@
 
          if (roundSaved == false) {
              $scope.showStimulus = false;
-             roundManager.addFoodRoundData(leftWordId, rightWordId, displayedFoodId,
-                 displayedFoodCategoryId, userResponseCategoryId, Date.now() - foodGame.getStartTime(), displayedName);
+             roundManager.addRoundData(vm.leftTouchItem, vm.rightTouchItem, vm.displayedItem,
+                 userResponseCategoryId, Date.now() - foodGame.getStartTime());
              roundSaved = true;
          }
 
-         if (roundSaved == true && displayedFoodCategoryId == userResponseCategoryId) {
+         if (roundSaved == true && vm.displayedItem.attribute_category_id == userResponseCategoryId) {
              $scope.showStimulus = false;
              foodGame.advanceRoundCounter();
              if (foodGame.getCurrentRound() == foodGame.getMaxRounds()) {
@@ -65,7 +65,7 @@
          vm.differenceMilliseconds = Date.now() - foodGame.getStartTime();
          // debug
 
-         if (roundSaved == true && displayedFoodCategoryId == userResponseCategoryId) {
+         if (roundSaved == true && vm.displayedItem.attribute_category_id == userResponseCategoryId) {
              $timeout(function() {
                  vm.displayedItem = foodGame.getNextDisplayItem();
                  foodGame.setStartTime(Date.now());

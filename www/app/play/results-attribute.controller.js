@@ -8,71 +8,75 @@
      var vm = this;
      if (roundManager.getRoundSaved() == true || roundManager.getRoundData().length == 0) {
          $location.path('/play');
-     }
+     } else {
+         roundManager.saveRoundDataToDatabase('word');
 
-     roundManager.saveRoundDataToDatabase('word');
 
-     $scope.showNewLevelInfo = false;
-     $scope.newLevelUnlocked = false;
-     $scope.currentLevelData = [];
-     $scope.nextLevelData = [];
 
-     var progressBarFinalPosition = 0;
-     var progressBarAnimationWidth = 0;
-     var progressBarAnimation;
-     $scope.progressBarWidth = 0;
+         $scope.showNewLevelInfo = false;
+         $scope.newLevelUnlocked = false;
+         $scope.currentLevelData = [];
+         $scope.nextLevelData = [];
 
-     vm.roundStatistics = roundManager.compileRoundStatistics();
-     vm.totalScore = scorer.calculateTotalScore(roundManager.getRoundData());
-     vm.totalScore = scorer.giveTotalBonuses(vm.totalScore, vm.roundStatistics, roundManager.getRoundData());
-     $scope.bonusInfo = scorer.getBonusInfo();
+         var progressBarFinalPosition = 0;
+         var progressBarAnimationWidth = 0;
+         var progressBarAnimation;
+         $scope.progressBarWidth = 0;
 
-     vm.totalScore = Math.round(vm.totalScore);
+         vm.roundStatistics = roundManager.compileRoundStatistics();
+         vm.totalScore = scorer.calculateTotalScore(roundManager.getRoundData());
+         vm.totalScore = scorer.giveTotalBonuses(vm.totalScore, vm.roundStatistics, roundManager.getRoundData());
+         $scope.bonusInfo = scorer.getBonusInfo();
 
-     player.updateTotalPoints(vm.totalScore).then(function() {
-             return player.getPlayerInfoFromDb();
-         })
-         .then(function() {
-             $scope.playerInfo = player.getPlayerInfo();
-             return player.getLevelInformation($scope.playerInfo.level, $scope.currentLevelData);
-         })
-         .then(function() {
-             return player.getLevelInformation($scope.playerInfo.level + 1, $scope.nextLevelData);
-         })
-         .then(function() {
-             roundManager.updateGameContainer(roundManager.getLastInsertedGameId(), vm.totalScore, vm.roundStatistics);
+         vm.totalScore = Math.round(vm.totalScore);
 
-             $scope.nextLevelData = $scope.nextLevelData[0];
-             $scope.currentLevelData = $scope.currentLevelData[0];
-             var pointsUntilNextLevel;
-             progressBarTotalScale = $scope.nextLevelData.required_points - $scope.currentLevelData.required_points;
+         player.updateTotalPoints(vm.totalScore).then(function() {
+                 return player.getPlayerInfoFromDb();
+             })
+             .then(function() {
+                 $scope.playerInfo = player.getPlayerInfo();
+                 return player.getLevelInformation($scope.playerInfo.level, $scope.currentLevelData);
+             })
+             .then(function() {
+                 return player.getLevelInformation($scope.playerInfo.level + 1, $scope.nextLevelData);
+             })
+             .then(function() {
+                 roundManager.updateGameContainer(roundManager.getLastInsertedGameId(), vm.totalScore, vm.roundStatistics);
 
-             if ($scope.playerInfo.total_points > $scope.nextLevelData.required_points) {
-                 progressBarFinalPosition = 100;
-                 $scope.newLevelUnlocked = true;
-                 player.updateLevel();
+                 $scope.nextLevelData = $scope.nextLevelData[0];
+                 $scope.currentLevelData = $scope.currentLevelData[0];
+                 var pointsUntilNextLevel;
+                 progressBarTotalScale = $scope.nextLevelData.required_points - $scope.currentLevelData.required_points;
 
+                 if ($scope.playerInfo.total_points > $scope.nextLevelData.required_points) {
+                     progressBarFinalPosition = 100;
+                     $scope.newLevelUnlocked = true;
+                     player.updateLevel();
+
+                 } else {
+                     pointsUntilNextLevel = $scope.nextLevelData.required_points - $scope.playerInfo.total_points;
+                     progressBarFinalPosition = Math.round(((progressBarTotalScale - pointsUntilNextLevel) / progressBarTotalScale) * 100);
+                 }
+
+                 progressBarAnimation = $interval(progressBarAnimationFunction, 10);
+             });
+
+         vm.results = roundManager.getRoundData();
+
+         function progressBarAnimationFunction() {
+             if (progressBarAnimationWidth >= progressBarFinalPosition) {
+                 if ($scope.newLevelUnlocked == true) {
+                     $scope.showNewLevelInfo = true;
+                     $scope.newLevelMessage = "You have reached a new level!";
+                 }
+                 $interval.cancel(progressBarAnimation);
              } else {
-                 pointsUntilNextLevel = $scope.nextLevelData.required_points - $scope.playerInfo.total_points;
-                 progressBarFinalPosition = Math.round(((progressBarTotalScale - pointsUntilNextLevel) / progressBarTotalScale) * 100);
+                 progressBarAnimationWidth++;
+                 $scope.progressBarWidth = progressBarAnimationWidth;
              }
-
-             progressBarAnimation = $interval(progressBarAnimationFunction, 10);
-         });
-
-     vm.results = roundManager.getRoundData();
-
-     function progressBarAnimationFunction() {
-         if (progressBarAnimationWidth >= progressBarFinalPosition) {
-             if ($scope.newLevelUnlocked == true) {
-                 $scope.showNewLevelInfo = true;
-                 $scope.newLevelMessage = "You have reached a new level!";
-             }
-             $interval.cancel(progressBarAnimation);
-         } else {
-             progressBarAnimationWidth++;
-             $scope.progressBarWidth = progressBarAnimationWidth;
          }
+
+
      }
 
  }
