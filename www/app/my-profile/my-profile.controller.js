@@ -2,15 +2,21 @@
      .module('myProfile')
      .controller('myProfileCtrl', myProfileCtrl);
 
- myProfileCtrl.$inject = ['$scope', '$timeout', '$interval', 'dbFactory', 'roundManager', 'player'];
+ myProfileCtrl.$inject = ['$scope', '$timeout', '$interval', '$route', 'dbFactory', 'roundManager', 'player'];
 
- function myProfileCtrl($scope, $timeout, $interval, dbFactory, roundManager, player) {
+ function myProfileCtrl($scope, $timeout, $interval, $route, dbFactory, roundManager, player) {
 
      var vm = this;
      $scope.roundData = [];
 
+     $scope.route = $route;
+
      $scope.data = [];
      $scope.labels = [];
+
+     $scope.exportNotification = false;
+
+     $scope.exportMessage = "";
 
      $scope.options = {
          scales: {
@@ -51,11 +57,11 @@
              $scope.labels.push(vm.playedGames[i].id);
          }
 
-         player.getPlayedGameRoundsFromDb().then(function() {
-
-         })
-
-
+         /*
+         player.getPlayedGameRoundsFromDb(vm.playedGames).then(function(roundData) {
+             $scope.roundData = roundData;
+         });
+         */
          /*
          for(var i = 0; i < vm.playedGames.length; i++) {
              playedGame.total_points
@@ -64,16 +70,33 @@
      });
 
 
-
-
-
-
-
      $scope.series = ['Series A'];
 
      vm.exportData = function() {
          console.log("export data kutsuttu");
-         player.exportPlayerGamesToCSV();
+         $scope.exportNotification = true;
+         player.getPlayedGameRoundsFromDb([]).then(function(roundData) {
+
+             player.exportPlayerGamesToCSV(roundData).then(function(response) {
+                 $scope.exportMessage = response;
+
+                 console.log('Success: ' + response);
+                 $timeout(function() {
+                     $scope.exportNotification = false;
+                     $scope.exportMessage = "";
+                 }, 1500);
+             }, function(error) {
+                 $scope.exportMessage = error;
+                 console.log(error);
+                 $timeout(function() {
+                     $scope.exportNotification = false;
+                     $scope.exportMessage = "";
+                 }, 1500);
+             }, function(update) {
+                 $scope.exportMessage = update;
+                 console.log(update);
+             });
+         });
      };
 
      //$scope.data = [65, 59, 80, 81, 56, 55, 40];

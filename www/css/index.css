@@ -54,6 +54,10 @@ body {
     border: 1px solid #18ab29;
 }
 
+.header-wide {
+    height: 15%;
+}
+
 .main-menu {
     margin-top: 15px;
     background-color: #a0ed69;
@@ -450,9 +454,15 @@ body {
 }
 
 .my-profile-btn {
-    width: 33%;
-    font-size: 14px !important;
-    padding: 12px !important;
+    width: 100%;
+    font-size: bold 16px !important;
+    text-decoration: none;
+    background-color: #89e34a !important;
+    width: calc(100% - 26px);
+    text-align: center;
+    padding: 12px 12px 12px 12px;
+    border: 1px black solid;
+    display: block;
 }
 
 .my-profile-export {
@@ -461,12 +471,78 @@ body {
     right: 0%;
 }
 
+.my-profile-export-notification {
+    position: absolute;
+    top: 23%;
+    left: 26%;
+    z-index: 10000;
+    height: 75px;
+    width: 190px;
+    border: 1px black solid;
+    background: #89e34a;
+}
+
+.my-profile-export-notification-message {
+    margin-left: 5px;
+    margin-top: 25px;
+}
+
 .navigation-bottom {
     position: absolute;
-    bottom: 0%;
+    bottom: 0;
+    left: 0;
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.navigation-bottom-left,
+.navigation-bottom-center {
+    float: left;
+    width: 33%;
+}
+
+.navigation-bottom-right {
+    float: right;
+    width: 34%;
+}
+
+.navigation-bottom-btn {
+    width: 100%;
+    font-size: bold 20px !important;
+    text-decoration: none;
+    background-color: #89e34a !important;
+    /*width: calc(100% - 26px);*/
+    text-align: center;
+    padding: 12px 12px 12px 12px;
+    border: 1px black solid;
+    display: block;
+    color: black;
+}
+
+.active {
+    background-color: green !important;
+}
+
+.navigation-bottom-btn:link {
+    text-decoration: none;
+    color: black;
+}
+
+.navigation-bottom-btn:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.navigation-bottom-btn:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.navigation-bottom-btn:active {
+    text-decoration: none;
+    background-color: #5cbf2a !important;
+    color: black;
 }
 
 .content-full {
@@ -475,6 +551,8 @@ body {
     background: rgba(160, 237, 105, 0.85);
     border-bottom: 3px solid #18ab29;
     border-top: 3px solid #18ab29;
+    /* remove */
+    height: 85%;
 }
 
 .content-game {

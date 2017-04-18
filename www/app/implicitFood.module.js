@@ -6,11 +6,13 @@ implicitFood.config(function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
         .when("/play", {
+            activetab: 'play',
             controller: 'playStartCtrl',
             controllerAs: 'playStartController',
             templateUrl: "app/play/start.html"
         })
         .when("/play-start-food", {
+            activetab: 'play',
             controller: 'playStartFoodCtrl',
             controllerAs: 'playStartFoodController',
             templateUrl: 'app/play/start-food.html',
@@ -20,6 +22,7 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             }
         })
         .when("/play-start-attribute", {
+            activetab: 'play',
             controller: 'playStartAttributeCtrl',
             controllerAs: 'playStartAttributeController',
             templateUrl: 'app/play/start-attribute.html',
@@ -38,16 +41,19 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             }
         })
         .when("/play-game-food", {
+            activetab: 'play',
             controller: 'playGameFoodCtrl',
             controllerAs: 'playGameFoodController',
             templateUrl: 'app/play/game-food.html'
         })
         .when("/play-game-attribute", {
+            activetab: 'play',
             controller: 'playGameAttributeCtrl',
             controllerAs: 'playGameAttributeController',
             templateUrl: 'app/play/game-attribute.html'
         })
         .when("/play-results-food", {
+            activetab: 'play',
             controller: 'playResultsFoodCtrl',
             controllerAs: 'playResultsFoodController',
             templateUrl: 'app/play/results-food.html',
@@ -56,6 +62,7 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             }*/
         })
         .when("/play-results-attribute", {
+            activetab: 'play',
             controller: 'playResultsAttributeCtrl',
             controllerAs: 'playResultsAttributeController',
             templateUrl: 'app/play/results-attribute.html',
@@ -64,11 +71,13 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             }*/
         })
         .when("/my-profile", {
+            activetab: 'profile',
             controller: 'myProfileCtrl',
             controllerAs: 'myProfileController',
             templateUrl: 'app/my-profile/my-profile.html'
         })
         .when("/about", {
+            activetab: 'about',
             templateUrl: 'app/about/about.html'
         })
         .otherwise({

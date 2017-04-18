@@ -4,6 +4,9 @@
     </div>
 </div>
 <div class="container-fluid content-full">
+    <div class='my-profile-export-notification div-center-content' ng-show="exportNotification">
+        <div class='my-profile-export-notification-message'>{{exportMessage}}</div>
+    </div>
     <br />
     <div class='my-profile-text'>
         <div class='my-profile-export'><img ng-click="myProfileController.exportData()" src="img/save.png" /></div>
@@ -51,11 +54,17 @@
         <span ng-repeat="playedGame in myProfileController.playedGames track by $index">
                         {{playedGame}}    
         </span>-->
+
+        <span ng-repeat="round in roundData track by $index">
+                        {{round}}    
+        </span>
+
     </div>
     <br />
-</div>
-<div class='div-center-content navigation-bottom'>
-    <a href="#/play" class="my-profile-btn btn-base">New Game</a>
-    <a href="#/main-menu" class="my-profile-btn btn-base">Main Menu</a>
-    <a href="#/about" class="my-profile-btn btn-base">About</a>
+
+    <div class='div-center-content navigation-bottom'>
+        <div class='navigation-bottom-left'><a href="#/play" ng-class="{active: route.current.activetab === 'play'}" class="navigation-bottom-btn">Play</a></div>
+        <div class='navigation-bottom-center'><a href="#/my-profile" ng-class="{active: route.current.activetab === 'profile'}" class="navigation-bottom-btn">My Profile</a></div>
+        <div class='navigation-bottom-right'><a href="#/about" ng-class="{active: route.current.activetab === 'about'}" class="navigation-bottom-btn">About</a></div>
+    </div>
 </div>
