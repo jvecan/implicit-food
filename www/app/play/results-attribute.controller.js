@@ -2,9 +2,10 @@
      .module('play')
      .controller('playResultsAttributeCtrl', playResultsAttributeCtrl);
 
- playResultsAttributeCtrl.$inject = ['$scope', '$timeout', '$location', '$interval', 'dbFactory', 'attributeGame', 'roundManager', 'scorer', 'player'];
+ playResultsAttributeCtrl.$inject = ['$scope', '$timeout', '$location', '$interval', '$route', 'dbFactory', 'attributeGame', 'roundManager', 'scorer', 'player'];
 
- function playResultsAttributeCtrl($scope, $timeout, $location, $interval, dbFactory, attributeGame, roundManager, scorer, player) {
+ function playResultsAttributeCtrl($scope, $timeout, $location, $interval, $route, dbFactory, attributeGame, roundManager, scorer, player) {
+     $scope.route = $route;
      var vm = this;
      if (roundManager.getRoundSaved() == true || roundManager.getRoundData().length == 0) {
          $location.path('/play');

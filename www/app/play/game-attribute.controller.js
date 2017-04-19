@@ -2,9 +2,10 @@
      .module('play')
      .controller('playGameAttributeCtrl', playGameAttributeCtrl);
 
- playGameAttributeCtrl.$inject = ['$scope', '$timeout', '$location', 'dbFactory', 'attributeGame', 'roundManager'];
+ playGameAttributeCtrl.$inject = ['$scope', '$timeout', '$location', '$route', 'dbFactory', 'attributeGame', 'roundManager'];
 
- function playGameAttributeCtrl($scope, $timeout, $location, dbFactory, attributeGame, roundManager) {
+ function playGameAttributeCtrl($scope, $timeout, $location, $route, dbFactory, attributeGame, roundManager) {
+     $scope.route = $route;
      var vm = this;
      vm.displayedItem;
 

@@ -2,9 +2,11 @@
      .module('play')
      .controller('playResultsFoodCtrl', playResultsFoodCtrl);
 
- playResultsFoodCtrl.$inject = ['$scope', '$timeout', '$location', '$interval', 'dbFactory', 'foodGame', 'roundManager', 'scorer', 'player'];
+ playResultsFoodCtrl.$inject = ['$scope', '$timeout', '$location', '$interval', '$route', 'dbFactory', 'foodGame', 'roundManager', 'scorer', 'player'];
 
- function playResultsFoodCtrl($scope, $timeout, $location, $interval, dbFactory, foodGame, roundManager, scorer, player) {
+ function playResultsFoodCtrl($scope, $timeout, $location, $interval, $route, dbFactory, foodGame, roundManager, scorer, player) {
+     $scope.route = $route;
+
      var vm = this;
      if (roundManager.getRoundSaved() == true || roundManager.getRoundData().length == 0) {
          $location.path('/play');

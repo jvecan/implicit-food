@@ -2,9 +2,10 @@
      .module('play')
      .controller('playStartAttributeCtrl', playStartAttributeCtrl);
 
- playStartAttributeCtrl.$inject = ['$scope', '$timeout', 'dbFactory', 'attributeGame', 'roundManager'];
+ playStartAttributeCtrl.$inject = ['$scope', '$timeout', '$route', 'dbFactory', 'attributeGame', 'roundManager'];
 
- function playStartAttributeCtrl($scope, $timeout, dbFactory, attributeGame, roundManager) {
+ function playStartAttributeCtrl($scope, $timeout, $route, dbFactory, attributeGame, roundManager) {
+     $scope.route = $route;
      var vm = this;
 
      vm.positiveWords = attributeGame.getPositiveWords();

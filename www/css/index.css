@@ -102,7 +102,7 @@ body {
 .results-btn-quick {
     width: 66%;
     font-size: 24px !important;
-    margin-bottom: 5px;
+    margin-bottom: 50px;
     margin-top: 5px;
 }
 
@@ -488,7 +488,7 @@ body {
 }
 
 .navigation-bottom {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -518,10 +518,16 @@ body {
     border: 1px black solid;
     display: block;
     color: black;
+    font-size: 18px;
+}
+
+.navigation-bottom-btn-center {
+    border-left: 0px !important;
+    border-right: 0px !important;
 }
 
 .active {
-    background-color: green !important;
+    background-color: #5cbf2a !important;
 }
 
 .navigation-bottom-btn:link {
@@ -553,6 +559,18 @@ body {
     border-top: 3px solid #18ab29;
     /* remove */
     height: 85%;
+}
+
+.content-full-results {
+    background: rgba(160, 237, 105, 0.85);
+    border-bottom: 3px solid #18ab29;
+    border-top: 3px solid #18ab29;
+}
+
+.content-full-height {
+    background: rgba(160, 237, 105, 0.85);
+    border-bottom: 3px solid #18ab29;
+    border-top: 3px solid #18ab29;
 }
 
 .content-game {

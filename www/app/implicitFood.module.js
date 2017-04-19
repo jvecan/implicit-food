@@ -92,6 +92,28 @@ implicitFood.controller("mainMenuController", function($scope) {
     //console.log(message);
 });
 
+implicitFood.directive('navigation', ['$location', '$route', function(location, route) {
+
+    return {
+        template: '<div class="div-center-content navigation-bottom">' +
+            '<div class="navigation-bottom-left"><a href="#/play" ng-class="{active: route.current.activetab === \'play\'}" class="navigation-bottom-btn">Play</a></div>' +
+            '<div class="navigation-bottom-center"><a href="#/my-profile" ng-class="{active: route.current.activetab === \'profile\'}" class="navigation-bottom-btn navigation-bottom-btn-center">My Profile</a></div>' +
+            '<div class="navigation-bottom-right"><a href="#/about" ng-class="{active: route.current.activetab === \'about\'}" class="navigation-bottom-btn">About</a></div>' +
+            //"<div class='navigation-bottom-center'><a href='#/my-profile' ng-class='{active: route.current.activetab === 'profile'}' class='navigation-bottom-btn'>My Profile</a></div>" +
+            //"<div class='navigation-bottom-right'><a href='#/about' ng-class='{active: route.current.activetab === 'about'}' class='navigation-bottom-btn'>About</a></div>" +
+            '</div>'
+            // "<h1>Made by a directive!</h1>" + route.current.activetab
+    };
+
+    /*return {
+        link: function(scope, elem, attrs) {
+            //things happen here
+            location.url('/');
+        }
+    };
+    */
+}]);
+
 implicitFood.factory('checkDatabase', ['$cordovaSQLite', '$q', function($cordovaSQLite, $q) {
     return {
         getDatabaseStatus: function() {

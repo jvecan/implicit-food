@@ -2,9 +2,10 @@
      .module('play')
      .controller('playGameFoodCtrl', playGameFoodCtrl);
 
- playGameFoodCtrl.$inject = ['$scope', '$timeout', '$location', 'dbFactory', 'foodGame', 'roundManager'];
+ playGameFoodCtrl.$inject = ['$scope', '$timeout', '$location', '$route', 'dbFactory', 'foodGame', 'roundManager'];
 
- function playGameFoodCtrl($scope, $timeout, $location, dbFactory, foodGame, roundManager) {
+ function playGameFoodCtrl($scope, $timeout, $location, $route, dbFactory, foodGame, roundManager) {
+     $scope.route = $route;
      var vm = this;
      vm.displayedItem;
 
