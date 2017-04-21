@@ -484,7 +484,33 @@ body {
 
 .my-profile-export-notification-message {
     margin-left: 5px;
-    margin-top: 25px;
+    margin-top: 5px;
+}
+
+.my-profile-chart-tabs {
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+}
+
+.my-profile-chart-tabs-link-container {
+    float: left;
+    margin-left: 2px;
+}
+
+.my-profile-chart-tabs-link {
+    width: 100%;
+    text-decoration: none;
+    background-color: #89e34a !important;
+    text-align: center;
+    padding: 3px;
+    display: block;
+    color: black;
+    font-size: 16px;
+    border-radius: 0px 0px 14px 5px;
+    -webkit-border-radius: 0px 0px 14px 5px;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    border-bottom: 1px black solid;
 }
 
 .navigation-bottom {
@@ -509,10 +535,8 @@ body {
 
 .navigation-bottom-btn {
     width: 100%;
-    font-size: bold 20px !important;
     text-decoration: none;
     background-color: #89e34a !important;
-    /*width: calc(100% - 26px);*/
     text-align: center;
     padding: 12px 12px 12px 12px;
     border: 1px black solid;
@@ -530,17 +554,20 @@ body {
     background-color: #5cbf2a !important;
 }
 
-.navigation-bottom-btn:link {
+.navigation-bottom-btn:link,
+.my-profile-chart-tabs-link:link {
     text-decoration: none;
     color: black;
 }
 
-.navigation-bottom-btn:visited {
+.navigation-bottom-btn:visited,
+.my-profile-chart-tabs-link:visited {
     text-decoration: none;
     color: black;
 }
 
-.navigation-bottom-btn:hover {
+.navigation-bottom-btn:hover,
+.my-profile-chart-tabs-link:hover {
     text-decoration: none;
     color: black;
 }
@@ -559,6 +586,11 @@ body {
     border-top: 3px solid #18ab29;
     /* remove */
     height: 85%;
+}
+
+.content-full-width {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .content-full-results {

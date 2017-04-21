@@ -12,11 +12,17 @@
      $scope.route = $route;
 
      $scope.data = [];
+     $scope.reactionTimeData = [];
+     $scope.correctResponsesData = [];
      $scope.labels = [];
 
      $scope.exportNotification = false;
+     $scope.exportNotificationLoaderGif = false;
 
      $scope.exportMessage = "";
+
+     $scope.activeChartTab = "points";
+
 
      $scope.options = {
          scales: {
@@ -54,6 +60,8 @@
 
          for (var i = 0; i < vm.playedGames.length; i++) {
              $scope.data.push(vm.playedGames[i].total_points);
+             $scope.reactionTimeData.push(vm.playedGames[i].average_reaction_time_correct_responses);
+             $scope.correctResponsesData.push(vm.playedGames[i].correct_responses);
              $scope.labels.push(vm.playedGames[i].id);
          }
 
@@ -75,13 +83,16 @@
      vm.exportData = function() {
          console.log("export data kutsuttu");
          $scope.exportNotification = true;
+
          player.getPlayedGameRoundsFromDb([]).then(function(roundData) {
 
              player.exportPlayerGamesToCSV(roundData).then(function(response) {
                  $scope.exportMessage = response;
+                 $scope.exportNotificationLoaderGif = false;
 
                  console.log('Success: ' + response);
                  $timeout(function() {
+
                      $scope.exportNotification = false;
                      $scope.exportMessage = "";
                  }, 1500);
@@ -89,15 +100,24 @@
                  $scope.exportMessage = error;
                  console.log(error);
                  $timeout(function() {
+                     $scope.exportNotificationLoaderGif = false;
                      $scope.exportNotification = false;
                      $scope.exportMessage = "";
                  }, 1500);
              }, function(update) {
+                 $scope.exportNotificationLoaderGif = true;
                  $scope.exportMessage = update;
                  console.log(update);
              });
          });
      };
+
+     vm.switchTab = function(tabName) {
+         console.log(tabName);
+         $scope.activeChartTab = tabName;
+     }
+
+
 
      //$scope.data = [65, 59, 80, 81, 56, 55, 40];
 

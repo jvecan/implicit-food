@@ -3,9 +3,10 @@
         <h1>My Profile</h1>
     </div>
 </div>
-<div class="container-fluid content-full">
+<div class="container-fluid content-full content-full-width">
     <div class='my-profile-export-notification div-center-content' ng-show="exportNotification">
-        <div class='my-profile-export-notification-message'>{{exportMessage}}</div>
+        <div class='my-profile-export-notification-message'><br />{{exportMessage}}</div>
+        <img ng-show="exportNotificationLoaderGif" src="img/ajax-loader.gif" />
     </div>
     <br />
     <div class='my-profile-text'>
@@ -41,8 +42,28 @@
                         {{playedGame.total_points}}    
         </span>-->
 
-        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick">
-</canvas>
+        <div class='my-profile-chart-tabs'>
+            <div class='my-profile-chart-tabs-links'>
+                <div class='my-profile-chart-tabs-link-container'><a class='my-profile-chart-tabs-link' ng-class="{active: activeChartTab === 'points'}" ng-click="myProfileController.switchTab('points')">Points</a></div>
+                <div class='my-profile-chart-tabs-link-container'><a class='my-profile-chart-tabs-link' ng-class="{active: activeChartTab === 'reactionTime'}" ng-click="myProfileController.switchTab('reactionTime')">Reaction Time</a></div>
+                <div class='my-profile-chart-tabs-link-container'><a class='my-profile-chart-tabs-link' ng-class="{active: activeChartTab === 'correctResponses'}" ng-click="myProfileController.switchTab('correctResponses')">Correct Answers</a></div>
+
+            </div>
+            <br />
+            <br />
+            <div ng-switch="activeChartTab">
+                <div ng-switch-when="points">
+                    <canvas id="pointsLine" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick"></canvas>
+                </div>
+                <div ng-switch-when="reactionTime">
+                    <canvas id="reactionTimeLine" class="chart chart-line" chart-data="reactionTimeData" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick"></canvas>
+                </div>
+                <div ng-switch-when="correctResponses">
+                    <canvas id="correctResponsesLine" class="chart chart-line" chart-data="correctResponsesData" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick"></canvas>
+                </div>
+            </div>
+        </div>
+
         <br />
         <!--
         <div class='div-center-content'>
@@ -63,11 +84,5 @@
     <br />
 
     <navigation></navigation>
-    <!--
-    <div class='div-center-content navigation-bottom'>
-        <div class='navigation-bottom-left'><a href="#/play" ng-class="{active: route.current.activetab === 'play'}" class="navigation-bottom-btn">Play</a></div>
-        <div class='navigation-bottom-center'><a href="#/my-profile" ng-class="{active: route.current.activetab === 'profile'}" class="navigation-bottom-btn">My Profile</a></div>
-        <div class='navigation-bottom-right'><a href="#/about" ng-class="{active: route.current.activetab === 'about'}" class="navigation-bottom-btn">About</a></div>
-    </div>
-    -->
+
 </div>

@@ -1,4 +1,4 @@
-angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $cordovaFile, $timeout, dbFactory) {
+angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $cordovaFile, $timeout, $http, dbFactory) {
 
     var playerId = 1;
     var playerInfo = [];
@@ -38,12 +38,53 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
 
         //playedGames = data;
 
-        for (var i = 0; i < data.length; i++) {
+        /*for (var i = 0; i < data.length; i++) {
             csvData += data[i].game_id + ';' + data[i].left_item_name + ';' + data[i].left_item_category_id + ';' + data[i].right_item_name + ';' + data[i].right_item_category_id + ';' +
                 data[i].displayed_item_name + ';' + data[i].displayed_item_category_id + ';' +
                 data[i].user_response_category_id + ';' + data[i].reaction_time + ';' + data[i].points + '\n';
+        }*/
+
+
+        /*csvData += data[i].game_id + ';' + data[i].left_item_name + ';' + data[i].left_item_category_id + ';' + data[i].right_item_name + ';' + data[i].right_item_category_id + ';' +
+            data[i].displayed_item_name + ';' + data[i].displayed_item_category_id + ';' +
+            data[i].user_response_category_id + ';' + data[i].reaction_time + ';' + data[i].points + '\n';*/
+        var csvData = [];
+        var csvHeaders = ["game_id", "left_item_name", "left_item_category_id", "right_item_name", "right_item_category_id", "displayed_item_name", "displayed_item_category_id", "user_response_category_id", "reaction_time", "points"];
+        csvData.push(csvHeaders);
+
+        for (var i = 0; i < data.length; i++) {
+            // var roundObj = {};
+            var roundObj = [data[i].game_id, data[i].left_item_name, data[i].left_item_category_id, data[i].right_item_name, data[i].right_item_category_id,
+                data[i].displayed_item_name, data[i].displayed_item_category_id, data[i].user_response_category_id, data[i].reaction_time, data[i].points
+            ];
+
+            /*roundObj.round_id = i;
+            roundObj.left_item_name = data[i].left_item_name;
+            roundObj.reaction_time = data[i].reaction_time;*/
+            csvData.push(roundObj);
         }
 
+
+
+
+        var url = 'http://iikkamanninen.com/mailgun/index.php';
+        //var parameter = JSON.stringify({ data });
+        var req = {
+            method: 'POST',
+            url: url,
+            data: JSON.stringify(csvData)
+                //data: { test: JSON.stringify(data) }
+        }
+
+        $http(req).then(function() {
+            q.resolve("Data exported successfully");
+            console.log("onnistui");
+        }, function() {
+            q.reject("Failed to export data");
+            console.log("vituiksi meni");
+        });
+
+        /*
         $cordovaFile.writeFile(cordova.file.externalRootDirectory, "data.csv", csvData, true)
             .then(function(success) {
                 q.resolve("Data exported successfully");
@@ -51,6 +92,9 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
             }, function(error) {
                 q.reject("Failed to export data");
             });
+            */
+
+
 
         return q.promise;
 
