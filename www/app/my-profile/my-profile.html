@@ -8,9 +8,21 @@
         <div class='my-profile-export-notification-message'><br />{{exportMessage}}</div>
         <img ng-show="exportNotificationLoaderGif" src="img/ajax-loader.gif" />
     </div>
+    <div class='my-profile-delete-notification div-center-content' ng-show="deleteNotification">
+        <div class='my-profile-delete-notification-message'><br />This action will reset your profile. All progress will be erased.
+            <br />
+            <br />
+            <a href="" ng-click='myProfileController.confirmProfileReset()' class="btn-base">Delete</a>&nbsp;<a href="" ng-click='myProfileController.closeDeleteNotification()' class="btn-base">Cancel</a>
+            <br />
+        </div>
+
+    </div>
     <br />
     <div class='my-profile-text'>
-        <div class='my-profile-export'><img ng-click="myProfileController.exportData()" src="img/save.png" /></div>
+        <div class='my-profile-icons'>
+            <img ng-click="myProfileController.exportData()" src="img/save.png" /><br />
+            <img ng-click="myProfileController.resetProfile()" src="img/delete.png" />
+        </div>
         <table class='my-profile-table'>
             <tr>
                 <td>
@@ -37,17 +49,12 @@
                 </td>
             </tr>
         </table>
-        <!--
-        <span ng-repeat="playedGame in myProfileController.playedGames track by $index">
-                        {{playedGame.total_points}}    
-        </span>-->
 
         <div class='my-profile-chart-tabs'>
             <div class='my-profile-chart-tabs-links'>
                 <div class='my-profile-chart-tabs-link-container'><a class='my-profile-chart-tabs-link' ng-class="{active: activeChartTab === 'points'}" ng-click="myProfileController.switchTab('points')">Points</a></div>
                 <div class='my-profile-chart-tabs-link-container'><a class='my-profile-chart-tabs-link' ng-class="{active: activeChartTab === 'reactionTime'}" ng-click="myProfileController.switchTab('reactionTime')">Reaction Time</a></div>
                 <div class='my-profile-chart-tabs-link-container'><a class='my-profile-chart-tabs-link' ng-class="{active: activeChartTab === 'correctResponses'}" ng-click="myProfileController.switchTab('correctResponses')">Correct Answers</a></div>
-
             </div>
             <br />
             <br />
@@ -63,23 +70,10 @@
                 </div>
             </div>
         </div>
-
-        <br />
-        <!--
         <div class='div-center-content'>
-            <a href="#/play" class="my-profile-btn btn-base">New Game</a>
-            <a href="#/main-menu" class="my-profile-btn btn-base">Main Menu</a>
-            <a href="#/about" class="my-profile-btn btn-base">About</a>
-        </div>-->
-        <!--
-        <span ng-repeat="playedGame in myProfileController.playedGames track by $index">
-                        {{playedGame}}    
-        </span>-->
-
-        <!--  <span ng-repeat="round in roundData track by $index">
-                        {{round}}    
-        </span>-->
-
+            <a href="#/my-profile-unlocked-foods" class="game-instructions-start-btn btn-base">Unlocked Foods</a>
+        </div>
+        <br />
     </div>
     <br />
 

@@ -2,9 +2,9 @@
      .module('myProfile')
      .controller('myProfileCtrl', myProfileCtrl);
 
- myProfileCtrl.$inject = ['$scope', '$timeout', '$interval', '$route', 'dbFactory', 'roundManager', 'player'];
+ myProfileCtrl.$inject = ['$scope', '$timeout', '$interval', '$route', '$location', 'dbFactory', 'roundManager', 'player'];
 
- function myProfileCtrl($scope, $timeout, $interval, $route, dbFactory, roundManager, player) {
+ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory, roundManager, player) {
 
      var vm = this;
      $scope.roundData = [];
@@ -16,13 +16,14 @@
      $scope.correctResponsesData = [];
      $scope.labels = [];
 
+     $scope.deleteNotification = false;
+
      $scope.exportNotification = false;
      $scope.exportNotificationLoaderGif = false;
 
      $scope.exportMessage = "";
 
      $scope.activeChartTab = "points";
-
 
      $scope.options = {
          scales: {
@@ -44,8 +45,6 @@
              }
          }
      };
-
-     //player.exportPlayerGamesToCSV();
 
      player.getHighScore().then(function(data) {
          vm.highScore = data[0].high_score;
@@ -77,22 +76,18 @@
          */
      });
 
-
      $scope.series = ['Series A'];
 
      vm.exportData = function() {
-         console.log("export data kutsuttu");
          $scope.exportNotification = true;
 
          player.getPlayedGameRoundsFromDb([]).then(function(roundData) {
-
              player.exportPlayerGamesToCSV(roundData).then(function(response) {
                  $scope.exportMessage = response;
                  $scope.exportNotificationLoaderGif = false;
 
                  console.log('Success: ' + response);
                  $timeout(function() {
-
                      $scope.exportNotification = false;
                      $scope.exportMessage = "";
                  }, 1500);
@@ -112,48 +107,25 @@
          });
      };
 
+     vm.resetProfile = function() {
+         $scope.deleteNotification = true;
+     };
+
+     vm.confirmProfileReset = function() {
+         player.resetPlayerProfile().then(function() {
+             $location.path('/my-profile');
+         });
+
+     };
+
+     vm.closeDeleteNotification = function() {
+         $scope.deleteNotification = false;
+     };
+
      vm.switchTab = function(tabName) {
-         console.log(tabName);
          $scope.activeChartTab = tabName;
-     }
-
-
+     };
 
      //$scope.data = [65, 59, 80, 81, 56, 55, 40];
-
-
-
-
-
-     /*
-
-          player.getPlayedGamesFromDb().then(function() {
-                  return player.getPlayerInfoFromDb();
-              })
-
-              
-              .then(function() {
-     */
-     //vm.highScore = [];
-     //vm.highScore = player.getHighScore(vm.highScore);
-
-     //console.log(vm.highScore);
-
-     //vm.playedGames = player.getPlayedGames();
-     //vm.playerInfo = player.getPlayerInfo();
-
-     /*
-     var singleRound = [];
-     for (var i = 0; i < vm.playedGames.length; i++) {
-
-         player.getGameRoundsFromDb(vm.playedGames[i].game_type, vm.playedGames[i].id, singleRound).then(function() {
-             console.log(singleRound);
-             $scope.roundData.push(singleRound);
-             singleRound.length = 0;
-         });
-         //player.getGameRounds(vm.playedGames[i].game_type, vm.playedGames[i].id);
-     }
-     */
-     // });
 
  }

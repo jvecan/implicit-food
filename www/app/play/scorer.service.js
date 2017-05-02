@@ -43,8 +43,6 @@ angular.module('play').factory("scorer", function($q, $timeout, dbFactory) {
     var giveTotalBonuses = function(totalScore, roundStatistics, roundData) {
         bonusInfo = {};
 
-        console.log(roundStatistics["correctResponses"]);
-
         if (roundStatistics["correctResponses"] == roundData.length) {
             bonusInfo.perfectRound = " (25 point bonus)";
             totalScore += 25;

@@ -65,8 +65,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
         }
 
 
-
-
         var url = 'http://iikkamanninen.com/mailgun/index.php';
         //var parameter = JSON.stringify({ data });
         var req = {
@@ -81,7 +79,7 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
             console.log("onnistui");
         }, function() {
             q.reject("Failed to export data");
-            console.log("vituiksi meni");
+            console.log("epäonnistui");
         });
 
         /*
@@ -123,7 +121,7 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
     var getPlayedGamesFromDb = function() {
         playedGames = [];
         var query = 'SELECT id, timestamp, game_type, total_points, correct_responses, incorrect_responses, ' +
-            'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC';
+            'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC LIMIT 30';
         var data = dbFactory.dbQuery(query, []);
         data.then(function(dataResponse) {
             playedGames = dataResponse;
@@ -152,7 +150,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
             query += " ORDER BY game_id ASC";
         }
 
-        console.log(query);
 
         var data = dbFactory.dbQuery(query, []);
         data.then(function(dataResponse) {
@@ -171,6 +168,17 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
         */
     };
 
+    var getUnlockedFoods = function(playerData) {
+        unlockedFoods = [];
+        var query = 'SELECT name, unlock_text, level FROM food JOIN food_attribute_category ' +
+            'ON food.id = food_attribute_category.food_id WHERE level BETWEEN 1 AND ' + playerData.level + ' AND food_attribute_category.attribute_category_id = 1 ORDER BY level ASC';
+        var data = dbFactory.dbQuery(query, []);
+        data.then(function(dataResponse) {
+            unlockedFoods = dataResponse;
+        });
+        return data;
+    };
+
 
     var getPlayerInfoFromDb = function() {
         var query = 'SELECT total_points, level, display_name FROM player WHERE id = ' + playerId;
@@ -185,9 +193,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
     };
 
 
-
-
-
     var updateLevel = function() {
         var q = $q.defer();
 
@@ -197,9 +202,6 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
         newLevelUnlocked = false;
 
         getLevelInformation(nextLevelNumber, levelInformationArray).then(function() {
-            //console.log(levelInformationArray[0].required_points);
-            //console.log(playerInfo.total_points);
-
             if (playerInfo.total_points > levelInformationArray[0].required_points) {
                 newLevel = levelInformationArray[0].level_number;
                 var query = 'UPDATE player SET level = ' + newLevel + ' WHERE id = ' + playerId;
@@ -241,18 +243,37 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
         return q.promise;
     };
 
+    var resetPlayerProfile = function() {
+        var q = $q.defer();
+        var query = 'DELETE from game';
+        dbFactory.dbQuery(query, []).then(function() {
+            q.notify("Deleting game information");
+            var query = 'DELETE from game_round';
+            dbFactory.dbQuery(query, []).then(function() {
+                q.notify("Deleting game round information");
+                var query = 'UPDATE player SET total_points = 0, level = 0 WHERE id = ' + playerId;
+                dbFactory.dbQuery(query, []).then(function() {
+                    q.resolve("Delete completed");
+                });
+            });
+        });
+        return q.promise;
+    };
+
     return {
         getPlayerInfoFromDb: getPlayerInfoFromDb,
         getPlayerInfo: getPlayerInfo,
         getPlayerProfile: getPlayerProfile,
         getPlayedGamesFromDb: getPlayedGamesFromDb,
         getPlayedGames: getPlayedGames,
+        getUnlockedFoods: getUnlockedFoods,
         exportPlayerGamesToCSV: exportPlayerGamesToCSV,
         getPlayedGameRoundsFromDb: getPlayedGameRoundsFromDb,
         getLevelInformation: getLevelInformation,
         newLevelUnlocked: newLevelUnlocked,
         getHighScore: getHighScore,
         updateLevel: updateLevel,
-        updateTotalPoints: updateTotalPoints
+        updateTotalPoints: updateTotalPoints,
+        resetPlayerProfile: resetPlayerProfile
     };
 })

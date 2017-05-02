@@ -122,14 +122,14 @@ angular.module('play').factory("attributeGame", function($q, $timeout, dbFactory
 
     var initializeHealthyFood = function() {
         var query = 'SELECT food.id AS item_id, name, level, food_attribute_category.attribute_category_id AS attribute_category_id FROM food, food_attribute_category ' +
-            'WHERE level <= ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + positiveCategoryId +
+            'WHERE level BETWEEN ' + (playerLevel - 8) + ' AND ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + positiveCategoryId +
             ' AND food_attribute_category.food_id = food.id ORDER BY RANDOM() LIMIT 1';
         dbFactory.execute(query, [], healthyFood);
     };
 
     var initializeUnhealthyFood = function() {
         var query = 'SELECT food.id AS item_id, name, level, food_attribute_category.attribute_category_id AS attribute_category_id FROM food, food_attribute_category ' +
-            'WHERE level <= ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + negativeCategoryId +
+            'WHERE level BETWEEN ' + (playerLevel - 8) + ' AND ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + negativeCategoryId +
             ' AND food_attribute_category.food_id = food.id ORDER BY RANDOM() LIMIT 1';
         dbFactory.execute(query, [], unhealthyFood);
     };

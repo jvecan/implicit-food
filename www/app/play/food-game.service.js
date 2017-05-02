@@ -183,8 +183,10 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
                 resetPositiveCategory();
                 initializePositiveCategory();
 
+
+
                 var query = 'SELECT food.id AS food_id, name, level, food_attribute_category.attribute_category_id AS attribute_category_id FROM food, food_attribute_category ' +
-                    'WHERE level <= ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + positiveCategoryId +
+                    'WHERE level BETWEEN ' + (playerLevel - 8) + ' AND ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + positiveCategoryId +
                     ' AND food_attribute_category.food_id = food.id ORDER BY RANDOM() LIMIT 5';
                 dbFactory.execute(query, [], healthyFoods);
                 return healthyFoods; // Return promise for resolve in routing. 
@@ -204,7 +206,7 @@ angular.module('play').factory("foodGame", function($q, $timeout, dbFactory, rou
                 setupCategoryPositions();
 
                 var query = 'SELECT food.id AS food_id, name, level, food_attribute_category.attribute_category_id AS attribute_category_id FROM food, food_attribute_category ' +
-                    'WHERE level <= ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + negativeCategoryId +
+                    'WHERE level BETWEEN ' + (playerLevel - 8) + ' AND ' + playerLevel + ' AND food_attribute_category.attribute_category_id = ' + negativeCategoryId +
                     ' AND food_attribute_category.food_id = food.id ORDER BY RANDOM() LIMIT 5';
                 dbFactory.execute(query, [], unhealthyFoods);
 

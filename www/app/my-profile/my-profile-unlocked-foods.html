@@ -1,0 +1,31 @@
+<div class="container-fluid header-wide">
+    <div class='div-center-content header'>
+        <h1>Unlocked Foods</h1>
+    </div>
+</div>
+<div class="container-fluid content-full content-full-width">
+    <div class='my-profile-unlocked-food-information' ng-click="myProfileUnlockedController.closeFoodInformation()" ng-show="showUnlockedFoodInformation">
+        <div>
+            <img ng-click="myProfileUnlockedController.closeFoodInformation()" class='my-profile-unlocked-food-close' src="img/close.png" />
+            <div class='div-center-content'>
+                <h2 class='capitalize-first'>{{unlockedFoodInformationTitle}}</h2>
+            </div>
+            <p>{{unlockedFoodInformation}}</p>
+        </div>
+    </div>
+    <div class='my-profile-text'>
+
+        <div class='div-center-content'>
+            <p>Tap a food icon to learn more. Tap text or "X" icon to close the pop-up.</p>
+        </div>
+        <div>
+            <span class='my-profile-unlocked-food-image' ng-repeat="unlockedFood in myProfileUnlockedController.unlockedFoods track by $index">
+                    <img ng-click="myProfileUnlockedController.showFoodInformation(unlockedFood.level)" ng-src="img/game_images/{{unlockedFood.name}}.png" class='image-instructions-food' />
+                     <br ng-if="($index+1)%5==0">
+            </span>
+        </div>
+    </div>
+    <br />
+    <br />
+    <navigation></navigation>
+</div>
