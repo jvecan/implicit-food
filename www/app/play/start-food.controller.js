@@ -8,6 +8,9 @@
      $scope.route = $route;
      var vm = this;
 
+     foodGame.initializeHealthyItems();
+     foodGame.initializeUnhealthyItems();
+
      vm.healthyFoods = foodGame.getHealthyFoods();
      vm.unhealthyFoods = foodGame.getUnhealthyFoods();
 

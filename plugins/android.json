@@ -13,16 +13,12 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.implicitfood.app"
         },
-        "cordova-sqlite-storage": {
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "com.implicitfood.app"
         },
-        "cordova-plugin-file": {
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.implicitfood.app"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.implicitfood.app"
-        }
-    }
+    "dependent_plugins": {}
 }

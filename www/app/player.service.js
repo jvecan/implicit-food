@@ -170,8 +170,8 @@ angular.module('implicitFood').factory('player', function($q, $cordovaSQLite, $c
 
     var getUnlockedFoods = function(playerData) {
         unlockedFoods = [];
-        var query = 'SELECT name, unlock_text, level FROM food JOIN food_attribute_category ' +
-            'ON food.id = food_attribute_category.food_id WHERE level BETWEEN 1 AND ' + playerData.level + ' AND food_attribute_category.attribute_category_id = 1 ORDER BY level ASC';
+        var query = 'SELECT name, unlock_text, level, level.description as description FROM food JOIN food_attribute_category ' +
+            'ON food.id = food_attribute_category.food_id JOIN level ON food.level = level.number WHERE level BETWEEN 1 AND ' + playerData.level + ' AND food_attribute_category.attribute_category_id = 1 ORDER BY level ASC';
         var data = dbFactory.dbQuery(query, []);
         data.then(function(dataResponse) {
             unlockedFoods = dataResponse;

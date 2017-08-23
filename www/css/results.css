@@ -1,0 +1,51 @@
+.results-btn-quick {
+    width: 66%;
+    font-size: 2em !important;
+    margin-bottom: 50px;
+    margin-top: 5px;
+}
+
+.results-surprise-bonus {
+    color: #FF8C00;
+    display: block;
+    font-weight: bold;
+    -webkit-animation: fadein 3s;
+    -moz-animation: fadein 3s;
+    -ms-animation: fadein 3s;
+    -o-animation: fadein 3s;
+    animation: fadein 3s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.results-progressbar-bar {
+    color: orange;
+    line-height: 40px;
+    height: 40px;
+    background-color: green;
+    border: 1px black solid;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.results-progressbar-container {
+    background-color: #18ab29;
+    border: 1px black solid;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.content-full-results {
+    background: rgba(160, 237, 105, 0.85);
+    border-bottom: 3px solid #18ab29;
+    border-top: 3px solid #18ab29;
+}

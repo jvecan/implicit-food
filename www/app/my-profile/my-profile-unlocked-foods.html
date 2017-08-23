@@ -1,5 +1,5 @@
 <div class="container-fluid header-wide">
-    <div class='div-center-content header'>
+    <div class='center-content header'>
         <h1>Unlocked Foods</h1>
     </div>
 </div>
@@ -7,15 +7,15 @@
     <div class='my-profile-unlocked-food-information' ng-click="myProfileUnlockedController.closeFoodInformation()" ng-show="showUnlockedFoodInformation">
         <div>
             <img ng-click="myProfileUnlockedController.closeFoodInformation()" class='my-profile-unlocked-food-close' src="img/close.png" />
-            <div class='div-center-content'>
-                <h2 class='capitalize-first'>{{unlockedFoodInformationTitle}}</h2>
+            <div class='center-content'>
+                <h2 class='capitalize-first'>{{unlockedFoodInformationLevelDescription}} ({{unlockedFoodInformationLevel}}/35)</h2>
             </div>
             <p>{{unlockedFoodInformation}}</p>
         </div>
     </div>
     <div class='my-profile-text'>
 
-        <div class='div-center-content'>
+        <div class='center-content'>
             <p>Tap a food icon to learn more. Tap text or "X" icon to close the pop-up.</p>
         </div>
         <div>

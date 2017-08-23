@@ -1,0 +1,13 @@
+.header {
+    background-color: #88e348;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    border: 1px solid #18ab29;
+    height: 100%;
+    font-size: 1em;
+}
+
+.header-wide {
+    height: 10%;
+}

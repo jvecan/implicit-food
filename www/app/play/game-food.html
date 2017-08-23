@@ -1,12 +1,12 @@
 <div class="game-container">
     <div class='game-content'>
-        <div ng-show="showOverlay" ng-click="playGameFoodController.startGameTouch()" class='game-instructions-overlay'>
-            <div class="game-instructions-overlay-content">
-                <h3 class='game-instructions-overlay-header'>Instructions</h3>
+        <div ng-show="showOverlay" ng-click="playGameFoodController.startGameTouch()" class='game-overlay'>
+            <div class="game-overlay-content">
+                <h3 class='center-content'>Instructions</h3>
                 <ol type="1">
-                    <li>Position your fingers on the dark green areas on each side of the screen. </li>
-                    <li>Start the game by tapping anywhere on the screen. </li>
-                    <li>The first food image will appear after one second in the middle of the screen.</li>
+                    <li>Place your fingers on the dark green areas. </li>
+                    <li>Start the game by tapping either of the dark green areas.</li>
+                    <li>The first food image will appear after one second.</li>
                     <li>If you answer incorrectly, tap the correct side of the screen to continue the game.</li>
                 </ol>
             </div>
@@ -22,10 +22,6 @@
                 <img class='game-stimulus-image' ng-src="img/game_images/{{playGameFoodController.displayedItem.name}}.png" />
             </div>
             <div class='game-error' ng-show="showError">X</div>
-            <!--<div class='game-nav-buttons'>
-                <a href="#/play" class="game-nav-btn btn-base">New Game</a>
-                <a href="#/main-menu" class="game-nav-btn btn-base">Main Menu</a>
-            </div>-->
         </div>
 
         <div class='game-touch-area game-touch-area-right'>

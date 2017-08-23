@@ -1,5 +1,5 @@
 <div class="container-fluid header-wide">
-    <div class='div-center-content header '>
+    <div class='center-content header '>
         <h1>Word Association</h1>
     </div>
 </div>
@@ -38,7 +38,7 @@
                 <th>Healthy food: </th>
             </tr>
             <tr>
-                <td class='center-text'>
+                <td class='center-content'>
                     <img ng-src="img/game_images/{{playStartAttributeController.healthyFood[0].name}}.png" class='image-instructions-food' />
                 </td>
             </tr>
@@ -48,7 +48,7 @@
                 <th>Unhealthy food: </th>
             </tr>
             <tr>
-                <td class='center-text'>
+                <td class='center-content'>
                     <img ng-src="img/game_images/{{playStartAttributeController.unhealthyFood[0].name}}.png" class='image-instructions-food' />
                 </td>
             </tr>
@@ -59,8 +59,9 @@
         <p>Associate positive words with the healthy food and negative words with the unhealthy food. </p>
         <p>Be as quick as possible. Fast and accurate answers net more points.</p>
     </div>
-    <div class='div-center-content'>
+    <div class='center-content'>
         <a href="#/play-game-attribute" class="game-instructions-start-btn btn-base">Start Game</a>
     </div>
     <br />
+    <navigation></navigation>
 </div>

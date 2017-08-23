@@ -16,20 +16,22 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             controller: 'playStartFoodCtrl',
             controllerAs: 'playStartFoodController',
             templateUrl: 'app/play/start-food.html',
+            /*
             resolve: {
-                healthyFoods: foodGame => foodGame.initializeHealthyItems(),
-                unhealthyFoods: foodGame => foodGame.initializeUnhealthyItems(),
-            }
+                healthyFoods: foodGame.initializeHealthyItems(),
+                unhealthyFoods: foodGame.initializeUnhealthyItems()
+            }*/
         })
         .when("/play-start-attribute", {
             activetab: 'play',
             controller: 'playStartAttributeCtrl',
             controllerAs: 'playStartAttributeController',
             templateUrl: 'app/play/start-attribute.html',
+            /*
             resolve: {
-                positiveWords: attributeGame => attributeGame.initializePositiveWords(),
-                negativeWords: attributeGame => attributeGame.initializeNegativeWords(),
-            }
+                positiveWords: attributeGame.initializePositiveWords(),
+                negativeWords: attributeGame.initializeNegativeWords()
+            }*/
         })
         .when('/', {
             controller: 'mainMenuController',
@@ -104,6 +106,10 @@ implicitFood.config(function($locationProvider, $routeProvider) {
 
 });
 
+function moviesPrepService(movieService) {
+    return movieService.getMovies();
+}
+
 implicitFood.controller("mainMenuController", function($scope) {
     //foodGame.initializeHealthyItems();
     //$scope.message = message;
@@ -113,7 +119,7 @@ implicitFood.controller("mainMenuController", function($scope) {
 implicitFood.directive('navigation', ['$location', '$route', function(location, route) {
 
     return {
-        template: '<div class="div-center-content navigation-bottom">' +
+        template: '<div class="center-content navigation-bottom">' +
             '<div class="navigation-bottom-left"><a href="#/play" ng-class="{active: route.current.activetab === \'play\'}" class="navigation-bottom-btn">Play</a></div>' +
             '<div class="navigation-bottom-center"><a href="#/my-profile" ng-class="{active: route.current.activetab === \'profile\'}" class="navigation-bottom-btn navigation-bottom-btn-center">My Profile</a></div>' +
             '<div class="navigation-bottom-right"><a href="#/about" ng-class="{active: route.current.activetab === \'about\'}" class="navigation-bottom-btn">About</a></div>' +

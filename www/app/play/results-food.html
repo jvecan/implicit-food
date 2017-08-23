@@ -1,5 +1,5 @@
 <div class="container-fluid header-wide">
-    <div class='div-center-content header'>
+    <div class='center-content header'>
         <h1>Results</h1>
     </div>
 </div>
@@ -8,18 +8,18 @@
 <div class="container-fluid content-full-results" style="min-height: 85% !important;">
     <br />
     <div class="game-instructions-text">
-        <div class='div-center-content'>
+        <div class='center-content'>
             <h2>You scored {{playResultsFoodController.totalScore}} points!</h2>
         </div>
         <!--<h3>You now have {{playerInfo.total_points}} points. </h3>-->
         <div class='results-progressbar-container'>
             <!--Points until next level: {{pointsUntilNextLevel}} Current level start points: {{currentLevelData.required_points}}-->
             <div class='results-progressbar-bar' ng-style="{'width' : progressBarWidth + '%' }">
-                <div class='div-center-content'>{{newLevelMessage}}</div>
+                <div class='center-content'>{{newLevelMessage}}</div>
             </div>
         </div>
         <br />
-        <div class='div-center-content'>{{playResultsFoodController.roundStatistics.correctResponses}} correct responses out of 10{{bonusInfo.perfectRound}}<br /> Average correct response time {{playResultsFoodController.roundStatistics.averageReactionTimeCorrectResponses}} ms{{bonusInfo.perfectFastRound}}
+        <div class='center-content'>{{playResultsFoodController.roundStatistics.correctResponses}} correct responses out of 10{{bonusInfo.perfectRound}}<br /> Average correct response time {{playResultsFoodController.roundStatistics.averageReactionTimeCorrectResponses}} ms{{bonusInfo.perfectFastRound}}
             <br /><span class='results-surprise-bonus'>{{bonusInfo.surpriseBonus}}</span>
         </div>
         <br />
@@ -27,17 +27,17 @@
     <div style='clear:both;'><br /></div>
     <div ng-if="showNewLevelInfo">
         <div class="game-instructions-text">
-            <div class='div-center-content'>
+            <div class='center-content'>
                 <h3>{{nextLevelData.level_description}}</h3>
                 {{nextLevelData.food_name}} unlocked
             </div>
-            <div class='div-center-content'>
+            <div class='center-content'>
                 <p><img class='image-results-unlock-food' ng-src="img/game_images/{{nextLevelData.food_name}}.png" /></p>
             </div>
             <p>{{nextLevelData.food_unlock_text}}</p>
         </div>
     </div>
-    <div class='div-center-content'>
+    <div class='center-content'>
         <a href="#/play-start-food" class="results-btn-quick btn-base">Quick Play</a>
     </div>
     <br />

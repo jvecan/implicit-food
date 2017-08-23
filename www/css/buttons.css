@@ -1,0 +1,45 @@
+.btn-base {
+    background-color: #89e34a !important;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+    border: 3px solid #18ab29;
+    display: inline-block;
+    color: #000000;
+    text-decoration: none !important;
+    text-align: center;
+    padding: 20px 31px;
+    outline: none;
+    font-weight: bold;
+}
+
+.btn-base:active {
+    background-color: #5cbf2a !important;
+    position: relative;
+    top: 1px;
+    text-decoration: none !important;
+}
+
+.btn-base:visited {
+    color: #000000;
+}
+
+.main-menu-btn {
+    margin-top: 20px;
+    width: 90%;
+    font-size: 2em !important;
+}
+
+.game-instructions-start-btn {
+    margin-top: 20px;
+    width: 70%;
+    font-size: 1.5em !important;
+}
+
+.game-type-select-btn {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 90%;
+    font-size: 1.5em !important;
+    padding: 8px !important;
+}

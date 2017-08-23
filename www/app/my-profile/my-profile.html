@@ -1,14 +1,14 @@
 <div class="container-fluid header-wide">
-    <div class='div-center-content header'>
+    <div class='center-content header'>
         <h1>My Profile</h1>
     </div>
 </div>
 <div class="container-fluid content-full content-full-width">
-    <div class='my-profile-export-notification div-center-content' ng-show="exportNotification">
+    <div class='my-profile-export-notification center-content' ng-show="exportNotification">
         <div class='my-profile-export-notification-message'><br />{{exportMessage}}</div>
         <img ng-show="exportNotificationLoaderGif" src="img/ajax-loader.gif" />
     </div>
-    <div class='my-profile-delete-notification div-center-content' ng-show="deleteNotification">
+    <div class='my-profile-delete-notification center-content' ng-show="deleteNotification">
         <div class='my-profile-delete-notification-message'><br />This action will reset your profile. All progress will be erased.
             <br />
             <br />
@@ -60,18 +60,19 @@
             <br />
             <div ng-switch="activeChartTab">
                 <div ng-switch-when="points">
-                    <canvas id="pointsLine" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick"></canvas>
+                    <canvas id="pointsLine" class="chart chart-line" chart-data="pointsData" chart-labels="labels" chart-series="series" chart-options="optionsPoints" chart-click="onClick"></canvas>
                 </div>
                 <div ng-switch-when="reactionTime">
-                    <canvas id="reactionTimeLine" class="chart chart-line" chart-data="reactionTimeData" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick"></canvas>
+                    <canvas id="reactionTimeLine" class="chart chart-line" chart-data="reactionTimeData" chart-labels="labels" chart-series="series" chart-options="optionsReactionTime" chart-click="onClick"></canvas>
                 </div>
                 <div ng-switch-when="correctResponses">
-                    <canvas id="correctResponsesLine" class="chart chart-line" chart-data="correctResponsesData" chart-labels="labels" chart-series="series" chart-options="options" chart-click="onClick"></canvas>
+                    <canvas id="correctResponsesLine" class="chart chart-line" chart-data="correctResponsesData" chart-labels="labels" chart-series="series" chart-options="optionsCorrectResponses" chart-click="onClick"></canvas>
                 </div>
             </div>
         </div>
-        <div class='div-center-content'>
-            <a href="#/my-profile-unlocked-foods" class="game-instructions-start-btn btn-base">Unlocked Foods</a>
+        <br />
+        <div class='center-content'>
+            <a href="#/my-profile-unlocked-foods" class="btn-base">Unlocked Foods</a>
         </div>
         <br />
     </div>

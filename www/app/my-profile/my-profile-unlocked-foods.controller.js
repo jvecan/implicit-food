@@ -22,6 +22,8 @@
      vm.showFoodInformation = function(foodLevel) {
          $scope.showUnlockedFoodInformation = true;
          $scope.unlockedFoodInformationTitle = vm.unlockedFoods[foodLevel - 1].name;
+         $scope.unlockedFoodInformationLevelDescription = vm.unlockedFoods[foodLevel - 1].description;
+         $scope.unlockedFoodInformationLevel = vm.unlockedFoods[foodLevel - 1].level;
          $scope.unlockedFoodInformation = vm.unlockedFoods[foodLevel - 1].unlock_text;
          $scope.unlockedFoodInformation = $scope.unlockedFoodInformation.charAt(0).toUpperCase() + $scope.unlockedFoodInformation.slice(1);
      };

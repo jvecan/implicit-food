@@ -1,0 +1,46 @@
+.game-instructions-text {
+    font-size: 1.3em;
+    border: 1px black solid;
+    width: 100%;
+    padding: 5px;
+    background: rgba(160, 237, 105, 1);
+    border-radius: 25px;
+}
+
+.game-instructions-attribute-table-container {
+    width: 100%;
+}
+
+.game-instructions-attribute-table {
+    background: rgba(160, 237, 105, 1);
+    width: 50%;
+    table-layout: fixed;
+    float: left;
+}
+
+.game-instructions-attribute-table-word td {
+    height: 65px;
+    vertical-align: top;
+}
+
+.game-instructions-food-table {
+    background-color: #6fd027;
+    width: 100%;
+    table-layout: fixed;
+    height: 80px;
+}
+
+.game-instructions-food-table td,
+.game-instructions-attribute-table td {
+    width: 64px;
+    border: 1px black solid;
+    padding: 2px;
+    font-size: 1.2em;
+}
+
+.game-instructions-food-table th,
+.game-instructions-attribute-table th {
+    border: 1px black solid;
+    text-align: center;
+    font-size: 1.33em;
+}

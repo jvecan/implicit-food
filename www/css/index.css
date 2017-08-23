@@ -36,26 +36,21 @@ body {
     /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;
     /* prevent copy paste, to allow, change 'none' to 'text' */
-    font-family: 'Verdana', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size: 12px;
+    font-family: 'Verdana', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;    
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     height: 100%;
+
 }
 
-.header {
-    margin-top: 15px;
-    background-color: #88e348;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
-    border-radius: 25px;
-    border: 1px solid #18ab29;
+.center-content {
+    text-align: center;
 }
 
-.header-wide {
-    height: 15%;
+.capitalize-first::first-letter {
+    text-transform: uppercase;
 }
 
 .main-menu {
@@ -67,564 +62,15 @@ body {
     border: 1px solid #18ab29;
 }
 
-.btn-base {
-    background-color: #89e34a !important;
-    -moz-border-radius: 18px;
-    -webkit-border-radius: 18px;
-    border-radius: 18px;
-    border: 3px solid #18ab29;
-    display: inline-block;
-    color: #000000;
-    text-decoration: none !important;
-    text-align: center;
-    padding: 20px 31px;
-    outline: none;
-    font-weight: bold;
-}
-
-.btn-base:active {
-    background-color: #5cbf2a !important;
-    position: relative;
-    top: 1px;
-    text-decoration: none !important;
-}
-
-.btn-base:visited {
-    color: #000000;
-}
-
-.results-btn-small {
-    width: 33%;
-    font-size: 14px !important;
-    padding: 12px !important;
-}
-
-.results-btn-quick {
-    width: 66%;
-    font-size: 24px !important;
-    margin-bottom: 50px;
-    margin-top: 5px;
-}
-
-.results-surprise-bonus {
-    color: #FF8C00;
-    display: block;
-    font-weight: bold;
-    -webkit-animation: fadein 3s;
-    -moz-animation: fadein 3s;
-    -ms-animation: fadein 3s;
-    -o-animation: fadein 3s;
-    animation: fadein 3s;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.center-text {
-    text-align: center;
-}
-
-.main-menu-btn {
-    margin-top: 40px;
-    width: 90%;
-    font-size: 24px !important;
-}
-
-.first-row {
-    margin-top: 12px;
-}
-
-.last-row {
-    margin-bottom: 12px;
-}
-
-.div-center-content {
-    text-align: center;
-}
-
-.game-type-text {
-    font-size: 16px;
-    border: 1px black solid;
-    width: 50%;
-    padding: 5px;
-    background: rgba(160, 237, 105, 1);
-    float: left;
-    height: 250px;
-}
-
-.game-instructions-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10000;
-    height: 100%;
-    width: 100%;
-    background: rgba(160, 237, 105, 0.4);
-}
-
-.game-instructions-overlay-header {
-    text-align: center;
-}
-
-.game-instructions-overlay-content {
-    position: relative;
-    font-size: 16px;
-    border: 1px black solid;
-    /*width: 200px;*/
-    padding: 5px;
-    top: 25%;
-    width: 75%;
-    padding: 5px;
-    margin: 0 auto;
-    background: rgba(160, 237, 105, 1);
-}
-
-.game-type-header {
-    text-align: center;
-}
-
 .game-type-paragraph {
     margin-left: 20px;
 }
 
-.game-instructions-text,
-.my-profile-text {
-    font-size: 16px;
-    border: 1px black solid;
-    width: 100%;
-    padding: 5px;
-    background: rgba(160, 237, 105, 1);
-}
-
-.game-instructions-text-table {
-    background: rgba(160, 237, 105, 1);
-    width: 100%;
-    table-layout: fixed;
-}
-
-.game-instructions-text-table-button {
-    text-align: center;
-    border: 0px;
-}
-
-.game-instructions-text-table td {
-    background: rgba(160, 237, 105, 1);
-    border: 1px black solid;
-    padding: 2px;
-}
-
-.game-instructions-text-table th {
-    background: rgba(160, 237, 105, 1);
-    border: 1px black solid;
-    text-align: left;
-    padding: 2px;
-}
-
-.game-instructions-start-btn {
-    margin-top: 20px;
-    width: 70%;
-    font-size: 24px !important;
-}
-
-.game-type-select-btn {
-    margin-bottom: 5px;
-    margin-top: 5px;
-    width: 90%;
-    font-size: 24px !important;
-    padding: 8px !important;
-}
-
-.game-instructions-attribute-table-container {
-    width: 100%;
-}
-
-.game-instructions-attribute-table {
-    background: rgba(160, 237, 105, 1);
-    width: 50%;
-    table-layout: fixed;
-    float: left;
-}
-
-.game-instructions-attribute-table-word td {
-    height: 65px;
-    vertical-align: top;
-}
-
-.game-instructions-food-table {
-    /*background: rgba(160, 237, 105, 1);*/
-    background-color: #6fd027;
-    width: 100%;
-    table-layout: fixed;
-    height: 80px;
-}
-
-.game-instructions-food-table td,
-.game-instructions-attribute-table td {
-    width: 64px;
-    border: 1px black solid;
-    padding: 2px;
-}
-
-.game-instructions-food-table th,
-.game-instructions-attribute-table th {
-    border: 1px black solid;
-    text-align: center;
-    font-size: 16px;
-}
-
-.game-container {
-    padding-top: 25px;
-    height: 100%;
-    width: 100%;
-}
-
-.game-content {
-    background-color: #b9f58e;
-    width: 100%;
-    height: 100%;
-}
-
-.game-touch-area {
-    border-top: 2px green solid;
-    width: 25%;
-    background-color: #6fd027;
-    height: 100%;
-    /*display: inline-block;*/
-}
-
-.game-touch-area-left {
-    border-right: 2px green solid;
-    float: left;
-}
-
-.game-touch-area-right {
-    border-left: 2px green solid;
-    float: right;
-}
-
-.game-touch-area-link {
-    text-decoration: none !important;
-    display: block;
-    background-color: #6fd027;
-    width: 100%;
-    height: 100%;
-    color: #000000;
-}
-
-.game-touch-area-link:active {
-    text-decoration: none !important;
-    background-color: #009933;
-    color: #000000;
-}
-
-.game-touch-area-link:visited {
-    color: #000000;
-}
-
-.game-middle-screen {
-    border-top: 2px green solid;
-    float: left;
-    height: 100%;
-    position: relative;
-    /*display: inline-block;*/
-    width: 50%;
-    background-color: #a0ed69;
-}
-
-.game-touch-area-left-attribute {
-    position: absolute;
-    top: 10%;
-    left: 0%;
-    z-index: 100;
-    font-size: 19px;
-    border: 1px black solid;
-    background-color: white;
-    padding: 4px;
-    width: 150px;
-    text-align: center;
-    color: black;
-}
-
-.game-touch-area-right-attribute {
-    position: absolute;
-    top: 10%;
-    right: 0%;
-    z-index: 100;
-    font-size: 19px;
-    border: 1px black solid;
-    background-color: white;
-    /*#009933 */
-    padding: 4px;
-    width: 150px;
-    text-align: center;
-    color: black;
-}
-
-.game-touch-area-attribute-image {
-    width: 75px;
-}
-
-.game-nav-buttons {
-    position: absolute;
-    bottom: 5%;
-    width: 100%;
-    padding: 5px;
-}
-
-.game-nav-btn {
-    width: 47%;
-    padding: 10px 0px 5px 0px !important;
-}
-
-.game-stimulus {
-    border-radius: 4px;
-    background-color: #6fd027;
-    position: absolute;
-    left: 15%;
-    top: 30%;
-}
-
-.game-stimulus-text {
-    font-size: 32px;
-    position: absolute;
-    left: -5%;
-    top: 45%;
-    text-align: center;
-    width: 200px;
-}
-
-.game-error {
-    position: absolute;
-    font-size: 48px;
-    color: red;
-    text-align: center;
-    left: 45%;
-    top: 55%;
-}
-
-.game-stimulus-image {
-    border: 2px green solid;
-    padding: 5px;
-}
-
-.game-points {
-    position: absolute;
-    left: 25%;
-    right: 25%;
-    bottom: 10%;
-}
-
-.results-progressbar-bar {
-    color: orange;
-    line-height: 40px;
-    height: 40px;
-    background-color: green;
-    border: 1px black solid;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
-    border-radius: 25px;
-}
-
-.results-progressbar-container {
-    background-color: #18ab29;
-    border: 1px black solid;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
-    border-radius: 25px;
-}
-
-.my-profile-table {
-    width: 100%;
-    border: 0px;
-}
-
-.my-profile-table td {
-    padding: 6px;
-    font-size: 16px;
-}
-
-.my-profile-text {
-    position: relative;
-}
-
-.my-profile-btn {
-    width: 100%;
-    font-size: bold 16px !important;
-    text-decoration: none;
-    background-color: #89e34a !important;
-    width: calc(100% - 26px);
-    text-align: center;
-    padding: 12px 12px 12px 12px;
-    border: 1px black solid;
-    display: block;
-}
-
-.my-profile-icons {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-}
-
-.my-profile-export-notification,
-.my-profile-delete-notification {
-    position: absolute;
-    top: 23%;
-    z-index: 10000;
-    border: 1px black solid;
-    background: #89e34a;
-    border-radius: 12px;
-    -webkit-border-radius: 12px;
-}
-
-.my-profile-delete-notification {
-    left: 16%;
-    height: 160px;
-    width: 260px;
-    padding: 5px;
-}
-
-.my-profile-export-notification {
-    left: 26%;
-    height: 75px;
-    width: 190px;
-}
-
-.my-profile-export-notification-message {
-    margin-left: 5px;
-    margin-top: 5px;
-}
-
-.my-profile-chart-tabs {
-    border-top: 1px black solid;
-    border-bottom: 1px black solid;
-}
-
-.my-profile-chart-tabs-link-container {
-    float: left;
-    margin-left: 2px;
-}
-
-.my-profile-chart-tabs-link {
-    width: 100%;
-    text-decoration: none;
-    background-color: #89e34a !important;
-    text-align: center;
-    padding: 3px;
-    display: block;
-    color: black;
-    font-size: 16px;
-    border-radius: 0px 0px 14px 5px;
-    -webkit-border-radius: 0px 0px 14px 5px;
-    border-left: 1px black solid;
-    border-right: 1px black solid;
-    border-bottom: 1px black solid;
-}
-
-.my-profile-unlocked-food-image {
-    margin: 8px;
-    display: inline-block;
-}
-
-.my-profile-unlocked-food-information {
-    position: absolute;
-    top: 35%;
-    left: 10%;
-    z-index: 10000;
-    width: 290px;
-    border: 1px black solid;
-    background: #89e34a;
-    padding: 10px;
-}
-
-.my-profile-unlocked-food-close {
-    position: absolute;
-    right: 2%;
-    top: 2%;
-}
-
-.capitalize-first::first-letter {
-    text-transform: uppercase;
-}
-
-.navigation-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.navigation-bottom-left,
-.navigation-bottom-center {
-    float: left;
-    width: 33%;
-}
-
-.navigation-bottom-right {
-    float: right;
-    width: 34%;
-}
-
-.navigation-bottom-btn {
-    width: 100%;
-    text-decoration: none;
-    background-color: #89e34a !important;
-    text-align: center;
-    padding: 12px 12px 12px 12px;
-    border: 1px black solid;
-    display: block;
-    color: black;
-    font-size: 18px;
-}
-
-.navigation-bottom-btn-center {
-    border-left: 0px !important;
-    border-right: 0px !important;
-}
-
-.active {
-    background-color: #5cbf2a !important;
-}
-
-.navigation-bottom-btn:link,
-.my-profile-chart-tabs-link:link {
-    text-decoration: none;
-    color: black;
-}
-
-.navigation-bottom-btn:visited,
-.my-profile-chart-tabs-link:visited {
-    text-decoration: none;
-    color: black;
-}
-
-.navigation-bottom-btn:hover,
-.my-profile-chart-tabs-link:hover {
-    text-decoration: none;
-    color: black;
-}
-
-.navigation-bottom-btn:active {
-    text-decoration: none;
-    background-color: #5cbf2a !important;
-    color: black;
-}
-
 .content-full {
-    /*width: 100%;*/
-    /*background-color: #a0ed69;*/
     background: rgba(160, 237, 105, 0.85);
     border-bottom: 3px solid #18ab29;
     border-top: 3px solid #18ab29;
-    /* remove */
-    height: 85%;
+    height: 90%;
 }
 
 .content-full-width {
@@ -632,44 +78,46 @@ body {
     padding-right: 0px !important;
 }
 
-.content-full-results {
-    background: rgba(160, 237, 105, 0.85);
-    border-bottom: 3px solid #18ab29;
-    border-top: 3px solid #18ab29;
+@media only screen and (min-width: 320px) and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 1) {
+    body {
+        font-size: 9px !important;
+    }
 }
 
-.content-full-height {
-    background: rgba(160, 237, 105, 0.85);
-    border-bottom: 3px solid #18ab29;
-    border-top: 3px solid #18ab29;
+@media only screen and (min-width: 320px) and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 1.5) {
+    body {
+        font-size: 10px !important;
+    }
 }
 
-.content-game {
-    /*width: 100%;*/
-    height: 90%;
-    background-color: #a0ed69;
-    border-bottom: 1px solid #18ab29;
-    border-top: 1px solid #18ab29;
+@media only screen and (min-width: 320px) and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        font-size: 11px !important;
+    }
 }
 
-.content-margins {
-    margin-left: 5%;
-    background-color: #a0ed69;
+@media only screen and (min-width: 320px) and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 2.5) {
+    body {
+        font-size: 12px !important;
+    }
 }
 
-
-/*
-.container-fluid {
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+@media only screen and (min-width: 320px) and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 3) {
+    body {
+        font-size: 12px !important;
+    }
 }
-*/
+
+@media only screen and (min-width: 320px) and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 4) {
+    body {
+        font-size: 13px !important;
+    }
+}
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
     body {
         background: url(../img/background480.jpg);
+        /*font-size: 9px !important;*/
     }
     .header-narrow {
         width: 300px;
@@ -679,8 +127,7 @@ body {
         width: 320px;
     }
     .main-menu {
-        width: 300px;
-        /*width: 80%;*/
+        width: 300px;        
     }
     .image-instructions-food {
         width: 50px;
@@ -691,11 +138,27 @@ body {
     .image-results-unlock-food {
         width: 130px;
     }
+
+    .my-profile-text {
+        font-size: 1.15em;
+    }
+    
+    .my-profile-table td {
+        font-size: 1.1em;
+    }
+    
+    .game-error {
+        top: 70%;
+    }
+
+
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     body {
         background: url(../img/background768.jpg);
+        font-size: 11px;
+
     }
     .header-narrow {
         width: 60%;
@@ -720,6 +183,7 @@ body {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     body {
         background: url(../img/background992.jpg);
+        font-size: 14px;
     }
     .header-narrow {
         width: 40%;
@@ -744,6 +208,7 @@ body {
 @media only screen and (min-width: 992px) and (max-width: 1999px) {
     body {
         background: url(../img/background.jpg) no-repeat center center fixed;
+        font-size: 16px !important;
     }
     .header-narrow {
         width: 40%;

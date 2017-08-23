@@ -8,6 +8,9 @@
      $scope.route = $route;
      var vm = this;
 
+     attributeGame.initializeNegativeWords();
+     attributeGame.initializePositiveWords();
+     
      vm.positiveWords = attributeGame.getPositiveWords();
      vm.negativeWords = attributeGame.getNegativeWords();
 

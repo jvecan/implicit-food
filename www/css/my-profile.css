@@ -1,0 +1,116 @@
+.my-profile-table {
+    width: 100%;
+    border: 0px;
+}
+
+.my-profile-table td {
+    padding: 6px;
+    font-size: 1.33em;
+}
+
+.my-profile-text {
+    position: relative;
+}
+
+.my-profile-btn {
+    width: 100%;
+    font-size: 1.33em !important;
+    text-decoration: none;
+    background-color: #89e34a !important;
+    width: calc(100% - 26px);
+    text-align: center;
+    padding: 12px 12px 12px 12px;
+    border: 1px black solid;
+    display: block;
+}
+
+.my-profile-icons {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+}
+
+.my-profile-export-notification,
+.my-profile-delete-notification {
+    position: absolute;
+    top: 23%;
+    z-index: 10000;
+    border: 1px black solid;
+    background: #89e34a;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+.my-profile-delete-notification {
+    left: 16%;
+    height: 160px;
+    width: 260px;
+    padding: 5px;
+}
+
+.my-profile-export-notification {
+    left: 26%;
+    height: 75px;
+    width: 190px;
+}
+
+.my-profile-export-notification-message {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.my-profile-chart-tabs {
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+}
+
+.my-profile-chart-tabs-link-container {
+    float: left;
+    margin-left: 2px;
+}
+
+.my-profile-chart-tabs-link {
+    width: 100%;
+    text-decoration: none;
+    background-color: #89e34a !important;
+    text-align: center;
+    padding: 3px;
+    display: block;
+    color: black;
+    font-size: 1.2em;
+    border-radius: 0px 0px 14px 5px;
+    -webkit-border-radius: 0px 0px 14px 5px;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    border-bottom: 1px black solid;
+}
+
+.my-profile-unlocked-food-image {
+    margin: 8px;
+    display: inline-block;
+}
+
+.my-profile-unlocked-food-information {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    z-index: 10000;
+    width: 80%;
+    border: 1px black solid;
+    background: #89e34a;
+    padding: 10px;
+}
+
+.my-profile-unlocked-food-close {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+}
+
+.my-profile-text {
+    font-size: 1.33em;
+    border: 1px black solid;
+    width: 100%;
+    padding: 5px;
+    background: rgba(160, 237, 105, 1);
+}
