@@ -49,9 +49,10 @@
 }
 
 .my-profile-export-notification {
-    left: 26%;
-    height: 75px;
-    width: 190px;
+    left: 10%;
+    height: 160px;
+    width: 360px;
+    padding: 5px;
 }
 
 .my-profile-export-notification-message {

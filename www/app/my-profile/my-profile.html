@@ -5,7 +5,15 @@
 </div>
 <div class="container-fluid content-full content-full-width">
     <div class='my-profile-export-notification center-content' ng-show="exportNotification">
-        <div class='my-profile-export-notification-message'><br />{{exportMessage}}</div>
+        <div class='my-profile-export-notification-message'>
+            <br />Do you want to send your game history for research purposes?                       
+            <br />             
+             <a href="" ng-click='myProfileController.confirmExportData()' class="btn-base">Yes, send data</a>&nbsp;<a href="" ng-click='myProfileController.closeExportNotification()' class="btn-base">No, don't send</a>             
+             {{exportMessage}}
+            <br />
+            
+            
+        </div>
         <img ng-show="exportNotificationLoaderGif" src="img/ajax-loader.gif" />
     </div>
     <div class='my-profile-delete-notification center-content' ng-show="deleteNotification">
@@ -48,6 +56,14 @@
                     {{myProfileController.playerInfo.level}} / 35
                 </td>
             </tr>
+             <tr>
+                <td>
+                    My id:
+                </td>
+                <td>
+                    {{myProfileController.playerInfo.unique_id}}
+                </td>
+            </tr>
         </table>
 
         <div class='my-profile-chart-tabs'>
@@ -66,7 +82,7 @@
                     <canvas id="reactionTimeLine" class="chart chart-line" chart-data="reactionTimeData" chart-labels="labels" chart-series="series" chart-options="optionsReactionTime" chart-click="onClick"></canvas>
                 </div>
                 <div ng-switch-when="correctResponses">
-                    <canvas id="correctResponsesLine" class="chart chart-line" chart-data="correctResponsesData" chart-labels="labels" chart-series="series" chart-options="optionsCorrectResponses" chart-click="onClick"></canvas>
+                    <canvas id="correctResponsesLine" class="chart chart-bar" chart-data="correctResponsesData" chart-labels="labels" chart-series="series" chart-options="optionsCorrectResponses" chart-click="onClick"></canvas>
                 </div>
             </div>
         </div>

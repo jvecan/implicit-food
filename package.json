@@ -1,0 +1,19 @@
+{
+    "name": "com.implicitfood.app",
+    "version": "1.0.0",
+    "displayName": "ImplicitFood",
+    "cordova": {
+        "platforms": [
+            "android"
+        ],
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-sqlite-ext": {}
+        }
+    },
+    "dependencies": {
+        "cordova-android": "^6.2.3",
+        "cordova-plugin-whitelist": "1",
+        "cordova-sqlite-ext": "~0.10.4"
+    }
+}

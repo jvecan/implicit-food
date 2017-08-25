@@ -15,9 +15,6 @@
         },
         "cordova-sqlite-ext": {
             "PACKAGE_NAME": "com.implicitfood.app"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.implicitfood.app"
         }
     },
     "dependent_plugins": {}

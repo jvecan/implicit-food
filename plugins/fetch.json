@@ -16,15 +16,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-sqlite-storage": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/litehelpers/Cordova-sqlite-storage.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-sqlite-ext": {
         "source": {
             "type": "registry",
@@ -47,14 +38,6 @@
             "id": "cordova-plugin-compat"
         },
         "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-device": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-device"
-        },
-        "is_top_level": true,
         "variables": {}
     }
 }

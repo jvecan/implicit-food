@@ -8,7 +8,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
 
     var vm = this;
     $scope.roundData = [];
-
+    
     $scope.route = $route;
 
     $scope.pointsData = [];
@@ -32,6 +32,8 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
     player.getPlayerProfile().then(function (data) {
         vm.playerInfo = data[0];
     });
+    
+    
 
     player.getPlayedGamesFromDb().then(function (data) {
         vm.playedGames = data;
@@ -43,6 +45,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
             $scope.labels.push(vm.playedGames[i].id);
         }
 
+        
 
         $scope.optionsPoints = {
             scales: {
@@ -54,7 +57,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                 yAxes: [{
                         display: true,
                         ticks: {
-                            beginAtZero: true                          
+                            beginAtZero: true
                         }
                     }]
             },
@@ -64,6 +67,8 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                 }
             }
         };
+
+
 
         $scope.optionsReactionTime = {
             scales: {
@@ -75,7 +80,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                 yAxes: [{
                         display: true,
                         ticks: {
-                            beginAtZero: true                           
+                            beginAtZero: true
                         }
                     }]
 
@@ -110,21 +115,11 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                 }
             }
         };
-        /*
-         player.getPlayedGameRoundsFromDb(vm.playedGames).then(function(roundData) {
-         $scope.roundData = roundData;
-         });
-         */
-        /*
-         for(var i = 0; i < vm.playedGames.length; i++) {
-         playedGame.total_points
-         }
-         */
     });
 
     $scope.series = ['Series A'];
 
-    vm.exportData = function () {
+    vm.confirmExportData = function () {
         $scope.exportNotification = true;
 
         player.getPlayedGameRoundsFromDb([]).then(function (roundData) {
@@ -152,6 +147,10 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
             });
         });
     };
+    
+    vm.exportData = function () {
+        $scope.exportNotification = true;
+    };
 
     vm.resetProfile = function () {
         $scope.deleteNotification = true;
@@ -159,7 +158,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
 
     vm.confirmProfileReset = function () {
         player.resetPlayerProfile().then(function () {
-            $location.path('/my-profile');
+            $location.path('/');
         });
 
     };
@@ -167,11 +166,14 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
     vm.closeDeleteNotification = function () {
         $scope.deleteNotification = false;
     };
+    
+    vm.closeExportNotification = function () {
+        $scope.exportNotification = false;
+    };
+    
+    
 
     vm.switchTab = function (tabName) {
         $scope.activeChartTab = tabName;
     };
-
-    //$scope.data = [65, 59, 80, 81, 56, 55, 40];
-
 }
