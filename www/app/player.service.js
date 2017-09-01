@@ -21,8 +21,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
     };
 
     function generateUID() {
-        // I generate the UID from two parts here 
-        // to ensure the random number provide enough bits.
+        // Source: https://stackoverflow.com/a/6248722
         var firstPart = (Math.random() * 46656) | 0;
         var secondPart = (Math.random() * 46656) | 0;
         firstPart = ("000" + firstPart.toString(36)).slice(-3);
@@ -34,11 +33,10 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
 
     var setUniqueId = function () {
         var q = $q.defer();
-        getPlayerInfoFromDb().then(function () {
+        this.getPlayerInfoFromDb().then(function () {
             var unique_id = playerInfo.unique_id;
             if (unique_id === "0") {
                 var new_unique_id = generateUID();
-
                 var query = 'UPDATE player SET unique_id = "' + new_unique_id + '" WHERE id = ' + playerId;
                 dbFactory.execute(query, [], []).then(function () {
                     q.resolve();
@@ -69,31 +67,21 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         var csvData = [];
         var csvHeaders = ["game_id", "left_item_name", "left_item_category_id", "right_item_name", "right_item_category_id", "displayed_item_name", "displayed_item_category_id", "user_response_category_id", "reaction_time", "points"];
 
-        getPlayerInfoFromDb().then(function () {
-
+        this.getPlayerInfoFromDb().then(function () {
             csvData.push([playerInfo.unique_id]);
             csvData.push(csvHeaders);
-
             for (var i = 0; i < data.length; i++) {
-                // var roundObj = {};
                 var roundObj = [data[i].game_id, data[i].left_item_name, data[i].left_item_category_id, data[i].right_item_name, data[i].right_item_category_id,
                     data[i].displayed_item_name, data[i].displayed_item_category_id, data[i].user_response_category_id, data[i].reaction_time, data[i].points
                 ];
-
-                /*roundObj.round_id = i;
-                 roundObj.left_item_name = data[i].left_item_name;
-                 roundObj.reaction_time = data[i].reaction_time;*/
                 csvData.push(roundObj);
             }
 
-
             var url = 'http://iikkamanninen.com/mailgun/index.php';
-            //var parameter = JSON.stringify({ data });
             var req = {
                 method: 'POST',
                 url: url,
                 data: JSON.stringify(csvData)
-                        //data: { test: JSON.stringify(data) }
             };
 
             $http(req).then(function () {
@@ -103,16 +91,6 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
                 q.reject("Failed to export data");
                 console.log("epäonnistui");
             });
-
-            /*
-             $cordovaFile.writeFile(cordova.file.externalRootDirectory, "data.csv", csvData, true)
-             .then(function(success) {
-             q.resolve("Data exported successfully");
-             //console.log("Csv file success");
-             }, function(error) {
-             q.reject("Failed to export data");
-             });
-             */
 
         });
 
@@ -140,10 +118,10 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         return data;
     };
 
-    var getPlayedGamesFromDb = function () {
-        playedGames = [];
+    var getPlayedGamesFromDb = function (limit) {
+        playedGames = [];        
         var query = 'SELECT id, timestamp, game_type, total_points, correct_responses, incorrect_responses, ' +
-                'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC LIMIT 30';
+                'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC LIMIT ' + limit;
         var data = dbFactory.dbQuery(query, []);
         data.then(function (dataResponse) {
             playedGames = dataResponse;
@@ -152,20 +130,17 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
     };
 
     var getPlayedGameRoundsFromDb = function (played_games) {
-
         var query = 'SELECT left_item_name, left_item_category_id, ' +
                 'right_item_name, right_item_category_id, displayed_item_name, displayed_item_category_id, ' +
                 'user_response_category_id, reaction_time, points, game_id FROM game_round';
         if (played_games.length > 0) {
             query += ' WHERE game_id IN (';
-
             for (var i = 0; i < played_games.length; i++) {
                 query += played_games[i].id;
 
-                if (i != played_games.length - 1) {
+                if (i !== played_games.length - 1) {
                     query += ', ';
                 } else {
-
                 }
             }
             query += ") ORDER BY game_id ASC";
@@ -180,15 +155,6 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         });
         return data;
 
-        /*
-         var query = 'SELECT id, reaction_time FROM game_round_' + game_type + ' WHERE game_id = ' + game_id;
-         var q = $q.defer();
-         
-         dbFactory.execute(query, [], gameRoundArray).then(function() {
-         q.resolve(gameRoundArray);
-         });
-         return q.promise;
-         */
     };
 
     var getUnlockedFoods = function (playerData) {
@@ -207,7 +173,6 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         var query = 'SELECT total_points, level, display_name, unique_id FROM player WHERE id = ' + playerId;
         var q = $q.defer();
         var playerInfoArray = [];
-
         dbFactory.execute(query, [], playerInfoArray).then(function () {
             playerInfo = playerInfoArray[0];
             q.resolve();
@@ -221,10 +186,9 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
 
         var nextLevelNumber = playerInfo.level + 1;
         var levelInformationArray = [];
-
         newLevelUnlocked = false;
 
-        getLevelInformation(nextLevelNumber, levelInformationArray).then(function () {
+        this.getLevelInformation(nextLevelNumber, levelInformationArray).then(function () {
             if (playerInfo.total_points > levelInformationArray[0].required_points) {
                 newLevel = levelInformationArray[0].level_number;
                 var query = 'UPDATE player SET level = ' + newLevel + ' WHERE id = ' + playerId;

@@ -35,7 +35,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
     
     
 
-    player.getPlayedGamesFromDb().then(function (data) {
+    player.getPlayedGamesFromDb(30).then(function (data) {
         vm.playedGames = data;
 
         for (var i = 0; i < vm.playedGames.length; i++) {

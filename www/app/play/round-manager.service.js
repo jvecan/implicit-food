@@ -45,6 +45,9 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
 
     var updateGameContainer = function(game_id, total_points, round_statistics) {
         var promiseArray = [];
+        if(isNaN(round_statistics["averageReactionTimeCorrectResponses"])) {
+            round_statistics["averageReactionTimeCorrectResponses"] = 0;
+        }
         var query = 'UPDATE game SET ' +
             'total_points = ' + total_points +
             ', correct_responses = ' + round_statistics["correctResponses"] +
@@ -55,7 +58,7 @@ angular.module('play').factory("roundManager", function($q, $timeout, dbFactory,
         dbFactory.execute(query, [], promiseArray);
         return promiseArray;
 
-    }
+    };
 
     var createGameContainerForRounds = function(game_type) {
         var q = $q.defer();
