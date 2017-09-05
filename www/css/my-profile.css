@@ -93,7 +93,7 @@
 
 .my-profile-unlocked-food-information {
     position: absolute;
-    top: 35%;
+    top: 20%;
     left: 5%;
     z-index: 10000;
     width: 80%;
@@ -101,6 +101,27 @@
     background: #89e34a;
     padding: 10px;
 }
+
+.my-profile-unlocked-food-statistics-table {
+    background-color: #6fd027;
+    width: 100%;
+    table-layout: fixed;    
+}
+
+.my-profile-unlocked-food-statistics-table td {    
+    border: 1px black solid;
+    padding: 2px;
+    font-size: 1em;
+}
+
+.my-profile-unlocked-food-statistics-table th {
+    border: 1px black solid;
+    text-align: center;
+    font-size: 1em;
+}
+
+
+
 
 .my-profile-unlocked-food-close {
     position: absolute;

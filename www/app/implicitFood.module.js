@@ -101,6 +101,10 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             activetab: 'about',
             templateUrl: 'app/about/about-this-app.html'
         })
+        .when("/about-licenses", {
+            activetab: 'about',
+            templateUrl: 'app/about/about-licenses.html'
+        })
         .otherwise({
             templateUrl: "app/main-menu/main-menu.html"
         });

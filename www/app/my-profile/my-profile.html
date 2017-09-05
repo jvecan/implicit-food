@@ -6,7 +6,7 @@
 <div class="container-fluid content-full content-full-width">
     <div class='my-profile-export-notification center-content' ng-show="exportNotification">
         <div class='my-profile-export-notification-message'>
-            <br />Do you want to send your game history for research purposes?                       
+            <br />Do you want to send your game history for research purposes? Only your random generated id will be used for identification.                      
             <br />             
              <a href="" ng-click='myProfileController.confirmExportData()' class="btn-base">Yes, send data</a>&nbsp;<a href="" ng-click='myProfileController.closeExportNotification()' class="btn-base">No, don't send</a>             
              {{exportMessage}}
@@ -88,7 +88,7 @@
         </div>
         <br />
         <div class='center-content'>
-            <a href="#/my-profile-unlocked-foods" class="btn-base">Unlocked Foods</a>
+            <a href="#/my-profile-unlocked-foods" class="btn-base">Unlocked Foods and Statistics</a>
         </div>
         <br />
     </div>

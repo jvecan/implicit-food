@@ -54,7 +54,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
                 'right_item_name, right_item_category_id, displayed_item_name, displayed_item_category_id ' +
                 'user_response_category_id, reaction_time, points, game_id FROM game_round';
 
-        var csvData = 'game_id;left_item_name;left_item_category_id;right_item_name;right_item_category_id;displayed_item_name;displayed_item_category_id;user_response_category_id;reaction_time;points\n';
+        var csvData = 'game_id;left_item_name;left_item_category_id;right_item_name;right_item_category_id;displayed_item_name;displayed_item_category_id;user_response_category_id;reaction_time;points;game_type;timestamp\n';
 
         var q = $q.defer();
 
@@ -65,14 +65,15 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         }, 0);
 
         var csvData = [];
-        var csvHeaders = ["game_id", "left_item_name", "left_item_category_id", "right_item_name", "right_item_category_id", "displayed_item_name", "displayed_item_category_id", "user_response_category_id", "reaction_time", "points"];
+        var csvHeaders = ["game_id", "left_item_name", "left_item_category_id", "right_item_name", "right_item_category_id", "displayed_item_name", "displayed_item_category_id", "user_response_category_id", "reaction_time", "points", "game_type", "timestamp"];
 
         this.getPlayerInfoFromDb().then(function () {
             csvData.push([playerInfo.unique_id]);
             csvData.push(csvHeaders);
             for (var i = 0; i < data.length; i++) {
                 var roundObj = [data[i].game_id, data[i].left_item_name, data[i].left_item_category_id, data[i].right_item_name, data[i].right_item_category_id,
-                    data[i].displayed_item_name, data[i].displayed_item_category_id, data[i].user_response_category_id, data[i].reaction_time, data[i].points
+                    data[i].displayed_item_name, data[i].displayed_item_category_id, data[i].user_response_category_id, data[i].reaction_time, data[i].points,
+                    data[i].game_type, data[i].timestamp
                 ];
                 csvData.push(roundObj);
             }
@@ -119,7 +120,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
     };
 
     var getPlayedGamesFromDb = function (limit) {
-        playedGames = [];        
+        playedGames = [];
         var query = 'SELECT id, timestamp, game_type, total_points, correct_responses, incorrect_responses, ' +
                 'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC LIMIT ' + limit;
         var data = dbFactory.dbQuery(query, []);
@@ -132,7 +133,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
     var getPlayedGameRoundsFromDb = function (played_games) {
         var query = 'SELECT left_item_name, left_item_category_id, ' +
                 'right_item_name, right_item_category_id, displayed_item_name, displayed_item_category_id, ' +
-                'user_response_category_id, reaction_time, points, game_id FROM game_round';
+                'user_response_category_id, reaction_time, points, game_id, game_type, timestamp FROM game_round JOIN game ON game_round.game_id = game.id ';
         if (played_games.length > 0) {
             query += ' WHERE game_id IN (';
             for (var i = 0; i < played_games.length; i++) {
@@ -159,11 +160,46 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
 
     var getUnlockedFoods = function (playerData) {
         unlockedFoods = [];
-        var query = 'SELECT name, unlock_text, level, level.description as description FROM food JOIN food_attribute_category ' +
+        var query = 'SELECT food.id, name, unlock_text, level, level.description as description FROM food JOIN food_attribute_category ' +
                 'ON food.id = food_attribute_category.food_id JOIN level ON food.level = level.number WHERE level BETWEEN 1 AND ' + playerData.level + ' AND food_attribute_category.attribute_category_id = 1 ORDER BY level ASC';
         var data = dbFactory.dbQuery(query, []);
         data.then(function (dataResponse) {
             unlockedFoods = dataResponse;
+        });
+        return data;
+    };
+
+    var getUnlockedFoodStatisticsFood = function (name) {
+        unlockedFood = [];
+        var query = 'SELECT displayed_item_name as name, ' + 
+                'SUM(CASE WHEN user_response_category_id = displayed_item_category_id THEN 1 ELSE 0 END) as correct_responses, ' + 
+                'count(displayed_item_name) as total_responses, round(avg(reaction_time), 0) as reaction_time, round(sum(points), 0) as total_points ' +
+                'FROM game_round ' +
+                'JOIN game ON game.id = game_round.game_id ' +
+                'WHERE game.game_type = "food" ' +
+                'AND displayed_item_name = "' + name + '"' +
+                ' GROUP BY displayed_item_name';
+        var data = dbFactory.dbQuery(query, []);
+        data.then(function (dataResponse) {
+            unlockedFood = dataResponse;
+        });
+        return data;
+    };
+    
+    var getUnlockedFoodStatisticsWord = function (name) {
+        unlockedFood = [];
+        var query = 'SELECT displayed_item_name, ' + 
+                'SUM(CASE WHEN user_response_category_id = displayed_item_category_id THEN 1 ELSE 0 END) as correct_responses, ' + 
+                'count(displayed_item_name) as total_responses, round(avg(reaction_time), 0) as reaction_time, round(sum(points), 0) as total_points ' +
+                'FROM game_round ' +
+                'JOIN game ON game.id = game_round.game_id ' +
+                'WHERE game.game_type = "word" ' +
+                'AND (right_item_name = "' + name + '"' +
+                'OR left_item_name = "' + name + '")' +
+                ' GROUP BY (CASE WHEN right_item_name = "' + name + '" THEN right_item_name WHEN left_item_name = "' + name + '" THEN left_item_name ELSE 0 END)';
+        var data = dbFactory.dbQuery(query, []);
+        data.then(function (dataResponse) {
+            unlockedFood = dataResponse;
         });
         return data;
     };
@@ -254,6 +290,8 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         getPlayedGamesFromDb: getPlayedGamesFromDb,
         getPlayedGames: getPlayedGames,
         getUnlockedFoods: getUnlockedFoods,
+        getUnlockedFoodStatisticsFood: getUnlockedFoodStatisticsFood,
+        getUnlockedFoodStatisticsWord: getUnlockedFoodStatisticsWord,
         exportPlayerGamesToCSV: exportPlayerGamesToCSV,
         getPlayedGameRoundsFromDb: getPlayedGameRoundsFromDb,
         getLevelInformation: getLevelInformation,
