@@ -122,7 +122,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
     var getPlayedGamesFromDb = function (limit) {
         playedGames = [];
         var query = 'SELECT id, timestamp, game_type, total_points, correct_responses, incorrect_responses, ' +
-                'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp ASC LIMIT ' + limit;
+                'average_reaction_time, average_reaction_time_correct_responses FROM game ORDER BY timestamp DESC LIMIT ' + limit;
         var data = dbFactory.dbQuery(query, []);
         data.then(function (dataResponse) {
             playedGames = dataResponse;
@@ -202,6 +202,26 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
             unlockedFood = dataResponse;
         });
         return data;
+    };
+    
+    var getOtherFoodStatisticsFood = function (playerData) {
+        unlockedFood = [];
+        var query = 'SELECT displayed_item_name as name, ' + 
+                'round((SUM(CASE WHEN user_response_category_id = displayed_item_category_id THEN 1.0 ELSE 0 END) / count(displayed_item_name)) * 100) as correct_responses, ' + 
+                'count(displayed_item_name) as total_responses, round(avg(reaction_time), 0) as reaction_time, round(sum(points), 0) as total_points ' +
+                'FROM game_round ' +
+                'JOIN game ON game.id = game_round.game_id ' +                
+                'JOIN food ON food.name = game_round.displayed_item_name ' +
+                'WHERE game.game_type = "food" ' +
+                'AND food.level <= ' + playerData.level + ' ' + 
+                'AND food.unlock_text IS NULL ' +
+                ' GROUP BY displayed_item_name ORDER BY correct_responses DESC';
+        var data = dbFactory.dbQuery(query, []);
+        data.then(function (dataResponse) {
+            unlockedFood = dataResponse;
+        });
+        return data;
+        
     };
 
 
@@ -292,6 +312,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
         getUnlockedFoods: getUnlockedFoods,
         getUnlockedFoodStatisticsFood: getUnlockedFoodStatisticsFood,
         getUnlockedFoodStatisticsWord: getUnlockedFoodStatisticsWord,
+        getOtherFoodStatisticsFood: getOtherFoodStatisticsFood,
         exportPlayerGamesToCSV: exportPlayerGamesToCSV,
         getPlayedGameRoundsFromDb: getPlayedGameRoundsFromDb,
         getLevelInformation: getLevelInformation,

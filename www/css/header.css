@@ -5,9 +5,11 @@
     border-radius: 25px;
     border: 1px solid #18ab29;
     height: 100%;
+    width: 100%;
     font-size: 1em;
 }
 
 .header-wide {
+    width: 100%;
     height: 10%;
 }

@@ -108,7 +108,8 @@
     table-layout: fixed;    
 }
 
-.my-profile-unlocked-food-statistics-table td {    
+.my-profile-unlocked-food-statistics-table td {
+    text-align: center;    
     border: 1px black solid;
     padding: 2px;
     font-size: 1em;

@@ -8,7 +8,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
 
     var vm = this;
     $scope.roundData = [];
-    
+
     $scope.route = $route;
 
     $scope.pointsData = [];
@@ -32,25 +32,33 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
     player.getPlayerProfile().then(function (data) {
         vm.playerInfo = data[0];
     });
-    
-    
 
-    player.getPlayedGamesFromDb(30).then(function (data) {
+
+
+    player.getPlayedGamesFromDb(300).then(function (data) {
         vm.playedGames = data;
+        vm.playedGames.reverse();
 
         for (var i = 0; i < vm.playedGames.length; i++) {
             $scope.pointsData.push(vm.playedGames[i].total_points);
-            $scope.reactionTimeData.push(vm.playedGames[i].average_reaction_time_correct_responses);
+            if (vm.playedGames[i].average_reaction_time_correct_responses > 1750) {
+                $scope.reactionTimeData.push(1750);
+            } else {
+                $scope.reactionTimeData.push(vm.playedGames[i].average_reaction_time_correct_responses);
+            }
             $scope.correctResponsesData.push(vm.playedGames[i].correct_responses);
             $scope.labels.push(vm.playedGames[i].id);
         }
 
-        
+
 
         $scope.optionsPoints = {
             scales: {
                 xAxes: [{
                         ticks: {
+                            display: false
+                        },
+                        gridLines: {
                             display: false
                         }
                     }],
@@ -58,6 +66,9 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                         display: true,
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }]
             },
@@ -75,12 +86,18 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                 xAxes: [{
                         ticks: {
                             display: false
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }],
                 yAxes: [{
                         display: true,
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }]
 
@@ -97,6 +114,9 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                 xAxes: [{
                         ticks: {
                             display: false
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }],
                 yAxes: [{
@@ -106,6 +126,9 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
                             steps: 10,
                             stepValue: 1,
                             max: 10
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }]
             },
@@ -147,7 +170,7 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
             });
         });
     };
-    
+
     vm.exportData = function () {
         $scope.exportNotification = true;
     };
@@ -166,12 +189,12 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
     vm.closeDeleteNotification = function () {
         $scope.deleteNotification = false;
     };
-    
+
     vm.closeExportNotification = function () {
         $scope.exportNotification = false;
     };
-    
-    
+
+
 
     vm.switchTab = function (tabName) {
         $scope.activeChartTab = tabName;

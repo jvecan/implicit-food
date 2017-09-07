@@ -85,6 +85,12 @@ implicitFood.config(function($locationProvider, $routeProvider) {
             controllerAs: 'myProfileUnlockedController',
             templateUrl: 'app/my-profile/my-profile-unlocked-foods.html'
         })
+        .when("/my-profile-other-statistics", {
+            activetab: 'profile',
+            controller: 'myProfileOtherStatisticsCtrl',
+            controllerAs: 'myProfileOtherStatisticsController',
+            templateUrl: 'app/my-profile/my-profile-other-statistics.html'
+        })
         .when("/about", {
             activetab: 'about',
             templateUrl: 'app/about/about.html'

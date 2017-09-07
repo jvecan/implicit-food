@@ -67,7 +67,7 @@ body {
 }
 
 .content-full {
-    background: rgba(160, 237, 105, 0.85);
+    /*background: rgba(160, 237, 105, 0.85);*/
     border-bottom: 3px solid #18ab29;
     border-top: 3px solid #18ab29;
     height: 90%;
@@ -120,11 +120,13 @@ body {
         /*font-size: 9px !important;*/
     }
     .header-narrow {
-        width: 300px;
+        /*width: 300px;*/
         /*width: 80%;*/
+        width: 100%;
     }
     .header-wide {
-        width: 320px;
+        width: 100%;
+        /*width: 320px;*/
     }
     .main-menu {
         width: 300px;        

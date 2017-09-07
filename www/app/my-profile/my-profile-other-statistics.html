@@ -1,0 +1,47 @@
+<div class="container-fluid header-wide">
+    <div class='center-content header'>
+        <h1>Unlocked Foods</h1>
+    </div>
+</div>
+<div class="container-fluid content-full content-full-width">
+    <div class='my-profile-text'>
+        <h3>Food Association statistics (click header to sort): </h3>
+        <table class='my-profile-unlocked-food-statistics-table'>
+            <thead>
+                <tr>
+                    <th>Food</th>                                        
+                    <th>
+                        <span ng-click="orderByField = 'correct_responses'; reverseSort = !reverseSort">
+                            Correct % (out of) <span ng-show="orderByField == 'correct_responses'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </span>
+                    </th>
+                    <th>
+                        <span href="#" ng-click="orderByField = 'total_points'; reverseSort = !reverseSort">
+                            Points <span ng-show="orderByField == 'total_points'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </span>
+                        
+                    </th>
+                    <th>
+                        <span href="#" ng-click="orderByField = 'reaction_time'; reverseSort = !reverseSort">
+                            Average Reaction <span ng-show="orderByField == 'reaction_time'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </span>
+                    </th>
+                </tr>     
+            </thead>
+            <tbody>
+                <tr ng-repeat="otherStatisticsSingle in myProfileOtherStatisticsController.otherStatistics | orderBy:orderByField:reverseSort track by $index">
+                    <td><img ng-src="img/game_images/{{otherStatisticsSingle.name}}.png" class='image-instructions-food' /></td>
+                    <td>{{otherStatisticsSingle.correct_responses}} % ({{otherStatisticsSingle.total_responses}})</td>
+                    <td>{{otherStatisticsSingle.total_points}}</td>
+                    <td>{{otherStatisticsSingle.reaction_time}} ms</td>
+                </tr>      
+            </tbody>
+        </table>
+
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <navigation></navigation>
+</div>
