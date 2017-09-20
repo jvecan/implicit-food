@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.implicitfood.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ImplicitFood</name>
+    <name>Implicity</name>
     <description>
         Persuasive application for healthier eating. 
     </description>
-    <author email="iikka.manninen@student.oulu.fi" href="http://www.iikkamanninen.com">
+    <author email="iikka.m@gmail.com" href="http://www.iikkamanninen.com">
         Iikka Manninen
     </author>
     <content src="index.html" />
@@ -22,6 +22,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <icon src="www/img/icons/ic_launcher.png" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-sqlite-ext" spec="~0.10.4" />
