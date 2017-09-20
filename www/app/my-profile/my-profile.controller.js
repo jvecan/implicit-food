@@ -37,17 +37,20 @@ function myProfileCtrl($scope, $timeout, $interval, $route, $location, dbFactory
 
     player.getPlayedGamesFromDb(300).then(function (data) {
         vm.playedGames = data;
-        vm.playedGames.reverse();
 
-        for (var i = 0; i < vm.playedGames.length; i++) {
-            $scope.pointsData.push(vm.playedGames[i].total_points);
-            if (vm.playedGames[i].average_reaction_time_correct_responses > 1750) {
-                $scope.reactionTimeData.push(1750);
-            } else {
-                $scope.reactionTimeData.push(vm.playedGames[i].average_reaction_time_correct_responses);
+        if (vm.playedGames.length > 0) {
+            vm.playedGames.reverse();
+
+            for (var i = 0; i < vm.playedGames.length; i++) {
+                $scope.pointsData.push(vm.playedGames[i].total_points);
+                if (vm.playedGames[i].average_reaction_time_correct_responses > 1750) {
+                    $scope.reactionTimeData.push(1750);
+                } else {
+                    $scope.reactionTimeData.push(vm.playedGames[i].average_reaction_time_correct_responses);
+                }
+                $scope.correctResponsesData.push(vm.playedGames[i].correct_responses);
+                $scope.labels.push(vm.playedGames[i].id);
             }
-            $scope.correctResponsesData.push(vm.playedGames[i].correct_responses);
-            $scope.labels.push(vm.playedGames[i].id);
         }
 
 

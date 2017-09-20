@@ -12,7 +12,8 @@
 }
 
 .game-instructions-attribute-table {
-    background: rgba(160, 237, 105, 1);
+    /*background: rgba(160, 237, 105, 1);*/
+    background-color: white;
     width: 50%;
     table-layout: fixed;
     float: left;
@@ -23,8 +24,9 @@
     vertical-align: top;
 }
 
-.game-instructions-food-table {
-    background-color: #6fd027;
+.game-instructions-food-table {    
+    /*background-color: #6fd027;*/
+    background-color: white;
     width: 100%;
     table-layout: fixed;
     height: 80px;

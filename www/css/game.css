@@ -129,6 +129,7 @@
 }
 
 .game-stimulus-image {
+    background-color: white;
     border: 2px green solid;
     padding: 5px;
 }

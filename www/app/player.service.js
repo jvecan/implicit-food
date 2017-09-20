@@ -214,7 +214,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
                 'JOIN food ON food.name = game_round.displayed_item_name ' +
                 'WHERE game.game_type = "food" ' +
                 'AND food.level <= ' + playerData.level + ' ' + 
-                'AND food.unlock_text IS NULL ' +
+                /*'AND food.unlock_text IS NULL ' +*/
                 ' GROUP BY displayed_item_name ORDER BY correct_responses DESC';
         var data = dbFactory.dbQuery(query, []);
         data.then(function (dataResponse) {

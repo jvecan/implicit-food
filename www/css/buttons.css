@@ -1,5 +1,5 @@
 .btn-base {
-    background-color: #89e34a !important;
+    background-color: #89e34a !important;  /*  #BFF499  */
     -moz-border-radius: 18px;
     -webkit-border-radius: 18px;
     border-radius: 18px;
@@ -14,7 +14,7 @@
 }
 
 .btn-base:active {
-    background-color: #5cbf2a !important;
+    background-color: #5cbf2a !important; 
     position: relative;
     top: 1px;
     text-decoration: none !important;
