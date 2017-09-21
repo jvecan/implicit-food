@@ -1,6 +1,6 @@
 <div class="container-fluid header-wide">
     <div class='center-content header'>
-        <h1>Unlocked Foods</h1>
+        <h1>Statistics</h1>
     </div>
 </div>
 <div class="container-fluid content-full content-full-width">
@@ -31,7 +31,7 @@
             <tbody>
                 <tr ng-repeat="otherStatisticsSingle in myProfileOtherStatisticsController.otherStatistics | orderBy:orderByField:reverseSort track by $index">
                     <td><img ng-src="img/game_images/{{otherStatisticsSingle.name}}.png" class='image-instructions-food' /></td>
-                    <td>{{otherStatisticsSingle.correct_responses}} % ({{otherStatisticsSingle.total_responses}})</td>
+                    <td>{{otherStatisticsSingle.correct_responses}}% ({{otherStatisticsSingle.total_responses}})</td>
                     <td>{{otherStatisticsSingle.total_points}}</td>
                     <td>{{otherStatisticsSingle.reaction_time}} ms</td>
                 </tr>      
