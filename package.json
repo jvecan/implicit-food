@@ -1,7 +1,7 @@
 {
-    "name": "com.implicitfood.app",
+    "name": "com.iikkamanninen.implicity",
     "version": "1.0.0",
-    "displayName": "ImplicitFood",
+    "displayName": "Implicity",
     "cordova": {
         "platforms": [
             "android"
