@@ -78,7 +78,7 @@ angular.module('implicitFood').factory('player', function ($q, $cordovaSQLite, $
                 csvData.push(roundObj);
             }
 
-            var url = 'http://iikkamanninen.com/mailgun/index.php';
+            var url = 'https://www.iikkamanninen.com/mailgun/index.php';
             var req = {
                 method: 'POST',
                 url: url,

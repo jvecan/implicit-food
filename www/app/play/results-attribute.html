@@ -19,8 +19,8 @@
             </div>
         </div>
         <br />
-        <div class='center-content'>{{playResultsAttributeController.roundStatistics.correctResponses}} correct responses out of 10{{bonusInfo.perfectRound}}<br />Average correct response time {{playResultsAttributeController.roundStatistics.averageReactionTimeCorrectResponses}}
-            ms{{bonusInfo.perfectFastRound}}
+        <div class='center-content'><table class="my-profile-unlocked-food-statistics-table"><tr><td>Correct responses:</td>{{playResultsAttributeController.roundStatistics.correctResponses}}/10 {{bonusInfo.perfectRound}}<td></tr><tr><td>Reaction time (for correct)</td><td> {{playResultsAttributeController.roundStatistics.averageReactionTimeCorrectResponses}} </td>
+                        ms{{bonusInfo.perfectFastRound}}</td></tr></table>
             <br /><span class='results-surprise-bonus'>{{bonusInfo.surpriseBonus}}</span>
         </div>
         <br />

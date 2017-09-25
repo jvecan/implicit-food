@@ -45,15 +45,17 @@ function playResultsAttributeCtrl($scope, $timeout, $location, $interval, $route
                     $scope.nextLevelData = $scope.nextLevelData[0];
                     $scope.currentLevelData = $scope.currentLevelData[0];
                     var pointsUntilNextLevel;
-                    progressBarTotalScale = $scope.nextLevelData.required_points - $scope.currentLevelData.required_points;
+                   
 
                     var currentLevelNumber = new Number($scope.currentLevelData.level_number);
-                    if (currentLevelNumber == 35) {
+                    if (currentLevelNumber == 34) {
                         progressBarFinalPosition = 0;
                         $scope.showNewLevelInfo = true;
-                        $scope.newLevelMessage = "You have unlocked all the foods. There is no more content available. ";
+                        $scope.progressBarWidth = 100;
+                        $scope.newLevelMessage = "You have unlocked all the foods. ";
                         
                     } else {
+                         progressBarTotalScale = $scope.nextLevelData.required_points - $scope.currentLevelData.required_points;
                         if ($scope.playerInfo.total_points > $scope.nextLevelData.required_points) {
                             progressBarFinalPosition = 100;
                             $scope.newLevelUnlocked = true;
